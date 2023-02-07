@@ -48,7 +48,7 @@ const Hero = () => {
                     save time and pay as go on the hourney of hiring the world
                 </p>
                 <Link 
-                    to='/login' 
+                    to='/LoginPages' 
                     className='shadow-md shadow-slate-400 transition-slow no-underline py-1 md:py-2 px-7 text-center mx-auto lg:mx-0 w-1/2 bg-primary font-bold text-white rounded-full hover:bg-black hover:text-primary'
                 >
                     Get Started
