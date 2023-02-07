@@ -23,6 +23,7 @@ const LoginPages = () => {
               <img src={Logo} alt="runor" className="w-6 h-6" />
             </div>
 
+
             <div className="">
               <p className="text-white text-sm tracking-6 leading-6">
                 stress less and do more. get exceptional assistance when you
