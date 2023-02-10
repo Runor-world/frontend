@@ -22,6 +22,7 @@ const LoginPages = () => {
               <h2 className="text-white text-3xl font-bold items-center">
                 Welcome To Runor
               </h2>
+              
               <img src={Logo} alt="runor" className="w-6 h-6" />
             </div>
 
