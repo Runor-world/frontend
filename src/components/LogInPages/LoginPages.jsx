@@ -1,11 +1,13 @@
-import React from "react";
+import React, {Fragment} from "react";
 import "./LoginPages.css";
-import GirlForLogin from "../../images/girlForLogIn.png";
+import Footer from '../Footer/Footer'
+import GirlForLogin from "../../images/GirlForLogin.png";
 import Logo from "../../images/logo.png";
 import Form from "./Forminput/From";
 
 const LoginPages = () => {
   return (
+    <Fragment>
     <section className="container">
       <div className="loginBoard">
         <div className="h-[630px] w-[500px] relative bg-[#0e5963] rounded-sm">
@@ -39,6 +41,9 @@ const LoginPages = () => {
         </div>
       </div>
     </section>
+
+<Footer/>
+</Fragment>
   );
 };
 
