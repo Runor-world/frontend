@@ -1,7 +1,7 @@
 import React from "react";
 import "./LoginPages.css";
 
-import GirlForLogin from "../../images/GirlForLogin.png";
+import GirlForLogin from "../../images/GirlForLoginPage.png";
 import Logo from "../../images/logo.png";
 import Form from "./Forminput/From";
 
