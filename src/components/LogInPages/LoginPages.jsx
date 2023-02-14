@@ -1,11 +1,11 @@
-import React, {Fragment, useState} from "react";
+import React from "react";
 import "./LoginPages.css";
 
 import GirlForLogin from "../../images/GirlForLogin.png";
 import Logo from "../../images/logo.png";
 import Form from "./Forminput/From";
 
-import Header from '../Header/Header'
+
 
 
 
@@ -13,14 +13,14 @@ const LoginPages = () => {
 
   return (
     
-    <Fragment>
+   
 
     <section className="container">
       <div className="loginBoard">
-        <div className="h-[630px] w-[500px] relative bg-[#0e5963] rounded-sm">
+        <div className="h-[550px] w-[450px] relative bg-[#0e5963] rounded-sm">
           <img
             src={GirlForLogin}
-            className="h-[630px] w-[500px] object-cover absolute mix-blend-overlay rounded-sm"
+            className="h-[550px] w-[450px] object-cover absolute mix-blend-overlay rounded-sm"
             alt=""
           />
 
@@ -52,7 +52,7 @@ const LoginPages = () => {
     </section>
 
 
-</Fragment>
+
   );
 };
 
