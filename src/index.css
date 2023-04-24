@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 ::-webkit-scrollbar {
   height: 5px;
 }
@@ -33,6 +34,10 @@
     @apply py-10 lg:py-20;
   }
   .transition-slow{ @apply transition-all duration-300;}
+
+  .btn-primary { @apply rounded-full p-2 px-3 bg-slate-100 text-black text-xl}
+  .btn-dark { @apply rounded-full p-2 px-3 bg-black text-white text-center}
+  .btn-hover {@apply hover:bg-black hover:text-primary duration-200 transition-all}
 }
 
 *, *::after, *::before{
