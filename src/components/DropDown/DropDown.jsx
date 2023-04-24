@@ -34,6 +34,9 @@ const DropDown = ({items, setIsOpen}) => {
                 <li className='item border-b-2 font-semibold'>{user.firstName} {user.otherName}</li>
             </div>
             {items.map((item, index) =>{
+                if(item.text === 'Dashboard' && user.role !== 'admin'){
+                    return null
+                }
                 if(item.url === '/logout'){
                     return(
                         <li className='item' key={index}>

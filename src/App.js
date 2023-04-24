@@ -61,7 +61,7 @@ function App() {
               <SharedLayout />
             </ProtectedRoutes>
           }>
-            <Route path='services' element={<Services/>} />
+            <Route index element={<Services/>} />
             <Route path='users' element={<h1>Users</h1>} />
             <Route path='complains' element={<h1>Complains</h1>}/>
           </Route>
