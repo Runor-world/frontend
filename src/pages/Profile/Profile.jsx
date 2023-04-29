@@ -23,7 +23,7 @@ const Profile = () => {
     useEffect(() => {
         dispatch(getAllProfiles())
         .unwrap()
-    }, [dispatch])
+    }, )
 
     if(isLoading){
         return( 
