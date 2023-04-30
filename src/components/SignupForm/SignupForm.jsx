@@ -35,9 +35,7 @@ const SignupForm = () => {
             .matches(/\d+/, "Must contain atleast one number"),
             passwordRepeat: Yup.string().required('Confirm password required').oneOf([Yup.ref('password'), null], 'Passwords must match')
         }),
-        onSubmit: async(values) => {
-            dispatch(clearMessage())
-            
+        onSubmit: async(values) => {    
             setIsLoading(true)
             try {
                 const res = await dispatch(localSignup(values)).unwrap()
@@ -50,7 +48,7 @@ const SignupForm = () => {
 
     useEffect(() => {
         dispatch(clearMessage())
-    }, [dispatch])
+    }, [])
     
     const facebookLogin = async() => {
         window.open('https://runor-backend.onrender.com/api/auth/facebook', '_self')

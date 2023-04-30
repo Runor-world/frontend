@@ -1,14 +1,22 @@
 import React from 'react'
 import { FaEdit, FaPen } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
+import { openForm } from '../../features/service/serviceSlice'
 
-const Service = ({name, description, active}) => {
+const Service = ({_id, name, description, active}) => {
+
+  const dispatch = useDispatch()
+  
+  const handleClick = () => {
+    dispatch(openForm({_id, name, description, active}))
+  }
   return (
-    <article className='flex justify-between items-center rounded-sm shadow-sm p-2 py-2 hover:scale-95 hover:bg-slate-50 duration-100 transitions-all'>
-        <p className=''>{name}</p>
-        <p className='hidden lg:inline'>{description.length > 40? `${description.substring(0, 40)}...`: description}</p>
-        <p>{active? 'Active': 'Suspended'}</p>      
-        <button className='btn px-4 flex items-center gap-2'><FaPen /></button>
-    </article>
+    <tr className='hover:scale-[101%] hover:bg-black hover:text-white bg-slate-50 duration-200 transitions-all border-b-2 border-white'>
+        <td>{name}</td>
+        <td>{description.split(' ').length > 5? `${description.split(' ').slice(0, 5).join(' ')}...`: description}</td>
+        <td>{active? 'Yes': 'No'}</td>    
+        <td className='btn' onClick={handleClick}><FaPen className='hover:scale-105' /></td>
+    </tr>
   )
 }
 

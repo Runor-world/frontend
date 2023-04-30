@@ -11,7 +11,7 @@ const NavItem = ({text, path, icon}) => {
 
     return (
         <li 
-            className={`cursor-pointer rounded-full p-2 hover:bg-slate-300 hover:p-4 hover:scale-110 ${isMatch? 'bg-slate-300': ''} w-full transition-slow`}
+            className={`cursor-pointer rounded-full p-2 hover:bg-slate-300 hover:p-4 hover:scale-110 ${isMatch? 'bg-slate-200': ''} w-full transition-slow`}
             onClick={()=>{dispatch(closeSidebar())}}
         >
             <Link 
@@ -25,4 +25,8 @@ const NavItem = ({text, path, icon}) => {
     )
 }
 
-export default NavItem
+const withSidebarClose = (Component, clickHandler) => (props) =>{
+    return <Component onClick={() => clickHandler(false)} {...props}/>
+}
+
+export default withSidebarClose(NavItem)

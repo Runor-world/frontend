@@ -9,7 +9,7 @@
     .p-profile-edit-form .form-group {
         @apply flex flex-col gap-1 w-full text-left;
     }
-    .p-profile-edit-form .form-group input, .p-profile-edit-form .form-group textarea {
+    .p-profile-edit-form .form-group input, .p-profile-edit-form .form-group textarea, .p-profile-edit-form .form-group select {
         @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
     }
     .p-profile-edit-form form {

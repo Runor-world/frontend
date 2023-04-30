@@ -16,7 +16,7 @@
         @apply flex flex-col gap-3;
     }
     .login button[type=submit]{
-        @apply hover:bg-black hover:text-primary
+        @apply bg-primary hover:bg-black hover:text-primary
     }
     .login .social-link{
         @apply rounded-full w-[50px] h-[50px] hover:w-[60px] hover:h-[60px] p-2  transition-all duration-150;

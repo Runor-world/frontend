@@ -30,7 +30,6 @@ const LoginForm = () => {
             .matches(/\d+/, "Must contain atleast one number")
         }),
         onSubmit: async(values) => {
-            dispatch(clearMessage())
             setIsLoading(true)
             try {
                 const res = await dispatch(localLogin(values)).unwrap()
@@ -45,7 +44,7 @@ const LoginForm = () => {
 
     useEffect(() => {
         dispatch(clearMessage())
-    }, [dispatch])
+    }, [])
     
     const facebookLogin = async() => {
         window.open('https://runor-backend.onrender.com/api/auth/facebook', '_self')
@@ -99,7 +98,7 @@ const LoginForm = () => {
 
                 <div className='flex justify-between items-center mt-5'>
                     <button 
-                        className={`flex gap-2 items-center p-2 rounded-full font-bold text-white text-center my-4 px-4 ${isLoading? 'bg-slate-300': 'bg-primary'}`}
+                        className={`flex gap-2 items-center p-2 rounded-full font-bold text-white text-center my-4 px-4 btn ${isLoading? 'bg-slate-300': 'bg-primary'}`}
                         type='submit'
                         disabled={isLoading}
                         >
