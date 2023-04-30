@@ -1,4 +1,4 @@
-const SERVER = 'dev'
+const SERVER = 'prod'
 export const baseUrl = SERVER === 'dev'? 'http://localhost:8000': 'https://runor-backend.onrender.com'
 
 
