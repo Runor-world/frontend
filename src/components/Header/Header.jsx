@@ -14,7 +14,7 @@ const Header = () => {
         window.addEventListener('scroll', (e)=>{
             setScroll(window.scrollY)
         })
-    }, [scroll])
+    }, [])
     
     return (
         <header 

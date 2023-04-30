@@ -15,7 +15,7 @@ const Home = () => {
 
   if(isLoading) return <Loading />
   return (
-    <div className='w-full mt-0 lg:mt-0'>
+    <div className='w-full mt-0 lg:mt-0 overflow-x-hidden'>
         <Header />
         <Hero2 />
         <FeaturedServices />

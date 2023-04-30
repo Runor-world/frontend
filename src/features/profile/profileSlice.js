@@ -123,7 +123,7 @@ const profileSlice = createSlice({
                 state.isLoading = false
             })
             .addCase(getAllProfiles.pending, (state, action)=>{
-                state.isLoading = true
+                state.isLoading = false
             })
 
             .addCase(updateProfile.fulfilled, (state, {payload}) =>{

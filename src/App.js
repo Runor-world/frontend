@@ -10,6 +10,9 @@ import { useDispatch, useSelector} from 'react-redux';
 import Profile from './pages/Profile/Profile';
 import ProfileSetup from './pages/ProfileSetup/ProfileSetup';
 import { getAllProfiles } from './features/profile/profileSlice';
+import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
+import SharedLayout from './components/SharedLayout/SharedLayout';
+import Services from './pages/Services/Services';
 
 function App() {
   
@@ -53,6 +56,15 @@ function App() {
   return (
     <div className='relative'>
         <Routes>
+          <Route path='/dashboard' element={
+            <ProtectedRoutes>
+              <SharedLayout />
+            </ProtectedRoutes>
+          }>
+            <Route index element={<Services/>} />
+            <Route path='users' element={<h1>Users</h1>} />
+            <Route path='complains' element={<h1>Complains</h1>}/>
+          </Route>
           <Route path='/' element={<Home />}/>
           <Route path='/login' element={ user? <Navigate to='/' />: <Login /> }/>
           <Route path='/signup' element={ user? <Navigate to='/' />: <Signup /> }/>

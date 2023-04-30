@@ -13,6 +13,7 @@ export const localLogin = createAsyncThunk(
             })
             return res.data
         } catch (error) {
+            console.log(error)
             thunkAPI.rejectWithValue('Something went wrong')
             return error.response.data.msg
         }
@@ -41,7 +42,7 @@ const authSlice = createSlice({
     initialState: {
         user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null, 
         userLoading: true, 
-        message: ''
+        message: { text: '', type: true}
     },
     reducers: {
         setUser: (state, {payload}) => {
@@ -51,7 +52,7 @@ const authSlice = createSlice({
             state.user = null
         },
         clearMessage: (state)=>{
-            state.message = ''
+            state.message = {text: '', type: true}
         }
     }, 
 
@@ -59,40 +60,42 @@ const authSlice = createSlice({
         builder
             .addCase(localLogin.pending,  (state) =>{
                 state.userLoading = true
-                state.message = 'Please wait...'
+                state.message = {text: 'Please wait ...', type: true}
             })
             .addCase(localLogin.fulfilled, (state, action) => {
                 if(action.payload.user){
                     state.userLoading = false
                     state.user = action.payload.user
-                    state.message = action.payload.message
+                    state.message = {text: action.payload.message, type: true}
                     localStorage.setItem('user', JSON.stringify(action.payload.user))
                     localStorage.setItem('token', JSON.stringify(action.payload.token))
                 }else{
-                    state.message = action.payload
+                    state.message = { text: action.payload, type: false }
                 }
             })
-            .addCase(localLogin.rejected, (state, {payload}) => {
+            .addCase(localLogin.rejected, (state) => {
                 state.userLoading = false
-                state.message = 'Login failed'
+                state.message = { text: 'Login failed', type: false }
                 localStorage.removeItem('token')
             })
+
             .addCase(localSignup.pending, (state) =>{
                 state.userLoading = true
+                state.message = { text: 'Please wait ...', type: true }
             })
             .addCase(localSignup.fulfilled, (state, action) =>{
                 state.userLoading = false
                 if(action.payload.user){
                     state.userLoading = false
                     state.user = action.payload.user
-                    state.message = action.payload.message
+                    state.message = { text: action.payload.message, type: true }
                 }else{
-                    state.message = action.payload
+                    state.message = { text: action.payload, type: false }
                 }
             })
             .addCase(localSignup.rejected, (state) =>{
                 state.userLoading = false
-                state.message = 'Sign up failed'
+                state.message = { text: 'Signup failed', type: false }
             })
         }
     }

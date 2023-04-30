@@ -9,7 +9,10 @@
     }
 
     .drop-down .item{
-        @apply py-3 p-4 hover:bg-slate-300 capitalize w-full text-left
+        @apply py-3 p-4 hover:bg-slate-50 capitalize w-full text-left
+    }
+    .drop-down .item .sub-item {
+        @apply bg-slate-200 p-1 rounded-full px-4 hover:scale-105 duration-200 transition-all;
     }
 }
 

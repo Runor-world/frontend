@@ -1,14 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import './DropDown.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { clearUser } from '../../features/auth/authSlice'
 import { baseUrl } from '../../utils/base_url'
-import { FaTimes } from 'react-icons/fa'
+import { FaCaretDown, FaCaretRight, FaTimes } from 'react-icons/fa'
 import userIcon from '../../images/user.png'
 
 const DropDown = ({items, setIsOpen}) => {
-
+    
+    const [hovered, setHovered] = useState(false)
     const dispatch = useDispatch()
     const {user} = useSelector( store => store.auth)
     const {personalProfile} = useSelector( store => store.profile)
@@ -34,6 +35,26 @@ const DropDown = ({items, setIsOpen}) => {
                 <li className='item border-b-2 font-semibold'>{user.firstName} {user.otherName}</li>
             </div>
             {items.map((item, index) =>{
+                if(item.text.toLowerCase() === 'dashboard'){
+                    if(user.role === 'admin'){
+                        return(
+                            <li key={index} className='item' onMouseEnter={()=> setHovered(true)} onMouseLeave={()=> setHovered(false)}>
+                                <p className='flex gap-2 items-center'>{item.text} {hovered? <FaCaretDown /> : <FaCaretRight /> }</p>
+                                {
+                                    hovered? (
+                                        <ul className='flex flex-col  pt-3 list-none pl-4 gap-2'>
+                                            <Link to='/dashboard' className='sub-item' onClick={ () => setIsOpen(false)}>Services</Link>
+                                            <Link to='/dashboard/users' className='sub-item' onClick={ () => setIsOpen(false)}>Users</Link>
+                                            <Link to='/dashboard/complains' className='sub-item' onClick={ () => setIsOpen(false)}>Complains</Link>
+                                        </ul>
+                                    ): null
+                                }
+                            </li>
+
+                        )
+                    }
+                    return null
+                }
                 if(item.url === '/logout'){
                     return(
                         <li className='item' key={index}>

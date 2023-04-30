@@ -4,6 +4,10 @@ export const userDropDown = [
         url: '/profile'
     },
     {
+        text: 'Dashboard',
+        url: '/dashboard'
+    },
+    {
         text: 'jobs', 
         url: '/jobs',
     },
