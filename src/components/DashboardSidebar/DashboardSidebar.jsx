@@ -11,7 +11,7 @@ const DashboardSidebar = () => {
     <aside className='hidden lg:inline-flex w-0 lg:w-1/6 h-screen text-black flex flex-col justify-center bg-slate-100 p-10'>
         <nav className='flex flex-col justify-center gap-2'>
           <ul className='list-none'>
-            <NavItem path='/dashboard' text='Dashboard' icon={<FaBabyCarriage />} />
+            <NavItem path='/dashboard' text='Services' icon={<FaBabyCarriage />} />
             <NavItem path='/dashboard/users' text='Users' icon={<FaUsers />} />
             <NavItem path='/dashboard/complains' text='Feedback' icon={<FaEnvelopeOpen />} />
           </ul>
