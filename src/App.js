@@ -13,6 +13,7 @@ import { getAllProfiles } from './features/profile/profileSlice';
 import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import SharedLayout from './components/SharedLayout/SharedLayout';
 import Services from './pages/Services/Services';
+import Users from './pages/Users/Users';
 
 function App() {
   
@@ -62,7 +63,7 @@ function App() {
             </ProtectedRoutes>
           }>
             <Route index element={<Services/>} />
-            <Route path='users' element={<h1>Users</h1>} />
+            <Route path='users' element={<Users />} />
             <Route path='complains' element={<h1>Complains</h1>}/>
           </Route>
           <Route path='/' element={<Home />}/>

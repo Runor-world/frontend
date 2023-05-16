@@ -3,6 +3,7 @@ import authReducer from './features/auth/authSlice'
 import profileSlice from './features/profile/profileSlice'
 import sidebarReducer from './features/sidebar/sidebarSlice'
 import serviceSlice from './features/service/serviceSlice'
+import userSlice from './features/user/userSlice'
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
         auth: authReducer,
         sidebar: sidebarReducer,
         profile: profileSlice,
-        service: serviceSlice
+        service: serviceSlice,
+        users: userSlice
     }
 })
