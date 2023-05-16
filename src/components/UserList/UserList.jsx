@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import UserListItem from '../UserListItem/UserListItem'
+import { useSelector, useDispatch } from 'react-redux'
+import { setSearchKey } from '../../features/search/searchSlice'
+import { userSearchByName } from '../../features/user/userSlice'
 
 
-const UserList = ({users}) => {
+const UserList = () => {
+    const {search} = useSelector( store => store.search)
+    const {users} = useSelector( store => store.users)
+
     return (
         <React.Fragment>
             {

@@ -20,6 +20,28 @@ export const getAllUsers = createAsyncThunk(
     }
 )
 
+
+export const userSearchByName = createAsyncThunk(
+    'user/searchUserByName',
+    async(value, thunkAPI) => {
+        let response = null
+        try {
+            response = await axios.post(`${baseUrl}/api/users`, 
+            {key: value},
+            {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            return response.data
+        } catch (error) {
+            thunkAPI.rejectWithValue('Something went wrong')
+            return error.response.data.msg
+        }
+    }
+
+) 
+
 export const activateSuspendUser = createAsyncThunk(
     'user/activateSuspendUser',
     async(values, thunkAPI) => {
@@ -111,6 +133,27 @@ const userSlice = createSlice({
                 }
             })
             .addCase(activateSuspendUser.rejected, ( state, {payload}) => {
+                state.isLoading = false
+                state.message =  {
+                    type: false, 
+                    text: 'Failed to fetched users'
+                }
+            })
+
+            // userSearchByName life cycle
+            .addCase(userSearchByName.pending, (state,) => {
+                state.isLoading = true
+            })
+            .addCase(userSearchByName.fulfilled, ( state, {payload}) => {
+                state.isLoading = false
+                console.log(payload.users)
+                if(payload.users){
+                    state.users = payload.users
+                }else{
+                    state.message = payload
+                }
+            })
+            .addCase(userSearchByName.rejected, ( state, {payload}) => {
                 state.isLoading = false
                 state.message =  {
                     type: false, 
