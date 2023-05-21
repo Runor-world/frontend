@@ -45,6 +45,27 @@ export const updateProfilePhoto = createAsyncThunk(
 )
 
 
+export const createUserServiceProfile = createAsyncThunk(
+    'profile/service-create',
+    async(values, thunkAPI) => {
+        console.log(values)
+        try {
+            const res = await axios.post(`${baseUrl}/api/profile/service`, 
+                values,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+            )
+            console.log(res.data)
+            return res.data
+        } catch (error) {
+            thunkAPI.rejectWithValue(error.data)
+        }
+    }
+)
+
 export const getAllProfiles = createAsyncThunk(
     'profile/getAllProfiles',
     async(arg, thunkAPI) =>{
@@ -74,7 +95,6 @@ export const updateProfile = createAsyncThunk(
                     }
                 }
             )
-            const {user} = thunkAPI.getState()
             if(res.data.user){
                 thunkAPI.dispatch(setUser(res.data.user))
                 localStorage.setItem('user', JSON.stringify(res.data.user))
@@ -97,6 +117,7 @@ const profileSlice = createSlice({
         },
         serviceProfile: null,
         isLoading: true,
+        message: { text: '', type: true },
         errorMessage: ''
     },
     reducers: {
@@ -123,13 +144,13 @@ const profileSlice = createSlice({
                 state.isLoading = false
             })
             .addCase(getAllProfiles.pending, (state, action)=>{
-                state.isLoading = false
+                state.isLoading = true
             })
 
             .addCase(updateProfile.fulfilled, (state, {payload}) =>{
                 state.isLoading = false
                 if(payload){
-                    const {personalProfile, serviceProfile} = payload
+                    const {personalProfile} = payload
                     state.personalProfile = {
                         ...personalProfile, 
                         bio: personalProfile.bio ?? state.personalProfile.bio,
@@ -183,6 +204,26 @@ const profileSlice = createSlice({
             })
             .addCase(updateProfilePhoto.pending, (state, action)=>{
                 state.isLoading = false
+            })
+
+            // profile service create
+            .addCase(createUserServiceProfile.fulfilled, (state, {payload}) =>{
+                state.isLoading = false
+                if(payload){
+                    state.serviceProfile = payload.userServiceProfile
+                    state.message = { text: payload.msg, type: true }
+                }else{
+                    state.message = { text: 'Failed to create service profile', type: false }
+                }
+            })
+            .addCase(createUserServiceProfile.rejected, (state, action)=>{
+                state.errorMessage = action.payload
+                state.message = { text: action.payload, type: false }
+                state.isLoading = false
+            })
+            .addCase(createUserServiceProfile.pending, (state, action)=>{
+                state.isLoading = false
+                state.message = { text: 'Creating service profile... ', type: true }
             })
     }
 })

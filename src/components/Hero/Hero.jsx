@@ -18,7 +18,6 @@ const Hero = () => {
             imagesWrapper.current.childNodes.forEach(element => {
                 let index = Math.floor((Math.random()*5)+1)
                 element.style.zIndex = index
-                console.log(index)
             });
             setRepresh(!represh)
         }, 5000)

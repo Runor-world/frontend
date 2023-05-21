@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 const Header = () => {
     const dispatch = useDispatch()
     const [scroll, setScroll] = useState(0)
-
+    
     useEffect(() => {
         window.addEventListener('scroll', (e)=>{
             setScroll(window.scrollY)

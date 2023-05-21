@@ -79,24 +79,24 @@ const Profile = () => {
                             serviceProfile? (
                                 <>
                                     <article>
-                                        <small className='text-primary'>You are a</small>
+                                        <small className='text-primary'>You are a </small>
                                         <hr />
-                                        <p>Service consumer</p>
+                                        <p>{serviceProfile.accountType}</p>
                                     </article>
                                     <article>
-                                        <small className='text-primary'>Service category</small>
+                                        <small className='text-primary'>Offerred/consumed Service</small>
                                         <hr />
-                                        <p>Cleaning</p>
+                                        <p>{serviceProfile.service.name}</p>
                                     </article>
                                     <article>
-                                        <small className='text-primary'>Related skills</small>
+                                        <small className='text-primary'>Service description</small>
                                         <hr />
-                                        <p>Cleaning, tile cleaning, car wash</p>
+                                        <p>{serviceProfile.service.description}</p>
                                     </article>
                                 </>
                             ):(
                                 <div className='text-center flex flex-col gap-2 mt-2'>
-                                    <p>Please create service profile to identify yourself as service provider or comsumer</p>
+                                    <p>Please create service profile to identify yourself as service provider or consumer</p>
                                     <Link 
                                         className='my-2 p-2 px-4 text-white bg-primary rounded-full w-fit m-auto hover:bg-black hover:text-primary'
                                         to='/service-profile'

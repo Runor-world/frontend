@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import CardButton from '../CardButton/CardButton'
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../Loading/Loading'
 import { getServices } from '../../features/service/serviceSlice'
 import { FaSpinner } from 'react-icons/fa'
 
