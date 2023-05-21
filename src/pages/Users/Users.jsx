@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import UserList from '../../components/UserList/UserList'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllUsers, userSearchByName } from '../../features/user/userSlice'
+import { userSearchByName } from '../../features/user/userSlice'
 import Loading from '../../components/Loading/Loading'
 import UserStatusUpdateModal from '../../components/UserStatusUpdateModal/UserStatusUpdateModal'
 import UserSearchBar from '../../components/UserSearchBar/UserSearchBar'
@@ -9,7 +9,6 @@ import UserSearchBar from '../../components/UserSearchBar/UserSearchBar'
 const Users = () => {
     const dispatch = useDispatch()
     const {users, isLoading, isOpened, selectedUser} = useSelector( store => store.users)
-    const {search} = useSelector( store => store.search)
     
     useEffect(() => {
         dispatch(userSearchByName(''))
