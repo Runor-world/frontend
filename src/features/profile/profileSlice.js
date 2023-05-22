@@ -213,7 +213,7 @@ const profileSlice = createSlice({
                     state.serviceProfile = payload.userServiceProfile
                     state.message = { text: payload.msg, type: true }
                 }else{
-                    state.message = { text: 'Failed to create service profile', type: false }
+                    state.message = { text: payload.msg, type: false }
                 }
             })
             .addCase(createUserServiceProfile.rejected, (state, action)=>{
