@@ -89,7 +89,7 @@ const Profile = () => {
                                     {
                                         serviceProfile.services.map( (service, index) =>{
                                             return (
-                                                <li className='bg-white p-2 relative'>
+                                                <li className='bg-white p-2 relative' key={service._id}>
                                                     <span 
                                                         className='absolute -top-2 -left-2 ring-2 ring-primary w-5 h-5 text-center bg-white shadow-md text-primary rounded-full'>
                                                             {index + 1}
