@@ -17,16 +17,17 @@ const UserServiceProfileForm = ({services}) => {
 
     const formik = useFormik({
         initialValues: {
-            service: null,
+            services: [],
             accountType: '',
         },
         validationSchema: Yup.object({
-            service: Yup.string().required('Select a service'),
+            services:  Yup.array().required('Select services'),
             accountType: Yup.string().min(2, "Must be atlest 2 characters").required('Select account type'),
         }),
         onSubmit: async(values) => {
             // do something on submit
-            const newValues = {...values, service: JSON.parse(values.service)}
+          
+            const newValues = {...values, services: values.services.map( service => JSON.parse(service))}
             try {
                 const res = await dispatch(createUserServiceProfile(newValues)).unwrap()
                 setTimeout(()=>{
@@ -37,6 +38,13 @@ const UserServiceProfileForm = ({services}) => {
             }
         }
     })
+
+    const setServiceLabel = (accountType) =>{
+        if(accountType === 'service man'){
+            return 'Select a service'
+        }
+        return 'Select service(s)'
+    }
 
     return (
         <div className='service-profile-form'>
@@ -63,12 +71,26 @@ const UserServiceProfileForm = ({services}) => {
                     />
                 </div>
                 <div className='form-group'>
-                    <label htmlFor='firstname'>Select service of interest</label>
+                    <label htmlFor='firstname'>Select offered/consumed services</label>
                     <select 
-                        id='service'
-                        {...formik.getFieldProps('service')}
+                        className='custom-scrollbar'
+                        id='services'
+                        multiple={formik.values.accountType !== 'service man'}
+                        {...formik.getFieldProps('services')}
+
+                        onChange={(e)=>{
+                            if(formik.values.accountType === 'service man'){
+                                formik.setFieldValue('services', [e.target.value])
+                            }
+                        }}
                     >
-                        <option defaultValue={''} className='text-slate-300'>---Select a service---</option>
+                        <option 
+                            defaultValue={''} 
+                            className='text-slate-300'
+                            selected
+                            >
+                                ---{setServiceLabel(formik.values.accountType)}---
+                        </option>
                         {
                             services.map( service => <option value={JSON.stringify(service)} key={service.name}>{service.name}</option>)
                         }

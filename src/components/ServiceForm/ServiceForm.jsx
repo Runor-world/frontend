@@ -10,8 +10,6 @@ import { createService, closeForm, updateService, setMessage } from '../../featu
 import { FaTimes } from 'react-icons/fa'
 
 const ServiceForm = () => {
-    
-    
     const dispatch = useDispatch()
     const {message, selectedService, isLoading} = useSelector( store => store.service)
 
