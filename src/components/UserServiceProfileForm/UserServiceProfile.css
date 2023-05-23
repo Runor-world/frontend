@@ -16,8 +16,15 @@
     .service-profile-form .form-group input, .service-profile-form .form-group select {
         @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
     }
+    .service-profile-form .form-group select {
+        @apply max-h-[150px] overflow-y-auto py-2 px-0 rounded-none;
+    }
     .service-profile-form option {
-        @apply p-4 border-2 border-primary px-4 bg-slate-300 ;
+        @apply py-2 border-b-2 border-slate-200 text-black;
+    }
+
+    .service-profile-form .form-group select::-webkit-scrollbar {
+        width: 10px;
     }
     .service-profile-form form {
         @apply flex flex-col gap-3 w-full text-white;

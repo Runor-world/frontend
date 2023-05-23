@@ -79,20 +79,36 @@ const Profile = () => {
                             serviceProfile? (
                                 <>
                                     <article>
-                                        <small className='text-primary'>You are a </small>
+                                        <small className='text-primary'>Account type </small>
                                         <hr />
                                         <p>{serviceProfile.accountType}</p>
                                     </article>
-                                    <article>
-                                        <small className='text-primary'>Offerred/consumed Service</small>
+                                    <ol className='flex flex-col gap-4'>
+                                        <small className='text-primary'>Offerred/consumed Services ({serviceProfile.services.length})</small>
                                         <hr />
-                                        <p>{serviceProfile.service.name}</p>
-                                    </article>
-                                    <article>
-                                        <small className='text-primary'>Service description</small>
-                                        <hr />
-                                        <p>{serviceProfile.service.description}</p>
-                                    </article>
+                                    {
+                                        serviceProfile.services.map( (service, index) =>{
+                                            return (
+                                                <li className='bg-white p-2 relative'>
+                                                    <span 
+                                                        className='absolute -top-2 -left-2 ring-2 ring-primary w-5 h-5 text-center bg-white shadow-md text-primary rounded-full'>
+                                                            {index + 1}
+                                                    </span>
+                                                    <article>
+                                                        <small className=''>Service name</small>
+                                                        <hr />
+                                                        <p>{service.name}</p>
+                                                    </article>
+                                                    <article>
+                                                        <small className=''>Service Description</small>
+                                                        <hr />
+                                                        <p>{service.description}</p>
+                                                    </article>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                    </ol>
                                 </>
                             ):(
                                 <div className='text-center flex flex-col gap-2 mt-2'>
