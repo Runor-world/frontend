@@ -75,7 +75,6 @@ export const getAllProfiles = createAsyncThunk(
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
-            console.log(res.data)
             return res.data
         } catch (error) {
             thunkAPI.rejectWithValue(error.data)
@@ -213,7 +212,7 @@ const profileSlice = createSlice({
                     state.serviceProfile = payload.userServiceProfile
                     state.message = { text: payload.msg, type: true }
                 }else{
-                    state.message = { text: payload.msg, type: false }
+                    state.message = { text: 'Creating service failed', type: false }
                 }
             })
             .addCase(createUserServiceProfile.rejected, (state, action)=>{

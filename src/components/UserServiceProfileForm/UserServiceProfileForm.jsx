@@ -82,12 +82,12 @@ const UserServiceProfileForm = ({services}) => {
                             if(formik.values.accountType === 'service man'){
                                 formik.setFieldValue('services', [e.target.value])
                             }
+                            formik.handleChange(e)
                         }}
                     >
                         <option 
                             defaultValue={''} 
                             className='text-slate-300'
-                            selected
                             >
                                 ---{setServiceLabel(formik.values.accountType)}---
                         </option>
