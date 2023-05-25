@@ -56,7 +56,7 @@ const ServiceSearchBar = props => {
                 <input 
                   id='key'
                   type='search'
-                  placeholder='Service name'
+                  placeholder='Name of the service you want'
                   {...formik.getFieldProps('key')}
                 />
                 <FaSearch className='absolute top-3 right-5 text-primary'/>
@@ -66,7 +66,7 @@ const ServiceSearchBar = props => {
                 <input 
                   id='location'
                   type='text'
-                  placeholder='your location'
+                  placeholder='Your location'
                   {...formik.getFieldProps('key')}
                 />
                 <FaMapMarkerAlt className='absolute top-3 right-5 text-primary'/>
