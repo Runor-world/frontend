@@ -7,7 +7,7 @@ const Brand = () => {
   return (
     <Link 
         className='flex items-center'
-        to='/'
+        to='/home'
     > 
         <img src={logo} alt='logo' className='h-[30px] lg:h-[50px]'/>
         <h2 className='text-2xl font-bold'>Runor</h2>

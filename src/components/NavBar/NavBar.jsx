@@ -13,7 +13,7 @@ const NavBar = () => {
     return (
         <nav className='flex gap-2 px-4'>
             <Link 
-                to='/services' 
+                to='/' 
                 className='transition-slow hidden lg:flex no-underline p-2 px-7 text-inherit font-bold rounded-full hover:bg-slate-500'
             >
                 Services
