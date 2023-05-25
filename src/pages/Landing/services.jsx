@@ -37,7 +37,7 @@ const Landing = () => {
                     </div>
                     <div className='col-span-full lg:col-span-3 w-full justify-center'>
                         <h3 className='text-lg font-bold'>Service men
-                            <span className='ring-2 rounded-full w-[20px] p-1 h-5 m-2 text-primary font-normal'>{services.length}</span>
+                            <span className='ring-2 rounded-full w-[20px] p-1 h-5 m-2 text-primary font-normal'>{serviceMen.length}</span>
                         </h3>
                         <div className='flex flex-col gap-4 mt-5 pr-6'>
                             {
