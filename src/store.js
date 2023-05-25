@@ -5,6 +5,7 @@ import sidebarReducer from './features/sidebar/sidebarSlice'
 import serviceSlice from './features/service/serviceSlice'
 import userSlice from './features/user/userSlice'
 import searchSlice from './features/search/searchSlice'
+import serviceManSlice from './features/serviceMan/serviceManSlice'
 
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
         profile: profileSlice,
         service: serviceSlice,
         users: userSlice,
-        search: searchSlice
+        search: searchSlice,
+        serviceman: serviceManSlice
     }
 })

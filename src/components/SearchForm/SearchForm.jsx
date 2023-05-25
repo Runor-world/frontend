@@ -5,7 +5,7 @@ const SearchForm = () => {
   return (
     <form 
         action="" 
-        className='flex'
+        className='flex w-full'
     >
         <div className='relative'>
             <FaSearch 

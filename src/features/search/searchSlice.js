@@ -7,6 +7,8 @@ const searchSlice = createSlice({
             key: "",
             result: []
         }, 
+        searchBarVisible: false,
+
     },
     reducers: {
         setSearchKey: (state, action) =>{
@@ -14,9 +16,15 @@ const searchSlice = createSlice({
         }, 
         setSearchResult: (state, action) => {
             state.search.result = action.payload
+        },
+        showSearchBar: (state) =>{
+            state.searchBarVisible = true
+        }, 
+        hideSearchBar: (state) =>{
+            state.searchBarVisible = false;
         }
     }
 })
 
-export const {setSearchKey, setSearchResult} = searchSlice.actions
+export const {setSearchKey, setSearchResult, hideSearchBar, showSearchBar} = searchSlice.actions
 export default searchSlice.reducer
