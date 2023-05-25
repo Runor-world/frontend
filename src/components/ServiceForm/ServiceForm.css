@@ -4,7 +4,7 @@
 
 @layer components{
     .p-profile-edit-form {
-        @apply absolute top-20 w-[94%] lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-white rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.7)]; 
+        @apply fixed top-20 w-[94%] lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-white rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.7)]; 
     }
     .p-profile-edit-form .form-group {
         @apply flex flex-col gap-1 w-full text-left;

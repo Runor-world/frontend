@@ -14,6 +14,7 @@ import ProtectedRoutes from './components/ProtectedRoutes/ProtectedRoutes';
 import SharedLayout from './components/SharedLayout/SharedLayout';
 import Services from './pages/Services/Services';
 import Users from './pages/Users/Users';
+import Landing from './pages/Landing/services';
 
 function App() {
   
@@ -72,6 +73,7 @@ function App() {
           <Route path='/profile' element={!user? <Navigate to='/'/>: <Profile />} />
           <Route path='/service-profile' element={!user? <Navigate to='/'/>: <ProfileSetup />} />
           <Route path='*' element={<Error/>} />
+          <Route path='/services' element={<Landing />}/>
         </Routes>
         { isOpen && <Sidebar />}
     </div>

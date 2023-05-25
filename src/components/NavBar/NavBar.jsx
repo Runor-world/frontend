@@ -36,7 +36,7 @@ const NavBar = () => {
                         className='flex gap-2 items-center'
                         onMouseEnter={()=> setIsOpen(true)}
                         >
-                        <img src={personalProfile?.photo ?? userIcon} alt='user-icon'  className='rounded-full w-[50px] h-[40px] shadow-md object-cover'/>
+                        <img src={personalProfile?.photo ?? userIcon} alt='user-icon'  className='rounded-full w-[45px] h-[45px] ring-2 ring-primary shadow-md object-cover'/>
                         {/* <p className='text-primary hidden lg:inline-block'>{user.firstName} {user.otherName}</p> */}
                         {/* {
                             isOpen? <FaChevronUp  className='invisible lg:visible' />:
