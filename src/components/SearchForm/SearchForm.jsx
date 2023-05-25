@@ -7,18 +7,18 @@ const SearchForm = () => {
         action="" 
         className='flex w-full'
     >
-        <div className='relative'>
+        <div className='relative w-full'>
             <FaSearch 
-                className='input-icon-custom'
+                className='absolute left-4 top-3 text-slate-400'
             />
             <input 
                 type="search" 
-                placeholder='keyword' 
+                placeholder='Search for something' 
                 id='service' 
-                className='rounded-l-full border-2 outline-none bg-opacity-60 border-primary p-2 px-10 border-r-0 bg-black'
+                className='rounded-full w-full border-[1px] outline-none border-primary p-2 px-10 border-r-1'
             />
         </div>
-        <div className='relative'>
+        {/* <div className='relative'>
             <FaMapMarkerAlt  
                 className='input-icon-custom'
             />
@@ -26,9 +26,9 @@ const SearchForm = () => {
                 type="search" 
                 placeholder='Location' 
                 id='location'
-                className='rounded-r-full border-2 outline-none border-primary bg-opacity-50 p-2 px-10 border-l-0 bg-black'
+                className='rounded-r-full border-2 outline-none border-primary p-2 px-10 border-l-0'
             />
-        </div>
+        </div> */}
         <input type="submit" className='hidden'/>
     </form>
   )

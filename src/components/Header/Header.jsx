@@ -21,7 +21,7 @@ const Header = () => {
     
     return (
         <header 
-            className={`flex justify-between items-center main-x-p py-2 lg:py-5 w-screen fixed top-0 left-0 bg-white z-50 shadow-sm shadow-primary ${scroll > 20 ?'bg-opacity-20': 'bg-opacity-100 text-primary'}`}
+            className={`flex justify-between items-center main-x-p py-2 lg:py-5 w-screen fixed top-0 left-0 bg-white z-50 shadow-md shadow-slate-300 ${scroll > 20 ?'bg-opacity-20': 'bg-opacity-100 text-primary'}`}
         >
             <div 
                     className='flex gap-4 items-center'
@@ -36,7 +36,7 @@ const Header = () => {
             {/* <div className='visible lg:hidden'>
                 <FaSearch className='text-primary text-xl' onClick={()=> dispatch(showSearchBar())}/>
             </div> */}
-            <div className='hidden lg:flex'>
+            <div className='hidden lg:flex flex-1 ml-7'>
                 <SearchForm />
             </div> 
 

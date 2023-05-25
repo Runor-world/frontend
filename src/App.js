@@ -67,13 +67,13 @@ function App() {
             <Route path='users' element={<Users />} />
             <Route path='complains' element={<h1>Complains</h1>}/>
           </Route>
-          <Route path='/' element={<Home />}/>
+          <Route path='/home' element={<Home />}/>
           <Route path='/login' element={ user? <Navigate to='/' />: <Login /> }/>
           <Route path='/signup' element={ user? <Navigate to='/' />: <Signup /> }/>
           <Route path='/profile' element={!user? <Navigate to='/'/>: <Profile />} />
           <Route path='/service-profile' element={!user? <Navigate to='/'/>: <ProfileSetup />} />
           <Route path='*' element={<Error/>} />
-          <Route path='/services' element={<Landing />}/>
+          <Route path='/' element={<Landing />}/>
         </Routes>
         { isOpen && <Sidebar />}
     </div>

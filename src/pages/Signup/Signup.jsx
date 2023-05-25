@@ -20,7 +20,7 @@ const Signup = () => {
                 <div 
                     className='bg-black bg-opacity-60 flex flex-col justify-center items-center gap-2 text-white absolute w-full h-full z-10 top-0 left-0 px-5 lg:px-20'
                 >
-                    <Link to='/'>
+                    <Link to='/home'>
                         <img src={logo} alt='logo'/>
                     </Link>
                     <h2 className='font-bold text-xl lg:text-5xl'>Welcome To Runor</h2>
@@ -29,7 +29,7 @@ const Signup = () => {
             </article>
         
             <article className='flex flex-col items-center justify-center shadow-xl'>
-                <Link to='/' className='cursor-pointer flex gap-2 font-bold items-center text-3xl visible lg:invisible px-5 text-primary'>
+                <Link to='/home' className='cursor-pointer flex gap-2 font-bold items-center text-3xl visible lg:invisible px-5 text-primary'>
                     <img src={logo} alt='logo'/>
                     <h2>Runor</h2>
                 </Link>
