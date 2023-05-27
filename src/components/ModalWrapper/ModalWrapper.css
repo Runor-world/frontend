@@ -4,7 +4,7 @@
 
 @layer components{
     .modal-wrapper {
-        @apply fixed top-20 w-[94%] lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-slate-200 rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.7)]; 
+        @apply fixed top-20 w-full lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-slate-200 rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.8)]; 
     }
  
    

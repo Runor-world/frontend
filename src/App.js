@@ -15,6 +15,7 @@ import SharedLayout from './components/SharedLayout/SharedLayout';
 import Services from './pages/Services/Services';
 import Users from './pages/Users/Users';
 import Landing from './pages/Landing/services';
+import Hiring from './pages/Hiring/Hiring';
 
 function App() {
   
@@ -74,6 +75,7 @@ function App() {
           <Route path='/service-profile' element={!user? <Navigate to='/'/>: <ProfileSetup />} />
           <Route path='*' element={<Error/>} />
           <Route path='/' element={<Landing />}/>
+          <Route path='/hiring/:serviceProviderId' element={<Hiring />}/>
         </Routes>
         { isOpen && <Sidebar />}
     </div>

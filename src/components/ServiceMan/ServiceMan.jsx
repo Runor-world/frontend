@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { FaMapMarkerAlt } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getServiceMan } from '../../features/serviceMan/serviceManSlice'
 
-const ServiceMan = ({user, profile, services, }) => {
-    const {_id, firstName, lastName, otherName, role, email, active} = user
+const ServiceMan = ({_id, user, profile, services, }) => {
+    const {firstName, lastName, otherName, active} = user
+    const dispatch = useDispatch()
 
-    const handleClick = () =>{}
     return (
         <article className='flex gap-4 lg:gap-5 flex-wrap lg:flex-nowrap justify-start w-full items-center group hover:scale-[101%] bg-slate-100 duration-200 transitions-all border-b-2 p-2 rounded-lg'>
             <div className='self-start'>
@@ -33,12 +36,13 @@ const ServiceMan = ({user, profile, services, }) => {
                     <p className='flex gap-2 text-md'><FaMapMarkerAlt className='text-primary text-xl'/>{profile.location} {profile.city}, {profile.country}</p>
                 </div>
                 <div className='mt-4 w-full flex gap-2'>
-                    {/* <p className='bg-white rounded-lg p-1 px-2'>{ `${active? 'active': 'suspended'}`}</p> */}
-                    <button 
-                        onClick={handleClick} disabled={ !active} 
-                        className={` ${role === 'admin'? 'btn-dark px-4 line-through': 'btn-dark group-hover:bg-primary'}  text-sm w-full`}
+                    <Link 
+                        to={`/hiring/${_id}`}
+                        disabled={ !active} 
+                        onClick={()=>dispatch(getServiceMan(_id))}
+                        className={` ${!active? 'btn-dark px-4 line-through': 'btn-dark group-hover:bg-primary'}  text-sm w-full`}
                         >Hire now
-                    </button>
+                    </Link>
                 </div>
                 
             </div>
