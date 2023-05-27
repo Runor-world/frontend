@@ -6,6 +6,8 @@ import serviceSlice from './features/service/serviceSlice'
 import userSlice from './features/user/userSlice'
 import searchSlice from './features/search/searchSlice'
 import serviceManSlice from './features/serviceMan/serviceManSlice'
+import hiringSlice from './features/hiring/hiringSlice'
+import modalSlice from './features/modal/modalSlice'
 
 
 export const store = configureStore({
@@ -16,6 +18,8 @@ export const store = configureStore({
         service: serviceSlice,
         users: userSlice,
         search: searchSlice,
-        serviceman: serviceManSlice
+        serviceman: serviceManSlice, 
+        hiring: hiringSlice,
+        modal: modalSlice
     }
 })

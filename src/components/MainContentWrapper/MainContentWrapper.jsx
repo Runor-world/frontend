@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const ServiceSearchBarWrapper = ({children}) => {
+const MainContentWrapper = ({children}) => {
   return (
     <section className='w-full main-x-p mt-20 lg:mt-40 flex flex-col justify-center gap-10 py-5'>
         {children}
@@ -9,8 +9,8 @@ const ServiceSearchBarWrapper = ({children}) => {
   )
 }
 
-ServiceSearchBarWrapper.propTypes = {
+MainContentWrapper.propTypes = {
     children: PropTypes.object.isRequired
 }
 
-export default ServiceSearchBarWrapper
+export default MainContentWrapper

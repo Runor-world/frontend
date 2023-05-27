@@ -15,11 +15,28 @@ export const getAllServiceMen = createAsyncThunk(
     }
 )
 
+export const getServiceMan = createAsyncThunk(
+    'serviceMan/getOne',
+    async(serviceProviderId, thunkAPI) => {
+        console.log(serviceProviderId)
+        let res = null
+        try {
+            res = await axios.get(`${baseUrl}/api/serviceman/${serviceProviderId}` )
+            console.log(res.data)
+            return res.data
+        } catch (error) {
+            thunkAPI.rejectWithValue("Something went wrong")
+        }
+    }
+)
+
+
 const serviceManSlice = createSlice({
     name: 'serviceman',
     initialState: {
         serviceMen: [],
-        isLoading: false,
+        serviceProvider: {},
+        isLoading: true,
         message: ''
     },
     reducers: {
@@ -41,6 +58,20 @@ const serviceManSlice = createSlice({
                 state.serviceMen = payload.serviceMen
             })
             .addCase(getAllServiceMen.rejected, ( state, payload) =>{
+                state.isLoading = false
+                state.message = payload.msg
+            })
+            
+            //single service man 
+            .addCase(getServiceMan.pending, (state) =>{
+                state.isLoading = true
+            })
+            .addCase(getServiceMan.fulfilled, ( state, {payload})=>{
+                state.isLoading = false
+                state.message = payload.msg
+                state.serviceProvider = payload.serviceProvider
+            })
+            .addCase(getServiceMan.rejected, ( state, payload) =>{
                 state.isLoading = false
                 state.message = payload.msg
             })

@@ -1,0 +1,24 @@
+@tailwind utilities;
+@tailwind components; 
+@tailwind base;
+
+@layer components{
+    .hiring {
+        @apply w-full px-5 lg:px-40; 
+    }
+    .hiring .form-group {
+        @apply flex flex-col gap-1 w-full text-left;
+    }
+    .hiring .form-group input {
+        @apply p-2 px-4 rounded-md outline-none border-2 w-full;
+    }
+    .hiring form {
+        @apply flex flex-col gap-3;
+    }
+    .hiring input[type=submit]{
+        @apply bg-primary hover:bg-black hover:text-primary font-thin
+    }
+    .hiring .social-link{
+        @apply rounded-full w-[50px] h-[50px] hover:w-[60px] hover:h-[60px] p-2  transition-all duration-150;
+    }
+}

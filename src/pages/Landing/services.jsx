@@ -1,17 +1,16 @@
 import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import Header from '../../components/Header/Header'
-import UserSearchBar from '../../components/UserSearchBar/UserSearchBar'
 import ServiceSearchBar from '../../components/ServiceSearchBar/ServiceSearchBar'
 import ServiceCategoryList from '../../components/ServiceCategoryList/ServiceCategoryList'
 import { useDispatch, useSelector } from 'react-redux'
 import { getServices } from '../../features/service/serviceSlice'
-import ServiceSearchBarWrapper from '../../components/ServiceSearchBarWrapper/ServiceSearchBarWrapper'
-import ModalWrapper from '../../components/ModalWrapper/ModalWrapper'
-import SearchForm from '../../components/SearchForm/SearchForm'
+import MainContentWrapper from '../../components/MainContentWrapper/MainContentWrapper'
 import { getAllServiceMen } from '../../features/serviceMan/serviceManSlice'
 import ServiceMan from '../../components/ServiceMan/ServiceMan'
 import Footer from '../../components/Footer/Footer'
+import PageWrapper from '../../components/PageWrapper/PageWrapper'
+
 
 const Landing = () => {
     const dispatch = useDispatch()
@@ -24,9 +23,9 @@ const Landing = () => {
     }, [])
     
     return (
-        <div  className='w-full overflow-x-hidden'>
+        <PageWrapper>
             <Header />
-            <ServiceSearchBarWrapper>
+            <MainContentWrapper>
                 <ServiceSearchBar />                
                 <section className='grid grid-col lg:grid-cols-4 w-full gap-5 items-start mb-10'>
                     <div className='flex col-span-full lg:col-span-1 flex-col gap-5'>
@@ -46,11 +45,9 @@ const Landing = () => {
                         </div>
                     </div>
                 </section>
-            </ServiceSearchBarWrapper>
+            </MainContentWrapper>
             <Footer />
-
-            
-        </div>
+        </PageWrapper>
     )
 }
 
