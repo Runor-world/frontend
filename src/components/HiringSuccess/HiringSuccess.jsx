@@ -38,7 +38,7 @@ const HiringSuccess = ({serviceProvider}) => {
             <Link 
                 className='btn-primary bg-primary px-4 w-full text-center text-white'
                 onClick={handleClick} 
-                to={'/'}
+                to={'/hiring/user'}
                 >Done
             </Link>
         </div>
