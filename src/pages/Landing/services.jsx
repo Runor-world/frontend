@@ -23,7 +23,7 @@ const Landing = () => {
       dispatch(getAllServiceMen())
     }, [])
     
-    if(isLoading){
+    if(isLoading && !serviceMen){
         return <Loading />
     }
     return (
@@ -44,7 +44,7 @@ const Landing = () => {
                         </h3>
                         <div className='flex flex-col gap-4 mt-5 pr-6'>
                             {
-                                serviceMen.map( serviceMan => <ServiceMan key={serviceMan._id} {...serviceMan}/>)
+                                serviceMen.map( serviceMan => <ServiceMan key={serviceMan._id} serviceMan={serviceMan}/>)
                             }
                         </div>
                     </div>

@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import PageWrapper from '../../components/PageWrapper/PageWrapper'
 import Header from '../../components/Header/Header'
 import MainContentWrapper from '../../components/MainContentWrapper/MainContentWrapper'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { getServiceMan } from '../../features/serviceMan/serviceManSlice'
 import Loading from '../../components/Loading/Loading'
 import HiringSuccess from '../../components/HiringSuccess/HiringSuccess'
-import { createHiring } from '../../features/hiring/hiringSlice'
+import { createHiring, setService } from '../../features/hiring/hiringSlice'
 import ModalWrapper from '../../components/ModalWrapper/ModalWrapper'
 import { openModal } from '../../features/modal/modalSlice'
 
@@ -29,6 +29,7 @@ const Hiring = () => {
 
     const [selectedService, setSelectedService] = useState(null)
     const {serviceProviderId} = useParams()
+    const navigate = useNavigate()
 
     const steps = [
         {
@@ -68,7 +69,6 @@ const Hiring = () => {
             } catch (error) {
                 console.log(error)
             }
-            console.log(message)
         }
     })
 
@@ -77,7 +77,6 @@ const Hiring = () => {
     const handleChange = (e) =>{
         formik.handleChange(e)
         const service = serviceProvider.services.filter( service => service._id === e.target.value)[0]
-        console.log(service)
         setSelectedService(service)
     }
 
@@ -101,6 +100,11 @@ const Hiring = () => {
         }
     }
 
+    useEffect(()=>{
+        if(serviceProvider.services.length === 1){
+            navigate('/hiring/confirm')
+        }
+    }, [])
 
     if(isLoading){
         return <Loading />
@@ -167,7 +171,7 @@ const Hiring = () => {
                                 (  
                                     <div className='flex flex-col justify-between gap-10 items-center w-full p-2'>
                                         <div className='text-center'>
-                                            You are about to hire <q>{serviceProvider.user.firstName} {serviceProvider.user.lastName?? serviceProvider.user.otherName}</q> for <q>{selectedService.name}</q>
+                                            You are about to hire <q>{serviceProvider.user.firstName} {serviceProvider.user.lastName?? serviceProvider.user.otherName}</q> for <q>{selectedService?.name}</q>
                                         </div>
                                         <div className='flex justify-between gap-10 items-center w-full'>
                                             <button className='btn-dark px-4 w-full' onClick={handleBackClick}>Back</button>

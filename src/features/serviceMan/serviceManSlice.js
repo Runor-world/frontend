@@ -22,7 +22,6 @@ export const getServiceMan = createAsyncThunk(
         let res = null
         try {
             res = await axios.get(`${baseUrl}/api/serviceman/${serviceProviderId}` )
-            console.log(res.data)
             return res.data
         } catch (error) {
             thunkAPI.rejectWithValue("Something went wrong")

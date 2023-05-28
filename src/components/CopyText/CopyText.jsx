@@ -22,7 +22,8 @@ const CopyText = ({text, icon}) => {
                 {icon} <span className='text-xl font-semibold'>{text}</span>
             </div>
             <div onClick={handleCopy} className='bg-slate-400 rounded-md p-1 px-4 hover:scale-105 duration-200 transition-all'>
-                <small>{copy === text? 'Copied': 'Click here to copy'}</small>
+                <small>{copy === text? 'Copied': 'Click here to copy'}</small> 
+                
             </div>
         </div>
     )

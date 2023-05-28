@@ -48,7 +48,6 @@ export const updateProfilePhoto = createAsyncThunk(
 export const createUserServiceProfile = createAsyncThunk(
     'profile/service-create',
     async(values, thunkAPI) => {
-        console.log(values)
         try {
             const res = await axios.post(`${baseUrl}/api/profile/service`, 
                 values,
@@ -58,7 +57,6 @@ export const createUserServiceProfile = createAsyncThunk(
                     }
                 }
             )
-            console.log(res.data)
             return res.data
         } catch (error) {
             thunkAPI.rejectWithValue(error.data)
