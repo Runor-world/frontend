@@ -16,6 +16,7 @@ import Services from './pages/Services/Services';
 import Users from './pages/Users/Users';
 import Landing from './pages/Landing/services';
 import Hiring from './pages/Hiring/Hiring';
+import UserHirings from './pages/UserHirings.jsx/UserHirings';
 
 function App() {
   
@@ -75,7 +76,8 @@ function App() {
           <Route path='/service-profile' element={!user? <Navigate to='/'/>: <ProfileSetup />} />
           <Route path='*' element={<Error/>} />
           <Route path='/' element={<Landing />}/>
-          <Route path='/hiring/:serviceProviderId' element={<Hiring />}/>
+          <Route path='/hiring/:serviceProviderId' element={!user? <Navigate to={'/login'}/>: <Hiring />}/>
+          <Route path='/hiring/user' element={!user? <Navigate to={'/login'}/>: <UserHirings />}/>
         </Routes>
         { isOpen && <Sidebar />}
     </div>

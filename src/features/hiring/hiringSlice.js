@@ -22,12 +22,33 @@ export const createHiring = createAsyncThunk(
     }
 )
 
+export const getAllHiringsByUser = createAsyncThunk(
+    'hiring/user',
+    async(values, thunkAPI) => {
+        let res = null
+        try {
+            res = await axios.get(`${baseUrl}/api/hiring/user`, 
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                }
+            )
+            return res.data
+        } catch (error) {
+            thunkAPI.rejectWithValue("Something went wrong")
+        }
+    }
+)
+
+
 const hiringSlice = createSlice({
     name: 'hiring', 
     initialState: {
         hiring: null,
         message: {text: '', error: true},
-        success: false
+        success: false, 
+        hirings: []
     }, 
     reducers: {
         setMessage: ( state, {payload}) => {
@@ -55,6 +76,20 @@ const hiringSlice = createSlice({
             .addCase(createHiring.rejected, ( state, payload) =>{
                 state.isLoading = false
                 state.message = { text: payload.msg, error: true}
+            })
+
+            // get user's hirings 
+            .addCase(getAllHiringsByUser.pending, (state) =>{
+                state.isLoading = true
+            })
+            .addCase(getAllHiringsByUser.fulfilled, ( state, {payload})=>{
+                state.isLoading = false
+                if(payload){
+                    state.hirings = payload.hirings
+                }
+            })
+            .addCase(getAllHiringsByUser.rejected, ( state, payload) =>{
+                state.isLoading = false
             })
     }
 })

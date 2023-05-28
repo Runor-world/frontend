@@ -10,18 +10,22 @@ import { getAllServiceMen } from '../../features/serviceMan/serviceManSlice'
 import ServiceMan from '../../components/ServiceMan/ServiceMan'
 import Footer from '../../components/Footer/Footer'
 import PageWrapper from '../../components/PageWrapper/PageWrapper'
+import Loading from '../../components/Loading/Loading'
 
 
 const Landing = () => {
     const dispatch = useDispatch()
     const {services} = useSelector( store => store.service)
     const {searchBarVisible} = useSelector( store => store.search)
-    const {serviceMen} = useSelector( store => store.serviceman)
+    const {serviceMen, isLoading} = useSelector( store => store.serviceman)
     useEffect(() => {
       dispatch(getServices())
       dispatch(getAllServiceMen())
     }, [])
     
+    if(isLoading){
+        return <Loading />
+    }
     return (
         <PageWrapper>
             <Header />
