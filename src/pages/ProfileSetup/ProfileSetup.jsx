@@ -26,9 +26,9 @@ const ProfileSetup = () => {
                 <img src={providerImage} alt='provider'/>
                 <img src={consumerImage} alt='consumer'/>
             </div>
-            <div className='overlay main-x-p mt-10 text-center'>
+            <div className='overlay main-x-p mt-10 text-center text-black'>
                 {/* <h1 className='font-bold text-2xl text-left lg:text-4xl'>Service Profile setting</h1> */}
-                <p className='text-xl text-slate-100 font-semibold mb-0 text-left lg:text-center'>Set your account accordingly</p>
+                <p className='text-xl text-black font-semibold mb-0 text-left lg:text-center'>Set your account accordingly</p>
                 <hr className='border-2 rounded-full border-slate-400 w-full lg:w-1/2 mb-4'/>
                 <UserServiceProfileForm services={services} />
             </div>

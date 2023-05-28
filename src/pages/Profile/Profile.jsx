@@ -128,17 +128,17 @@ const Profile = () => {
             </div>
             {
                 showImageUploader && <PhotoEdit 
-                    title={'Background image update/upload'}
-                    setShowImageUploader={setShowImageUploader}
-                    dispatcher={updateProfileBackgroundPhoto}
-                    />
+                                        title={'Background image update/upload'}
+                                        setShowImageUploader={setShowImageUploader}
+                                        dispatcher={updateProfileBackgroundPhoto}
+                                    />
             }
             {
                 showUserImageUploader && <PhotoEdit 
-                    title={'User image update/upload'}
-                    setShowImageUploader={setShowUserImageUploader}
-                    dispatcher={updateProfilePhoto}
-                    />
+                                            title={'User image update/upload'}
+                                            setShowImageUploader={setShowUserImageUploader}
+                                            dispatcher={updateProfilePhoto}
+                                        />
             }
         </div>
     )
