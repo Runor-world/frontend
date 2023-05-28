@@ -24,13 +24,21 @@ const HiringConfirm = props => {
     const navigate = useNavigate()
     const [selectedService, setSlectedService] = useState({})
 
-    useEffect(()=> {
-        dispatch(getServiceMan(serviceProviderId))
-        if(serviceProvider.services.length === 1){
-            setSlectedService(serviceProvider.services[0])
-        }else{
-            setSlectedService(service)
+    const fetchServiceProvider = async()=>{
+        try {
+            const res = await dispatch(getServiceMan(serviceProviderId)).unwrap()
+            console.log(res)
+            if(serviceProvider.services.length === 1){
+                setSlectedService(serviceProvider.services[0])
+            }else{
+                setSlectedService(service)
+            }
+        } catch (error) {
+            console.log(error)
         }
+    }
+    useEffect(()=> {
+        fetchServiceProvider()
     }, [])
 
     const handleBackClick = () => {
@@ -52,7 +60,6 @@ const HiringConfirm = props => {
                 )
             ).unwrap()
             dispatch(openModal())
-            console.log(res)
         } catch (error) {
             console.log(error)
         }
