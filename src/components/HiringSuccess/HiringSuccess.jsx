@@ -16,7 +16,7 @@ const HiringSuccess = ({serviceProvider}) => {
     }
 
     return (
-        <div className='flex flex-col gap-5 items-center justify-center h-[3/4hv]'>
+        <div className='flex flex-col gap-5 items-center justify-center h-[3/4hv] group hover:scale-[101%] bg-slate-100 duration-200 transitions-all'>
             <div className='flex flex-col gap-2 items-center w-full p-2'>
                 <div className='my-2 text-xl font-semibold'>
                     <p>Hiring done successfully!</p>
@@ -38,7 +38,7 @@ const HiringSuccess = ({serviceProvider}) => {
             <Link 
                 className='btn-primary bg-primary px-4 w-full text-center text-white'
                 onClick={handleClick} 
-                to={'/'}
+                to={'/hiring/user'}
                 >Done
             </Link>
         </div>

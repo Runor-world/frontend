@@ -53,7 +53,7 @@ const UserHirings = props => {
                                 <small className='text-center'>{hirings.length}</small>
                             </div>
                         </div>
-                        <div className='flex flex-col gap-4 mt-5 pr-4'>
+                        <div className='flex flex-col gap-4 mt-5 pr-6'>
                             {
                                 hirings.map( hiring => <HiringItem key={hiring._id} hiring={hiring} />)
                             }
