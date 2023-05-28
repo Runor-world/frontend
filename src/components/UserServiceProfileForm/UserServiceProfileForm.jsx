@@ -17,19 +17,19 @@ const UserServiceProfileForm = ({services}) => {
 
     const formik = useFormik({
         initialValues: {
-            services: [],
+            service: '',
             accountType: '',
         },
         validationSchema: Yup.object({
-            services:  Yup.array().required('Select services'),
+            service:  Yup.string().required('Select service'),
             accountType: Yup.string().min(2, "Must be atlest 2 characters").required('Select account type'),
         }),
         onSubmit: async(values) => {
             // do something on submit
           
-            const newValues = {...values, services: values.services.map( service => JSON.parse(service))}
+            // const newValues = {...values, service: values.service.map( service => JSON.parse(service))}
             try {
-                const res = await dispatch(createUserServiceProfile(newValues)).unwrap()
+                const res = await dispatch(createUserServiceProfile(values)).unwrap()
                 setTimeout(()=>{
                     navigate('/profile')
                 }, 1000)
@@ -39,20 +39,13 @@ const UserServiceProfileForm = ({services}) => {
         }
     })
 
-    const setServiceLabel = (accountType) =>{
-        if(accountType === 'service man'){
-            return 'Select a service'
-        }
-        return 'Select service(s)'
-    }
-
     return (
         <div className='service-profile-form'>
             {/* <h2 className='font-bold text-center'>Configure your account</h2> */}
             <form onSubmit={formik.handleSubmit}>
                 <FormError message={message}/>
                 <div className='form-group'>
-                    <label htmlFor='accountType'>Who are you ?</label>
+                    <label htmlFor='accountType'>Account type</label>
                     <select 
                         id='accountType'
                         {...formik.getFieldProps('accountType')}
@@ -61,9 +54,9 @@ const UserServiceProfileForm = ({services}) => {
                             defaultValue={''}  
                             className='text-slate-300'>---Select account type---
                         </option>
-                       <option value={'service consumer'}>Service consumer (only hire)</option>
-                       <option value={'service man'}>Service man (hire and serve)</option>
-                       <option value={'business'}>Business (many services)</option>
+                        <option value={'service consumer'}>Service consumer (hire only)</option>
+                        <option value={'service man'}>Service man (hire and serve)</option>
+                        <option value={'business'}>Business (many services)</option>
                     </select>
                     <FormInputError 
                         isTouched={formik.touched.accountType}
@@ -71,28 +64,20 @@ const UserServiceProfileForm = ({services}) => {
                     />
                 </div>
                 <div className='form-group'>
-                    <label htmlFor='firstname'>Select offered/consumed services</label>
+                    <label htmlFor='firstname'>Select offered/consumed service</label>
                     <select 
                         className='custom-scrollbar'
-                        id='services'
-                        multiple={formik.values.accountType !== 'service man'}
-                        {...formik.getFieldProps('services')}
-
-                        onChange={(e)=>{
-                            if(formik.values.accountType === 'service man'){
-                                formik.setFieldValue('services', [e.target.value])
-                            }
-                            formik.handleChange(e)
-                        }}
+                        id='service'
+                        {...formik.getFieldProps('service')}
                     >
                         <option 
                             defaultValue={''} 
                             className='text-slate-300'
                             >
-                                ---{setServiceLabel(formik.values.accountType)}---
+                                ---Select a service---
                         </option>
                         {
-                            services.map( service => <option value={JSON.stringify(service)} key={service.name}>{service.name}</option>)
+                            services.map( service => <option value={service._id} key={service._id}>{service.name}</option>)
                         }
                     </select>
             
@@ -103,9 +88,9 @@ const UserServiceProfileForm = ({services}) => {
                 </div>
 
                 
-                <div className='w-full flex justify-between gap-4 py-2'>
+                <div className='w-full flex justify-between gap-4 py-4 pb-2'>
                     <Link 
-                        className='bg-white text-primary p-2 rounded-md flex-1'
+                        className='btn-dark bg-slate-800 text-white p-2 rounded-md flex-1'
                         to={'/profile'}
                         >Not now
                     </Link>
@@ -113,7 +98,8 @@ const UserServiceProfileForm = ({services}) => {
                     <input 
                         type='submit' 
                         value={'Submit'}
-                        className='bg-slate-500 text-white p-2 rounded-md flex-1 border-2' />                
+                        className='btn-dark bg-primary p-2 rounded-md flex-1 border-2'
+                     />                
                 </div>
             </form>
         </div>
