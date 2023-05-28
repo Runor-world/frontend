@@ -12,6 +12,10 @@ export const userDropDown = [
         url: '/jobs',
     },
     {
+        text: 'hiring',
+        url: '/hiring/user'
+    },
+    {
         text: 'wallet',
         url: '/wallet'
     },
