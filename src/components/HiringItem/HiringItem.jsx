@@ -42,7 +42,7 @@ const HiringItem = ({hiring}) => {
                         />
                     </div>
                     <div className='flex flex-col lg:flex-row text-left'>
-                        <Link className='underline' to={`/user/${_id}`}>{firstName} {lastname?? otherName}</Link>
+                        <Link className='hover:underline' to={`/user/${_id}`}>{firstName} {lastname?? otherName}</Link>
                         <span className='text-primary'>(service provider)</span>
                     </div>
                 </div>

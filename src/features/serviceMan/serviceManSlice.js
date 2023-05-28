@@ -53,8 +53,12 @@ const serviceManSlice = createSlice({
             })
             .addCase(getAllServiceMen.fulfilled, ( state, {payload})=>{
                 state.isLoading = false
-                state.message = payload.msg
-                state.serviceMen = payload.serviceMen
+                if(payload){
+                    state.message = payload.msg
+                    state.serviceMen = payload.serviceMen
+                }else{
+                    state.message = 'Failed to fetch'
+                }
             })
             .addCase(getAllServiceMen.rejected, ( state, payload) =>{
                 state.isLoading = false
@@ -67,8 +71,12 @@ const serviceManSlice = createSlice({
             })
             .addCase(getServiceMan.fulfilled, ( state, {payload})=>{
                 state.isLoading = false
-                state.message = payload.msg
-                state.serviceProvider = payload.serviceProvider
+                if(payload){
+                    state.message = payload.msg
+                    state.serviceProvider = payload.serviceProvider
+                }else{
+                    state.message = 'Failed to fetch service provider'
+                }
             })
             .addCase(getServiceMan.rejected, ( state, payload) =>{
                 state.isLoading = false
