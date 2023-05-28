@@ -84,7 +84,7 @@ const Profile = () => {
                                         <p>{serviceProfile.accountType}</p>
                                     </article>
                                     <ol className='flex flex-col gap-4'>
-                                        <small className='text-primary'>Offerred/consumed Services ({serviceProfile.services.length})</small>
+                                        <small className='text-primary'>Offerred/consumed Services ({serviceProfile.services?.length})</small>
                                         <hr />
                                     {
                                         serviceProfile.services.map( (service, index) =>{

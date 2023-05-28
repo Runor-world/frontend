@@ -10,7 +10,7 @@ const MainContentWrapper = ({children}) => {
 }
 
 MainContentWrapper.propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.array.isRequired
 }
 
 export default MainContentWrapper

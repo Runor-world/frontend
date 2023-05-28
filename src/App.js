@@ -17,11 +17,13 @@ import Users from './pages/Users/Users';
 import Landing from './pages/Landing/services';
 import Hiring from './pages/Hiring/Hiring';
 import UserHirings from './pages/UserHirings.jsx/UserHirings';
+import HiringConfirm from './pages/HiringConfirm/HiringConfirm';
 
 function App() {
   
   const { user } = useSelector(store => store.auth)
   const {isOpen} = useSelector( store => store.sidebar)
+  const {serviceProvider} = useSelector( store => store.serviceman)
 
   const dispatch = useDispatch()
 
@@ -76,8 +78,9 @@ function App() {
           <Route path='/service-profile' element={!user? <Navigate to='/'/>: <ProfileSetup />} />
           <Route path='*' element={<Error/>} />
           <Route path='/' element={<Landing />}/>
-          <Route path='/hiring/:serviceProviderId' element={!user? <Navigate to={'/login'}/>: <Hiring />}/>
+          <Route path='/hiring/:serviceProviderId'element={!user? <Navigate to={'/login'}/>: <Hiring />}/>
           <Route path='/hiring/user' element={!user? <Navigate to={'/login'}/>: <UserHirings />}/>
+          <Route path='/hiring/confirm/:serviceProviderId' element={!user? <Navigate to={'/login'} />: <HiringConfirm />} />
         </Routes>
         { isOpen && <Sidebar />}
     </div>

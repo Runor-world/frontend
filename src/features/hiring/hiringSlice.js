@@ -45,10 +45,12 @@ export const getAllHiringsByUser = createAsyncThunk(
 const hiringSlice = createSlice({
     name: 'hiring', 
     initialState: {
-        hiring: null,
+        hiring: {},
         message: {text: '', error: true},
         success: false, 
-        hirings: []
+        hirings: [],
+        service: {}, 
+        isLoading: false
     }, 
     reducers: {
         setMessage: ( state, {payload}) => {
@@ -57,6 +59,9 @@ const hiringSlice = createSlice({
         clearMessage: ( state) => {
             state.message = { text: '', error: true}
         }, 
+        setService: (state, {payload}) =>{
+            state.service = payload
+        }
     }, 
     extraReducers: (builder)=>{
         builder
@@ -94,5 +99,5 @@ const hiringSlice = createSlice({
     }
 })
 
-export const { setServiceProvider, setMessage, clearMessage} = hiringSlice.actions
+export const { setServiceProvider, setMessage, clearMessage, setService} = hiringSlice.actions
 export default hiringSlice.reducer
