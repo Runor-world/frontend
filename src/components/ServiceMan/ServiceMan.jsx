@@ -38,9 +38,10 @@ const ServiceMan = ({_id, user, profile, services, }) => {
                 <div className='mt-4 w-full flex gap-2'>
                     <Link 
                         to={`/hiring/${_id}`}
+                        
                         disabled={ !active} 
                         onClick={()=>dispatch(getServiceMan(_id))}
-                        className={` ${!active? 'btn-dark px-4 line-through': 'btn-dark group-hover:bg-primary'}  text-sm w-full`}
+                        className={` ${!active? 'btn-dark px-4 line-through': 'btn-dark group-hover:bg-slate-900'} bg-primary text-sm w-full`}
                         >Hire now
                     </Link>
                 </div>

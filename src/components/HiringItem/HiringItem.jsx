@@ -22,7 +22,8 @@ const HiringItem = ({hiring}) => {
     }
 
     return (
-        <article className='flex flex-col gap-3 rounded-md shadow-md relative w-full md:w-2/3 bg-slate-50'>
+        <article 
+            className='flex flex-col gap-3 rounded-md shadow-md relative w-full md:w-2/3 bg-slate-50 group hover:scale-[101%] duration-200 transitions-all'>
             {/* head */}
             <header className='flex flex-col gap-3 border-b-2 rounded-t-md bg-slate-100 p-5'>
                 <div className='flex gap-2'>
@@ -62,7 +63,7 @@ const HiringItem = ({hiring}) => {
             {
                 status === 'pending'? (
                     <div className='p-2'>
-                        <button className='btn-dark bg-primary w-full'>Cancel</button>
+                        <button className='btn-dark bg-primary w-full group-hover:bg-slate-900'>Cancel</button>
                     </div>
                 ): (null)
             }
