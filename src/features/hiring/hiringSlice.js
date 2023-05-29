@@ -50,7 +50,7 @@ const hiringSlice = createSlice({
         success: false, 
         hirings: [],
         service: {}, 
-        isLoading: false
+        isLoading: true
     }, 
     reducers: {
         setMessage: ( state, {payload}) => {
@@ -61,6 +61,7 @@ const hiringSlice = createSlice({
         }, 
         setService: (state, {payload}) =>{
             state.service = payload
+            state.isLoading = false
         }
     }, 
     extraReducers: (builder)=>{
