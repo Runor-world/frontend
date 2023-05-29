@@ -15,7 +15,7 @@ const ServiceMan = ({serviceMan}) => {
     const handleHireClick = () =>{
         if(services.length === 1){
             dispatch(setService(services[0]))
-            navigate(`/hiring/confirm/${_id}`, {replace: true})
+            navigate(`/hiring/confirm/${_id}`)
         }else{
             dispatch(getServiceMan(_id))
             navigate(`/hiring/${_id}`)

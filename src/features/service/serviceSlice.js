@@ -18,7 +18,6 @@ export const updateService = createAsyncThunk(
     'service/update',
     async(values, thunkAPI) => {
         let res = null
-        console.log(values)
         try {
             res = await axios.patch(`${baseUrl}/api/service`, 
             values,

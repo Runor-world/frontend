@@ -18,7 +18,6 @@ export const getAllServiceMen = createAsyncThunk(
 export const getServiceMan = createAsyncThunk(
     'serviceMan/getOne',
     async(serviceProviderId, thunkAPI) => {
-        console.log(serviceProviderId)
         let res = null
         try {
             res = await axios.get(`${baseUrl}/api/serviceman/${serviceProviderId}` )
@@ -72,6 +71,7 @@ const serviceManSlice = createSlice({
             .addCase(getServiceMan.fulfilled, ( state, {payload})=>{
                 state.isLoading = false
                 if(payload){
+                    console.log('serviceProvider: ', payload.serviceProvider)
                     state.message = payload.msg
                     state.serviceProvider = payload.serviceProvider
                 }else{

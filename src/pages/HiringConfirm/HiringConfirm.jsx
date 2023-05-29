@@ -14,33 +14,30 @@ import ModalWrapper from '../../components/ModalWrapper/ModalWrapper'
 import HiringSuccess from '../../components/HiringSuccess/HiringSuccess'
 import { openModal } from '../../features/modal/modalSlice'
 
-const HiringConfirm = props => {
-    const {serviceProvider, isLoading} = useSelector( store => store.serviceman)
-    const {service, message, isLoading:hiringLoading, hiring} = useSelector( store => store.hiring)
+const HiringConfirm = () => {
+    const fetchServiceProvider = async()=>{
+        try {
+            const res = await dispatch(getServiceMan(serviceProviderId)).unwrap()
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(()=> {
+        fetchServiceProvider()
+    }, [])
+
+    const {serviceProvider,} = useSelector( store => store.serviceman)
+    const {service, message, hiring, isLoading} = useSelector( store => store.hiring)
     const {isOpened} = useSelector( store => store.modal)
 
     const dispatch = useDispatch()
     const {serviceProviderId} = useParams()
     const navigate = useNavigate()
     const [selectedService, setSlectedService] = useState({})
-
-    const fetchServiceProvider = async()=>{
-        try {
-            const res = await dispatch(getServiceMan(serviceProviderId)).unwrap()
-            console.log(res)
-            if(serviceProvider.services.length === 1){
-                setSlectedService(serviceProvider.services[0])
-            }else{
-                setSlectedService(service)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    useEffect(()=> {
-        fetchServiceProvider()
-    }, [])
-
+    const [loading, setLoading] = useState(true)
+  
     const handleBackClick = () => {
         if(serviceProvider.services.length > 1){
             navigate(`/hiring/${serviceProviderId}`)
@@ -65,7 +62,7 @@ const HiringConfirm = props => {
         }
     }
 
-    if(isLoading){
+    if(loading){
         return <Loading />
     }
 
@@ -81,7 +78,7 @@ const HiringConfirm = props => {
                     <div className='flex flex-col justify-between gap-10 items-center w-full p-2'>
                         <div className='text-center'>
                             <p>
-                                You are about to hire <q>{serviceProvider.user.firstName} {serviceProvider.user.lastName?? serviceProvider.user.otherName}</q> for <q> {selectedService.name}</q>
+                                You are about to hire <q>{serviceProvider.user?.firstName} {serviceProvider.user?.lastName?? serviceProvider.user?.otherName}</q> for <q> {service?.name}</q>
                             </p>
                         </div>
                         <div className='flex justify-between gap-10 items-center w-full'>
@@ -113,6 +110,5 @@ const HiringConfirm = props => {
     )
 }
 
-HiringConfirm.propTypes = {}
 
 export default HiringConfirm
