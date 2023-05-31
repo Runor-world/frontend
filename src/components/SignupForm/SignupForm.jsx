@@ -10,15 +10,19 @@ import { Link, useLocation } from 'react-router-dom'
 import googleIcon from '../../images/google-icon.png'
 import facebookIcon from '../../images/facebook-icon.png'
 import { FaSpinner } from 'react-icons/fa'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 
 const SignupForm = () => {
     const dispatch = useDispatch()
     const { message} = useSelector( store => store.auth) 
     const [isLoading, setIsLoading] = useState(false)
+    const [phoneNumber, setPhoneNumber] = useState('')
     const formik = useFormik({
         initialValues: {
             email: '',
+            phoneNumber: '',
             password: '',
             passwordRepeat: '',
             firstName: '', 
@@ -26,6 +30,7 @@ const SignupForm = () => {
         },
         validationSchema: Yup.object({
             email: Yup.string().email('Invalid email address').required('Email is required'),
+            phoneNumber: Yup.string().required('Phone is required'),
             firstName: Yup.string().min(2, "Must be atlest 2 characters").required('First name is required'),
             otherName: Yup.string().min(2, "Must be atlest 2 characters").required('Other name is required'),
             password: Yup.string().min(8, "Must be at least 8 characters").required("Password required")
@@ -36,6 +41,7 @@ const SignupForm = () => {
             passwordRepeat: Yup.string().required('Confirm password required').oneOf([Yup.ref('password'), null], 'Passwords must match')
         }),
         onSubmit: async(values) => {    
+            console.log('signup', values)
             setIsLoading(true)
             try {
                 const res = await dispatch(localSignup(values)).unwrap()
@@ -81,7 +87,30 @@ const SignupForm = () => {
                         errorMessage={formik.errors.email}
                     />
                 </div>
-                <div className='flex justify-between gap-2'>
+
+                <div className='form-group'>
+                    <label htmlFor='phoneNumber'>Phone number</label>
+                    <div>
+                        <PhoneInput 
+                            type='text' 
+                            defaultCountry='NG'
+                            className='flex gap-4'
+                            id='phoneNumber'
+                            placeholder='Phone number'
+                            value={formik.values.phoneNumber}
+                            {...formik.getFieldProps('phoneNumber')}
+                            onChange={(value)=>{
+                                formik.getFieldHelpers('phoneNumber').setValue(value)
+                            }}
+                        />
+                    </div>
+                    <FormInputError 
+                        isTouched={formik.touched.phoneNumber}
+                        errorMessage={formik.errors.phoneNumber}
+                    />
+                </div>
+
+                <div className='flex flex-col lg:flex-row justify-between gap-2'>
                     <div className='form-group'>
                         <label htmlFor='firstname'>First name</label>
                         <input 
@@ -109,7 +138,7 @@ const SignupForm = () => {
                     </div>
                 </div>
 
-                <div className='flex gap-2'>
+                <div className='flex gap-2 flex-col lg:flex-row'>
                     <div className='form-group'>
                         <label htmlFor='password'>Password</label>
                         <input 

@@ -11,7 +11,7 @@ const Signup = () => {
 
     if(isLoading) return <Loading />
     return (
-        <div className='grid grid-col-1 lg:grid-cols-2 h-screen w-screen overflow-clip '>
+        <div className='grid grid-col-1 lg:grid-cols-2 h-screen w-screen overflow-x-clip py-5 lg:py-0'>
             <article className='relative items-center text-center invisible lg:visible'>
                 <img 
                     src={loginImage} alt='bg-poster'
@@ -29,8 +29,8 @@ const Signup = () => {
             </article>
         
             <article className='flex flex-col items-center justify-center shadow-xl'>
-                <Link to='/home' className='cursor-pointer flex gap-2 font-bold items-center text-3xl visible lg:invisible px-5 text-primary'>
-                    <img src={logo} alt='logo'/>
+                <Link to='/home' className='cursor-pointer flex gap-2 font-bold items-center text-xl visible lg:hidden px-5 text-primary'>
+                    <img src={logo} alt='logo' className='w-10 h-10 rounded-full ring-primary ring-2'/>
                     <h2>Runor</h2>
                 </Link>
                 <SignupForm />

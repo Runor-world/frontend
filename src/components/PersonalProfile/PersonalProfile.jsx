@@ -29,6 +29,11 @@ const PersonalProfile = ({personalProfile, user, setOpen}) => {
                 <p>{user.email}</p>
             </article>
             <article>
+                <small className='text-primary'>Phone number</small>
+                <hr />
+                <p>{user.phoneNumber}</p>
+            </article>
+            <article>
                 <small className='text-primary'>Location</small>
                 <hr />
                 <p>{user.location}</p>

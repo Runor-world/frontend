@@ -28,7 +28,8 @@ export const localSignup = createAsyncThunk(
                 email: values.email,
                 password: values.password,
                 otherName: values.otherName,
-                firstName: values.firstName
+                firstName: values.firstName,
+                phoneNumber: values.phoneNumber
             })
             return res.data
         } catch (error) {
