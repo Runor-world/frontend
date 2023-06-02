@@ -52,20 +52,14 @@ const ServiceMan = ({ serviceMan }) => {
             ))}
         </div>
 
-        <div className="flex justify-start my-2">
-          {/* <p className="flex gap-2 text-md">
-            <FaPhone className="text-primary text-xl" />
-            {phoneNumber} 
-          </p> */}
-          <CopyText icon={<FaPhone />} text={phoneNumber}></CopyText>
-        </div>
-
-        <div className="flex flex-col my-2">
-          <p className="flex gap-2 text-md">
-            <FaMapMarkerAlt className="text-primary text-xl" />
-            {profile.location} {profile.city}, {profile.country}
-          </p>
-        </div>
+        {(profile.location || profile.city || profile.country) && (
+          <div className="flex flex-col my-2">
+            <p className="flex gap-2 text-md">
+              <FaMapMarkerAlt className="text-primary text-xl" />
+              {profile.location} {profile.city}, {profile.country}
+            </p>
+          </div>
+        )}
 
         <div className="mt-4 w-full flex gap-2">
           <button
