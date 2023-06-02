@@ -1,22 +1,23 @@
 @tailwind utilities;
-@tailwind components; 
+@tailwind components;
 @tailwind base;
 
-@layer components{
-    .p-profile-edit-form {
-        @apply absolute top-20 w-[94%] lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-white rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.7)]; 
-    }
-    .p-profile-edit-form .form-group {
-        @apply flex flex-col gap-1 w-full text-left;
-    }
-    .p-profile-edit-form .form-group input, .p-profile-edit-form .form-group textarea, .p-profile-edit-form .form-group select {
-        @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
-    }
-    .p-profile-edit-form form {
-        @apply flex flex-col gap-3;
-    }
-    .p-profile-edit-form input[type=submit]{
-        @apply bg-primary hover:bg-black hover:text-primary;
-    }
-   
+@layer components {
+  .service-form {
+    @apply absolute top-20 w-[94%] lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-white rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.7)];
+  }
+  .service-form .form-group {
+    @apply flex flex-col gap-1 w-full text-left;
+  }
+  .service-form .form-group input,
+  .service-form .form-group textarea,
+  .service-form .form-group select {
+    @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
+  }
+  .service-form form {
+    @apply flex flex-col gap-3;
+  }
+  .service-form input[type="submit"] {
+    @apply bg-primary hover:bg-black hover:text-primary;
+  }
 }
