@@ -1,22 +1,22 @@
 @tailwind utilities;
-@tailwind components; 
+@tailwind components;
 @tailwind base;
 
-@layer components{
-    .p-profile-edit-form {
-        @apply absolute top-20 left-0  mx-[3%] w-[94%] bg-black z-40 p-4 lg:p-20 bg-opacity-70 text-white rounded-md; 
-    }
-    .p-profile-edit-form .form-group {
-        @apply flex flex-col gap-1 w-full text-left;
-    }
-    .p-profile-edit-form .form-group input, .p-profile-edit-form .form-group textarea {
-        @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
-    }
-    .p-profile-edit-form form {
-        @apply flex flex-col gap-3;
-    }
-    .p-profile-edit-form button[type=submit]{
-        @apply bg-primary hover:bg-black hover:text-primary;
-    }
-   
+@layer components {
+  .p-profile-edit-form {
+    @apply absolute top-0 left-0  mx-[3%] w-[94%] bg-black z-50 p-4 lg:p-20 bg-opacity-90 text-white rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.8)];
+  }
+  .p-profile-edit-form .form-group {
+    @apply flex flex-col gap-1 w-full text-left;
+  }
+  .p-profile-edit-form .form-group input,
+  .p-profile-edit-form .form-group textarea {
+    @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
+  }
+  .p-profile-edit-form form {
+    @apply flex flex-col gap-3;
+  }
+  .p-profile-edit-form button[type="submit"] {
+    @apply hover:bg-black hover:text-primary;
+  }
 }

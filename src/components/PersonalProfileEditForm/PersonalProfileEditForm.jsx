@@ -6,6 +6,7 @@ import './PersonalProfileEditForm.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProfile } from '../../features/profile/profileSlice'
 import { FaTimes } from 'react-icons/fa'
+import ModalWrapper from '../ModalWrapper/ModalWrapper'
 
 const PersonalProfileEditForm = ({setOpen}) => {
     const {personalProfile} = useSelector( store=> store.profile)
@@ -138,12 +139,13 @@ const PersonalProfileEditForm = ({setOpen}) => {
                     errorMessage={formik.errors.dateOfBirth}
                 />
             </div>
-            <div className='flex justify-between gap-4'>
-                <input className='flex-1 p-2 rounded-md bg-primary' type='submit' value='Save'/>
-                <button onClick={()=>setOpen(false)} className='flex-1 font-semibold'>close</button>
+            <div className='flex justify-between gap-4 my-3'>
+                <input className='btn-dark bg-primary flex-1 border-2 border-primary' type='submit' value='Save'/>
+                <button onClick={()=>setOpen(false)} className='btn-dark bg-slate-200 text-primary flex-1 font-semibold'>close</button>
             </div>
         </form>
     </div>
+
   )
 }
 

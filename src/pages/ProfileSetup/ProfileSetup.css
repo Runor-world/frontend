@@ -2,18 +2,17 @@
 @tailwind utilities;
 @tailwind components;
 
-@layer components{
-   .profile-setup {
-        @apply w-full  flex justify-center items-center relative pt-10;
-   }
-   .profile-setup .overlay {
-        @apply w-full lg:w-2/3 h-fit mx-auto flex flex-col items-center gap-4 lg:gap-5 absolute py-10 lg:py-10 lg:px-5 opacity-90 text-white bg-white;
-    }
-   .profile-setup p{
-        @apply w-full lg:w-2/3 lg:text-2xl px-4;
-   }
-   .profile-setup img {
-        @apply w-full  lg:w-full lg:h-full object-cover aspect-square flex-1 blur-sm lg:blur-none lg:animate-ping;
-   }
-    
+@layer components {
+  .profile-setup {
+    @apply w-full  flex justify-center items-center relative pt-10;
+  }
+  .profile-setup .overlay {
+    @apply w-full lg:w-2/3 h-fit mx-auto flex flex-col items-center gap-4 lg:gap-5 absolute py-10 lg:py-10 lg:px-5 opacity-90 text-white bg-white;
+  }
+  .profile-setup p {
+    @apply w-full lg:w-2/3 lg:text-2xl px-4;
+  }
+  .profile-setup img {
+    @apply w-full  lg:w-full lg:h-full object-cover aspect-square flex-1 blur-sm lg:blur-none lg:animate-ping;
+  }
 }

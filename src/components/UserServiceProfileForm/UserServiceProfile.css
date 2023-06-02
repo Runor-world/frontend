@@ -2,34 +2,35 @@
 @tailwind utilities;
 @tailwind components;
 
-@layer components{
-    /* .service-profile-form {
+@layer components {
+  /* .service-profile-form {
         @apply w-screen h-screen absolute -top-16 pt-20 pb-10 left-0 z-50 bg-black bg-opacity-90 text-white mx-auto;
     } */
-    .service-profile-form {
-        @apply text-black w-full lg:w-2/4 lg:mx-auto py-2 lg:px-10 rounded-md lg:border-2 bg-opacity-70;
-    }
+  .service-profile-form {
+    @apply text-black w-full lg:w-2/4 lg:mx-auto py-2 lg:px-10 rounded-md lg:border-2 bg-opacity-70;
+  }
 
-    .service-profile-form .form-group {
-        @apply flex flex-col gap-1 w-full text-left;
-    }
-    .service-profile-form .form-group input, .service-profile-form .form-group select {
-        @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
-    }
-    .service-profile-form .form-group select {
-        @apply max-h-[150px] overflow-y-auto py-2 px-0 rounded-none;
-    }
-    .service-profile-form option {
-        @apply py-2 border-b-2 border-slate-200 text-black;
-    }
+  .service-profile-form .form-group {
+    @apply flex flex-col gap-1 w-full text-left;
+  }
+  .service-profile-form .form-group input,
+  .service-profile-form .form-group select {
+    @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
+  }
+  .service-profile-form .form-group select {
+    @apply max-h-[150px] overflow-y-auto py-2 px-0 rounded-none;
+  }
+  .service-profile-form option {
+    @apply py-2 border-b-2 border-slate-200 text-black;
+  }
 
-    .service-profile-form .form-group select::-webkit-scrollbar {
-        width: 10px;
-    }
-    .service-profile-form form {
-        @apply flex flex-col gap-3 w-full;
-    }
-    .service-profile-form input[type=submit]{
+  .service-profile-form .form-group select::-webkit-scrollbar {
+    width: 10px;
+  }
+  .service-profile-form form {
+    @apply flex flex-col gap-3 w-full;
+  }
+  /* .service-profile-form input[type=submit]{
         @apply bg-primary hover:bg-black hover:text-primary
-    }
+    } */
 }

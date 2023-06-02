@@ -1,24 +1,24 @@
 @tailwind utilities;
-@tailwind components; 
+@tailwind components;
 @tailwind base;
 
-@layer components{
-    .signup {
-        @apply w-full px-5 lg:px-40; 
-    }
-    .signup .form-group {
-        @apply flex flex-col gap-1 w-full text-left;
-    }
-    .signup .form-group input {
-        @apply p-2 px-4 rounded-md outline-none border-2 w-full;
-    }
-    .signup form {
-        @apply flex flex-col gap-2;
-    }
-    .signup button[type=submit]{
-        @apply bg-primary hover:bg-black hover:text-primary
-    }
-    .signup .social-link{
-        @apply rounded-full w-[50px] h-[50px] hover:w-[60px] hover:h-[60px] p-2  transition-all duration-150;
-    }
+@layer components {
+  .signup {
+    @apply w-full px-5 lg:px-40;
+  }
+  .signup .form-group {
+    @apply flex flex-col gap-1 w-full text-left;
+  }
+  .signup .form-group input {
+    @apply p-2 px-4 rounded-md outline-none border-2 w-full;
+  }
+  .signup form {
+    @apply flex flex-col gap-2;
+  }
+  .signup button[type="submit"] {
+    @apply bg-primary hover:bg-black hover:text-primary;
+  }
+  .signup .social-link {
+    @apply rounded-full w-[50px] h-[50px] hover:w-[60px] hover:h-[60px] p-2  transition-all duration-150;
+  }
 }
