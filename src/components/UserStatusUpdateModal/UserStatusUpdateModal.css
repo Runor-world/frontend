@@ -1,10 +1,9 @@
 @tailwind utilities;
-@tailwind components; 
+@tailwind components;
 @tailwind base;
 
-@layer components{
-    .status-modal {
-        @apply text-center gap-4 flex flex-col absolute top-20 w-[94%] lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-white rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.7)]; 
-    }
-   
+@layer components {
+  .status-modal {
+    @apply text-center gap-4 flex flex-col fixed top-20 w-[94%] lg:w-[30%] lg:left-[35%] text-black z-50 p-4 lg:p-10 bg-white rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.7)];
+  }
 }
