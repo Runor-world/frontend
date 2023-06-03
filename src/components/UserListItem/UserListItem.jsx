@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { openUserModal, setSelectedUser } from "../../features/user/userSlice";
+import CopyText from "../CopyText/CopyText";
+import { FaPhone } from "react-icons/fa";
 
 const UserListItem = ({
   _id,
@@ -10,12 +12,20 @@ const UserListItem = ({
   role,
   profile,
   email,
+  phoneNumber,
 }) => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
     dispatch(
-      setSelectedUser({ _id, firstName, lastName, active, role, profile })
+      setSelectedUser({
+        _id,
+        firstName,
+        lastName,
+        active,
+        role,
+        profile,
+      })
     );
     dispatch(openUserModal());
   };
@@ -42,6 +52,11 @@ const UserListItem = ({
           </span>
         </small>
         <small>{email}</small>
+        {phoneNumber && (
+          <div className="flex justify-start">
+            <CopyText icon={<FaPhone />} text={phoneNumber} />
+          </div>
+        )}
         <div className="mt-4 w-full flex gap-2">
           {/* <p className='bg-white rounded-lg p-1 px-2'>{ `${active? 'active': 'suspended'}`}</p> */}
           <button
