@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Header from "../../components/Header/Header";
 import ServiceSearchBar from "../../components/ServiceSearchBar/ServiceSearchBar";
@@ -18,23 +18,23 @@ const Landing = () => {
   const { services } = useSelector((store) => store.service);
   const { searchBarVisible } = useSelector((store) => store.search);
   const { serviceMen, isLoading } = useSelector((store) => store.serviceman);
+  const [activeServiceMen, setActiveServiceMen] = useState([]);
   useEffect(() => {
-    dispatch(getServices());
-    dispatch(getAllServiceMen());
+    console.log(serviceMen);
+    try {
+      dispatch(getServices()).unwrap();
+      dispatch(getAllServiceMen()).unwrap();
+      setActiveServiceMen(serviceMen.map((serviceMan) => serviceMan));
+    } catch (error) {}
   }, []);
 
   if (isLoading && !serviceMen && !services) {
     return <Loading />;
   }
 
-  const serviceMenList = serviceMen.map((serviceMan) =>
-    serviceMan.active ? (
-      <ServiceMan key={serviceMan._id} serviceMan={serviceMan} />
-    ) : null
-  );
-  const activeServiceMenLength = serviceMen.filter(
-    (item) => item.active
-  ).length;
+  const serviceMenList = activeServiceMen.map((serviceMan) => (
+    <ServiceMan key={serviceMan._id} serviceMan={serviceMan} />
+  ));
 
   const activeServices = services.filter((service) => service.active);
 
@@ -50,9 +50,9 @@ const Landing = () => {
           </div>
 
           <div className="col-span-full lg:col-span-3 w-full justify-center">
-            <Badge text="Service Men" number={activeServiceMenLength} />
+            <Badge text="Service Men" number={activeServiceMen.length} />
             <div className="flex flex-col gap-4 mt-5 pr-6">
-              {activeServiceMenLength > 0 ? (
+              {activeServiceMen.length > 0 ? (
                 serviceMenList
               ) : (
                 <div className="flex justify-center items-center">

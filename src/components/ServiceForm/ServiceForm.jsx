@@ -96,7 +96,7 @@ const ServiceForm = () => {
 
         <div className="flex justify-between gap-4">
           <input
-            className="flex-1 p-2 rounded-md bg-primary bg-black"
+            className="flex-1 p-2 rounded-md bg-black"
             type="submit"
             value="Save"
             disabled={isLoading}
