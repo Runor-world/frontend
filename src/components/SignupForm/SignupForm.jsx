@@ -2,22 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { clearMessage, localSignup } from "../../features/auth/authSlice";
+import { clearMessage } from "../../features/auth/authSlice";
 import FormError from "../FormError/FormError";
 import "./SignupForm.css";
 import FormInputError from "../FormInputError/FormInputError";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import googleIcon from "../../images/google-icon.png";
 import facebookIcon from "../../images/facebook-icon.png";
 import { FaSpinner } from "react-icons/fa";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import { useRegisterUserMutation } from "../../features/api/authApi";
+import { autoTimer } from "../../utils/timer";
 
 const SignupForm = () => {
+  let timer = null;
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { message } = useSelector((store) => store.auth);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [registerUser] = useRegisterUserMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -54,8 +58,11 @@ const SignupForm = () => {
     onSubmit: async (values) => {
       setIsLoading(true);
       try {
-        const res = await dispatch(localSignup(values)).unwrap();
+        await registerUser(values);
         setIsLoading(false);
+        formik.resetForm();
+        timer = autoTimer(1000, navigate, "/login");
+        //
       } catch (error) {
         setIsLoading(false);
       }
@@ -64,6 +71,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     dispatch(clearMessage());
+    return () => clearTimeout(timer);
   }, []);
 
   const facebookLogin = async () => {

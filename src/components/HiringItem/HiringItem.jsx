@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import CopyText from "../CopyText/CopyText";
 
 const HiringItem = ({ hiring }) => {
-  const { service, serviceProvider, createdAt, status, profile } = hiring;
+  const { service, serviceProvider, createdAt, status, servicemanProfile } =
+    hiring;
   const { lastname, firstName, otherName, _id, phoneNumber } = serviceProvider;
   const dateTime = new Date(createdAt);
 
@@ -36,9 +37,9 @@ const HiringItem = ({ hiring }) => {
         <div className="flex gap-4 items-center">
           <div className="self-start">
             <img
-              src={profile.photo}
+              src={servicemanProfile?.photo}
               alt={firstName}
-              className="h-12 w-12 lg:w-20 lg:h-20 ring-2 rounded-full ring-slate-400"
+              className="h-20 w-20 lg:w-40 lg:h-40 ring-2 rounded-full ring-slate-400"
             />
           </div>
           <div className="flex flex-col lg:flex-row text-left">

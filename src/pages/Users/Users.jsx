@@ -5,18 +5,14 @@ import { userSearchByName } from "../../features/user/userSlice";
 import Loading from "../../components/Loading/Loading";
 import UserStatusUpdateModal from "../../components/UserStatusUpdateModal/UserStatusUpdateModal";
 import UserSearchBar from "../../components/UserSearchBar/UserSearchBar";
+import { useGetAllUsersQuery } from "../../features/api/userApi";
 
 const Users = () => {
   const dispatch = useDispatch();
-  const { users, isLoading, isOpened, selectedUser } = useSelector(
-    (store) => store.users
-  );
+  const { isOpened, selectedUser } = useSelector((store) => store.users);
+  const { data, isLoading, isFetching } = useGetAllUsersQuery();
 
-  useEffect(() => {
-    dispatch(userSearchByName(""));
-  }, []);
-
-  if (isLoading) {
+  if (isLoading && isFetching && !data) {
     return <Loading />;
   }
   return (
@@ -27,10 +23,10 @@ const Users = () => {
 
       <div className="flex justify-between items-cetner">
         <h1 className="text-xl lg:text-xl font-semibold">
-          Users ({users.length})
+          Users ({data?.users?.length})
         </h1>
       </div>
-      <UserList users={users} />
+      <UserList users={data?.users} />
       {isOpened && <UserStatusUpdateModal {...selectedUser} />}
     </section>
   );

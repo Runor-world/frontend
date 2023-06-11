@@ -1,70 +1,65 @@
-import React, { useEffect } from 'react'
-import CardButton from '../CardButton/CardButton'
-import { useDispatch, useSelector } from 'react-redux'
-import { getServices } from '../../features/service/serviceSlice'
-import { FaSpinner } from 'react-icons/fa'
+import React, { useEffect } from "react";
+import CardButton from "../CardButton/CardButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getServices } from "../../features/service/serviceSlice";
+import { FaSpinner } from "react-icons/fa";
+import { useGetServicesQuery } from "../../features/api/serviceApi";
 
 const categories = [
-    'Shoe making',
-    'Catering',
-    'Phone repair',
-    'Motor mechanic',
-    'Electrical',
-    'Dry cleaning',
-    'Web development',
-    'Mobile development',
-    'Tailoring',
-    'Decoration'
-]
+  "Shoe making",
+  "Catering",
+  "Phone repair",
+  "Motor mechanic",
+  "Electrical",
+  "Dry cleaning",
+  "Web development",
+  "Mobile development",
+  "Tailoring",
+  "Decoration",
+];
 
 const WorkerCategories = () => {
-    const dispatch = useDispatch()
-    const {services, isLoading} = useSelector( store => store.service)
-    
-    useEffect(() => {
-      dispatch(getServices())
-    }, [])
-    
-    return (
-        <section 
-            className='flex flex-col gap-3 lg:gap-10 justify-between bg-slate-200 main-x-p main-y-p group'
-        >
-            <div className='flex flex-col items-center lg:items-start'>
-                <h2 
-                    className='text-center lg:text-left text-3xl lg:text-4xl font-extrabold'
-                    >
-                    Discover workers by categories
-                </h2>
-                <hr 
-                    className='border-8 rounded-lg border-primary w-[50%] lg:w-[23%] my-2 group-hover:w-10 transition-slow'
-                />
-            </div>
-            <div 
-                className='flex flex-wrap gap-2 justify-center items-center flex-2'
-            >
-                {
-                    isLoading? (
-                        <div className='flex items-center justify-center'>
-                            <FaSpinner className='animate-spin text-xl'/>
-                        </div>
-                    ):
-                    (
-                        
-                        services.length > 0 ? (
-                            services.map(service => 
-                                <CardButton 
-                                    extraStyle='bg-slate-100 text-slate-600 border-2 border-primary my-0 underline'
-                                    text={service.name} 
-                                    key={service._id}
-                                    path={`categories/${service.name}`}
-                                />
-                            )
-                        ): <p>Oops there are no services</p>
-                    )
-                }
-            </div>
-        </section>
-    )
-}
+  const dispatch = useDispatch();
+  const {
+    data: services,
+    isLoading,
+    isFetching,
+    isError,
+    error,
+  } = useGetServicesQuery();
 
-export default WorkerCategories
+  return (
+    <section className="flex flex-col gap-3 lg:gap-10 justify-between bg-slate-200 main-x-p main-y-p group">
+      <div className="flex flex-col items-center lg:items-start">
+        <h2 className="text-center lg:text-left text-3xl lg:text-4xl font-extrabold">
+          Discover workers by categories
+        </h2>
+        <hr className="border-8 rounded-lg border-primary w-[50%] lg:w-[23%] my-2 group-hover:w-10 transition-slow" />
+      </div>
+      <div className="flex flex-wrap gap-2 justify-center items-center flex-2">
+        {isLoading && isFetching ? (
+          <div className="flex items-center justify-center">
+            <FaSpinner className="animate-spin text-xl" />
+          </div>
+        ) : services?.services?.length > 0 ? (
+          services.services.map((service) => (
+            <CardButton
+              extraStyle="bg-slate-100 text-slate-600 border-2 border-primary my-0 underline"
+              text={service.name}
+              key={service._id}
+              path={`categories/${service.name}`}
+            />
+          ))
+        ) : isError ? (
+          <div>
+            <p>{error}</p>
+          </div>
+        ) : (
+          <p>Oops there are no services</p>
+        )}
+      </div>
+    </section>
+  );
+};
+
+export default WorkerCategories;

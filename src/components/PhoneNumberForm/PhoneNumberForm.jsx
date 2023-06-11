@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import FormWrapper from "../FormWrapper/FormWrapper";
@@ -8,11 +7,16 @@ import "react-phone-number-input";
 import FormInputError from "../FormInputError/FormInputError";
 import { useDispatch, useSelector } from "react-redux";
 import FormError from "../FormError/FormError";
-import { createUserPhoneNumber } from "../../features/auth/authSlice";
+import { useAddUserPhoneNumberMutation } from "../../features/api/profileApi";
+import { closeModal } from "../../features/modal/modalSlice";
+import { clearMessage } from "../../features/profile/profileSlice";
 
-const PhoneNumberForm = ({}) => {
-  const { user, message, isLoading } = useSelector((store) => store.auth);
+const PhoneNumberForm = () => {
   const dispatch = useDispatch();
+  const [addPhoneNumber, { isLoading, isFetching }] =
+    useAddUserPhoneNumberMutation();
+  const { user } = useSelector((store) => store.auth);
+  const { message } = useSelector((store) => store.profile);
   const formik = useFormik({
     initialValues: {
       phoneNumber: user.phoneNumber ?? "",
@@ -21,9 +25,15 @@ const PhoneNumberForm = ({}) => {
       phoneNumber: Yup.string().required("Enter pnone number"),
     }),
     onSubmit: async (values) => {
-      dispatch(createUserPhoneNumber(values));
+      try {
+        await addPhoneNumber(values);
+      } catch (error) {}
     },
   });
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, []);
 
   return (
     <FormWrapper title={"Provide Phone number"} formik={formik}>
@@ -47,14 +57,21 @@ const PhoneNumberForm = ({}) => {
         />
       </div>
 
-      <div className="my-2 w-full">
+      <div className="my-2 w-full flex gap-2">
+        {(message.text === "" || (message.text !== "" && !message.type)) && (
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={`btn-primary ${
+              isLoading && isFetching ? "bg-slate-600" : "bg-primary"
+            }  w-full text-white rounded-full`}>
+            {isLoading && isFetching ? "updating.." : "Submit"}
+          </button>
+        )}
         <button
-          type="submit"
-          disabled={isLoading}
-          className={`btn-primary ${
-            isLoading ? "bg-slate-600" : "bg-primary"
-          }  w-full text-white rounded-full`}>
-          {isLoading ? message.text : "Submit"}
+          className={`btn-dark w-full text-white rounded-full border-2 border-primary`}
+          onClick={() => dispatch(closeModal())}>
+          {message.text === "" || !message.type ? "Cancel" : "Done"}
         </button>
       </div>
     </FormWrapper>

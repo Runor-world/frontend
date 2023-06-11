@@ -3,23 +3,22 @@
 @tailwind utilities;
 
 @layer components {
-    .profile .profile-photo {
-        @apply rounded-full w-[150px] h-[150px] absolute border-2 bottom-0 bg-black z-20;
-    }
-    .profile .profile-header{
-        @apply h-[335px] bg-white text-black bg-opacity-80 relative flex flex-col items-center pt-20 border-b-0;
-    }
-    .profile-body{
-        @apply w-full h-auto p-5 lg:w-1/3 absolute top-64  text-center grid grid-cols-1 gap-2 text-black z-10 pt-20 lg:left-1/3
-    }
-    .profile-body article {
-        @apply hover:bg-slate-300 hover:p-3 p-1 px-2 rounded-full hover:scale-105 transition-all duration-200;
-    }
-    .profile-body .profile-link{
-        @apply bg-primary text-white p-2 mx-auto px-4 rounded-full text-center w-2/3 shadow-lg flex items-center gap-2 justify-center hover:bg-black hover:text-primary
-    }
-    .profile-body .profile-link-round{
-        @apply bg-primary rounded-full p-2 hover:bg-black hover:text-primary
-    }
-
+  .profile .profile-photo {
+    @apply rounded-full w-[150px] h-[150px] absolute border-2 -bottom-8 bg-black z-10;
+  }
+  .profile .profile-header {
+    @apply h-[300px] bg-white text-black bg-opacity-80 relative flex flex-col items-center pt-20 border-b-0;
+  }
+  .profile-body {
+    @apply w-full h-auto p-5 lg:w-1/3 absolute top-64  text-center grid grid-cols-1 gap-2 text-black z-10 pt-20 lg:left-1/3;
+  }
+  .profile-body article {
+    @apply hover:bg-slate-300 hover:p-3 p-1 px-2 rounded-full hover:scale-105 transition-all duration-200;
+  }
+  .profile-body .profile-link {
+    @apply bg-primary text-white p-2 mx-auto px-4 rounded-full text-center w-2/3 shadow-lg flex items-center gap-2 justify-center hover:bg-black hover:text-primary;
+  }
+  .profile-body .profile-link-round {
+    @apply bg-primary rounded-full p-2 hover:bg-black hover:text-primary;
+  }
 }

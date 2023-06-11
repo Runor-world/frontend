@@ -13,36 +13,24 @@ import { createHiring } from "../../features/hiring/hiringSlice";
 import ModalWrapper from "../../components/ModalWrapper/ModalWrapper";
 import HiringSuccess from "../../components/HiringSuccess/HiringSuccess";
 import { openModal } from "../../features/modal/modalSlice";
+import { useGetServiceManQuery } from "../../features/api/servicemanApi";
+import { useHireServiceManMutation } from "../../features/api/hiringApi";
 
 const HiringConfirm = () => {
-  const fetchServiceProvider = async () => {
-    try {
-      const res = await dispatch(getServiceMan(serviceProviderId)).unwrap();
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchServiceProvider();
-  }, []);
-
-  const { serviceProvider } = useSelector((store) => store.serviceman);
-  const { service, message, hiring, isLoading } = useSelector(
-    (store) => store.hiring
-  );
+  const { serviceManUserId } = useParams();
+  const { data, isLoading, isFetching, isError, error } =
+    useGetServiceManQuery(serviceManUserId);
+  const [hireServiceMan] = useHireServiceManMutation();
+  const { service, message, hiring } = useSelector((store) => store.hiring);
   const { isOpened } = useSelector((store) => store.modal);
 
   const dispatch = useDispatch();
-  const { serviceProviderId } = useParams();
   const navigate = useNavigate();
   const [selectedService, setSlectedService] = useState({});
-  const [loading, setLoading] = useState(true);
 
   const handleBackClick = () => {
-    if (serviceProvider.services.length > 1) {
-      navigate(`/hiring/${serviceProviderId}`);
+    if (data?.serviceMan.services.length > 1) {
+      navigate(`/hiring/${serviceManUserId}`);
     } else {
       navigate("/");
     }
@@ -50,21 +38,25 @@ const HiringConfirm = () => {
 
   const handleConfirmClick = async () => {
     try {
-      const res = await dispatch(
-        createHiring({
-          serviceProvider: serviceProviderId,
-          service: service._id,
-        })
-      ).unwrap();
+      await hireServiceMan({
+        serviceProvider: serviceManUserId,
+        service: service._id,
+      });
       dispatch(openModal());
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (loading) {
+  if (isLoading && isFetching && !data?.serviceMan) {
     return <Loading />;
   }
+  if (isError)
+    return (
+      <div>
+        <p>{error}</p>
+      </div>
+    );
 
   return (
     <PageWrapper>
@@ -72,7 +64,7 @@ const HiringConfirm = () => {
       <MainContentWrapper>
         <HiringWrapper>
           <HiringHeader
-            serviceProvider={serviceProvider}
+            serviceProvider={data?.serviceMan}
             title="Confirm hiring"
           />
           <div className="flex flex-col justify-between gap-10 items-center w-full p-2">
@@ -80,9 +72,9 @@ const HiringConfirm = () => {
               <p>
                 You are about to hire{" "}
                 <q>
-                  {serviceProvider.user?.firstName}{" "}
-                  {serviceProvider.user?.lastName ??
-                    serviceProvider.user?.otherName}
+                  {data?.serviceMan?.user?.firstName}{" "}
+                  {data?.serviceMan?.user?.lastName ??
+                    data?.serviceMan.user?.otherName}
                 </q>{" "}
                 for <q> {service?.name}</q>
               </p>
@@ -91,7 +83,7 @@ const HiringConfirm = () => {
               <button
                 className="btn-dark px-4 w-full"
                 onClick={handleBackClick}>
-                {serviceProvider.services.length > 1 ? "Back" : "Cancel"}
+                {data?.serviceMan?.services?.length > 1 ? "Back" : "Cancel"}
               </button>
               <button
                 className={`btn-dark ${
@@ -107,7 +99,7 @@ const HiringConfirm = () => {
       </MainContentWrapper>
       {isOpened && (
         <ModalWrapper>
-          <HiringSuccess serviceProvider={serviceProvider} hiring={hiring} />
+          <HiringSuccess serviceMan={data?.serviceMan} hiring={hiring} />
         </ModalWrapper>
       )}
     </PageWrapper>

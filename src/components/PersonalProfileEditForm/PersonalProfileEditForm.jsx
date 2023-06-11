@@ -6,22 +6,24 @@ import "./PersonalProfileEditForm.css";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "../../features/profile/profileSlice";
 import { FaTimes } from "react-icons/fa";
-import ModalWrapper from "../ModalWrapper/ModalWrapper";
+import { toISODate } from "../../utils/date";
+import FormError from "../FormError/FormError";
+import { useUpdateUserProfileMutation } from "../../features/api/profileApi";
 
-const PersonalProfileEditForm = ({ setOpen }) => {
-  const { personalProfile } = useSelector((store) => store.profile);
+const PersonalProfileEditForm = ({ setOpen, personalProfile }) => {
   const { user } = useSelector((store) => store.auth);
-  const dispatch = useDispatch();
+  const { message } = useSelector((store) => store.profile);
+  const [updateUserProfile] = useUpdateUserProfileMutation();
 
   const formik = useFormik({
     initialValues: {
       firstName: user.firstName,
       otherName: user.otherName,
       address: user.location,
-      city: personalProfile.city,
-      country: personalProfile.country,
-      bio: personalProfile.bio,
-      dateOfBirth: personalProfile.birthday,
+      city: personalProfile?.city,
+      country: personalProfile?.country,
+      bio: personalProfile?.bio,
+      dateOfBirth: toISODate(personalProfile?.birthday),
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -46,8 +48,9 @@ const PersonalProfileEditForm = ({ setOpen }) => {
     }),
     onSubmit: async (values) => {
       // save personal profile
+      console.log(values);
       try {
-        const res = await dispatch(updateProfile(values)).unwrap();
+        await updateUserProfile(values);
         setOpen(false);
       } catch (error) {
         console.log(error);
@@ -63,7 +66,7 @@ const PersonalProfileEditForm = ({ setOpen }) => {
       />
       <h1 className="text-xl font-bold mb-2">Edit profile</h1>
       <form onSubmit={formik.handleSubmit}>
-        {/* <FormError message={message}/> */}
+        <FormError message={message} />
         <div className="form-group">
           <label htmlFor="firstname">First name</label>
           <input
@@ -90,7 +93,7 @@ const PersonalProfileEditForm = ({ setOpen }) => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="city">Address</label>
+          <label htmlFor="address">Address</label>
           <input
             type="text"
             id="address"

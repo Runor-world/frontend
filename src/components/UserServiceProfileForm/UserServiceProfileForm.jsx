@@ -4,15 +4,14 @@ import * as Yup from "yup";
 import "./UserServiceProfile.css";
 import FormInputError from "../FormInputError/FormInputError";
 import FormError from "../FormError/FormError";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserServiceProfile } from "../../features/profile/profileSlice";
+import { useCreateServiceProfileMutation } from "../../features/api/profileApi";
 
 const UserServiceProfileForm = ({ services }) => {
   const navigate = useNavigate();
-
+  const [createUserServiceProfile] = useCreateServiceProfileMutation();
   const { message } = useSelector((store) => store.profile);
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -27,10 +26,8 @@ const UserServiceProfileForm = ({ services }) => {
     }),
     onSubmit: async (values) => {
       // do something on submit
-
-      // const newValues = {...values, service: values.service.map( service => JSON.parse(service))}
       try {
-        const res = await dispatch(createUserServiceProfile(values)).unwrap();
+        await createUserServiceProfile(values);
         setTimeout(() => {
           navigate("/profile");
         }, 1000);
@@ -42,7 +39,6 @@ const UserServiceProfileForm = ({ services }) => {
 
   return (
     <div className="service-profile-form">
-      {/* <h2 className='font-bold text-center'>Configure your account</h2> */}
       <form onSubmit={formik.handleSubmit}>
         <FormError message={message} />
         <div className="form-group">

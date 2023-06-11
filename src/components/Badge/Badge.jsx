@@ -16,5 +16,9 @@ Badge.propTypes = {
   text: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,
 };
+Badge.defaultProps = {
+  text: "",
+  number: 0,
+};
 
 export default Badge;

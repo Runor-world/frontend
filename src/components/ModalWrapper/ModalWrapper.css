@@ -4,6 +4,6 @@
 
 @layer components {
   .modal-wrapper {
-    @apply fixed top-20  text-black bg-slate-100 p-4 lg:p-10 z-50 rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.8)];
+    @apply fixed top-20 text-black bg-slate-100 p-4 lg:p-10 z-50 rounded-md shadow-[0_35px_60px_1000px_rgba(0,0,0,0.8)];
   }
 }

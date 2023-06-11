@@ -4,8 +4,19 @@ import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../features/modal/modalSlice";
+import { getTodayFormatedDate, toISODate } from "../../utils/date";
 
-const PersonalProfile = ({ personalProfile, user, setOpen }) => {
+const PersonalProfile = ({ personalProfile: pProfile, user, setOpen }) => {
+  // if user is new use this default profile
+  const personalProfile = {
+    ...pProfile,
+    birthday: toISODate(pProfile.birthday),
+  } ?? {
+    bio: "my beatiful bio",
+    birthday: getTodayFormatedDate(),
+    city: "my city",
+    country: "my country",
+  };
   const dispatch = useDispatch();
   return (
     <section className="wrapper text-left">
@@ -59,22 +70,22 @@ const PersonalProfile = ({ personalProfile, user, setOpen }) => {
         <article>
           <small className="text-primary">City</small>
           <hr />
-          <p>{personalProfile.city}</p>
+          <p>{personalProfile?.city}</p>
         </article>
         <article>
           <small className="text-primary">Country</small>
           <hr />
-          <p>{personalProfile.country}</p>
+          <p>{personalProfile?.country}</p>
         </article>
         <article>
           <small className="text-primary">Birthday</small>
           <hr />
-          <p>{personalProfile.birthday}</p>
+          <p>{personalProfile?.birthday}</p>
         </article>
         <article>
           <small className="text-primary">Bio</small>
           <hr />
-          <p>{personalProfile.bio}</p>
+          <p>{personalProfile?.bio}</p>
         </article>
       </>
     </section>

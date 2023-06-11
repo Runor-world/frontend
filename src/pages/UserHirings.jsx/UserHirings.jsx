@@ -3,34 +3,35 @@ import PropTypes from "prop-types";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import Header from "../../components/Header/Header";
 import MainContentWrapper from "../../components/MainContentWrapper/MainContentWrapper";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllHiringsByUser } from "../../features/hiring/hiringSlice";
 import Loading from "../../components/Loading/Loading";
 import HiringItem from "../../components/HiringItem/HiringItem";
 import CardButton from "../../components/CardButton/CardButton";
 import ScrollableItemsWrapper from "../../components/ScrollableItemsWrapper/ScrollableItemsWrapper";
 import { Link } from "react-router-dom";
 import Badge from "../../components/Badge/Badge";
+import { useGetAllHiringByUserQuery } from "../../features/api/hiringApi";
 
 const status = ["pending", "in progress", "completed", "cancelled"];
 
 const UserHirings = (props) => {
-  const { hirings, isLoading } = useSelector((store) => store.hiring);
-  const dispatch = useDispatch();
+  const { data, isLoading, isFetching, error, isError } =
+    useGetAllHiringByUserQuery();
 
-  useEffect(() => {
-    dispatch(getAllHiringsByUser());
-  }, []);
-
-  if (isLoading) {
+  if (isLoading && isFetching) {
     return <Loading />;
   }
+  if (isError)
+    return (
+      <div className="flex justify-center items-center text-center">
+        <p>{error}</p>
+      </div>
+    );
   return (
     <PageWrapper>
       <Header />
       <MainContentWrapper>
         <section className="grid grid-col lg:grid-cols-4 w-full gap-5 items-start mb-10">
-          {hirings.length > 0 ? (
+          {data?.hirings.length > 0 ? (
             <>
               <div className="flex col-span-full lg:col-span-1 flex-col gap-5">
                 <h2 className="">Filter by status</h2>
@@ -47,9 +48,12 @@ const UserHirings = (props) => {
                 </ScrollableItemsWrapper>
               </div>
               <div className="col-span-full lg:col-span-3 w-full justify-center">
-                <Badge text="Hiring" number={hirings.length} />
+                <Badge
+                  text="People/businesses you are hiring"
+                  number={data?.hirings?.length}
+                />
                 <div className="flex flex-col gap-4 mt-5 pr-6">
-                  {hirings.map((hiring) => (
+                  {data?.hirings?.map((hiring) => (
                     <HiringItem key={hiring._id} hiring={hiring} />
                   ))}
                 </div>
