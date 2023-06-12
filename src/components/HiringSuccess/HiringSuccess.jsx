@@ -7,7 +7,7 @@ import { clearMessage } from "../../features/hiring/hiringSlice";
 import CopyText from "../CopyText/CopyText";
 
 const HiringSuccess = ({ serviceMan }) => {
-  const { lastName, firstName, otherName, phone } = serviceMan.user;
+  const { lastName, firstName, otherName, phoneNumber } = serviceMan.user;
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -33,7 +33,7 @@ const HiringSuccess = ({ serviceMan }) => {
 
           <ul className="my-2 bg-slate-0 flex flex-col gap-2">
             <CopyText
-              text={phone ?? "099034433330"}
+              text={phoneNumber}
               icon={<FaPhone className="text-primary" />}
             />
           </ul>
