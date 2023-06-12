@@ -1,5 +1,6 @@
 import { emptyApi } from "./emptyApi";
 import { setMessage } from "../hiring/hiringSlice";
+import { openModal } from "../modal/modalSlice";
 
 const hiringApi = emptyApi.injectEndpoints({
   endpoints: (build) => ({
@@ -16,6 +17,7 @@ const hiringApi = emptyApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setMessage({ text: data.msg, type: true }));
+          dispatch(openModal());
         } catch (error) {
           dispatch(setMessage({ text: error.error.data.msg, type: false }));
         }

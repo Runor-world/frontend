@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+import FormError from "../FormError/FormError";
 
 const HiringHeader = ({ serviceMan, title }) => {
   const { message } = useSelector((store) => store.hiring);
@@ -8,10 +9,7 @@ const HiringHeader = ({ serviceMan, title }) => {
   const steps = serviceMan?.services.length > 1 ? 2 : 1;
   return (
     <header className="w-full flex flex-col gap-3">
-      <small
-        className={`text-${message.error ? "red" : "green"}-500 text-center`}>
-        {message.text}
-      </small>
+      <FormError message={message} />
       <div className="w-full p-2 flex flex-col gap-2 items-center justify-center border-2 rounded-md bg-slate-100 border-slate-50">
         <img
           src={serviceMan?.profile.photo}

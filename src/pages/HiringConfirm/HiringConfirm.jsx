@@ -9,9 +9,9 @@ import HiringWrapper from "../../components/HiringWrapper/HiringWrapper";
 import HiringHeader from "../../components/HiringHeader/HiringHeader";
 import ModalWrapper from "../../components/ModalWrapper/ModalWrapper";
 import HiringSuccess from "../../components/HiringSuccess/HiringSuccess";
-import { openModal } from "../../features/modal/modalSlice";
 import { useGetServiceManQuery } from "../../features/api/servicemanApi";
 import { useHireServiceManMutation } from "../../features/api/hiringApi";
+import { clearMessage } from "../../features/hiring/hiringSlice";
 
 const HiringConfirm = () => {
   const { serviceManUserId } = useParams();
@@ -30,6 +30,7 @@ const HiringConfirm = () => {
     } else {
       navigate("/");
     }
+    dispatch(clearMessage());
   };
 
   const handleConfirmClick = async () => {
@@ -38,7 +39,7 @@ const HiringConfirm = () => {
         serviceProvider: serviceManUserId,
         service: service._id,
       });
-      dispatch(openModal());
+      // dispatch(openModal());
     } catch (error) {
       console.log(error);
     }
@@ -59,10 +60,7 @@ const HiringConfirm = () => {
       <Header />
       <MainContentWrapper>
         <HiringWrapper>
-          <HiringHeader
-            serviceProvider={data?.serviceMan}
-            title="Confirm hiring"
-          />
+          <HiringHeader serviceMan={data?.serviceMan} title="Confirm hiring" />
           <div className="flex flex-col justify-between gap-10 items-center w-full p-2">
             <div className="text-center">
               <p>
