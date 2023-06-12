@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaEdit, FaPen, FaUserEdit } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Header from "../../components/Header/Header";
-import {
-  updateProfileBackgroundPhoto,
-  updateProfilePhoto,
-} from "../../features/profile/profileSlice";
 import userIcon from "../../images/user.png";
 import "./Profile.css";
 import PersonalProfile from "../../components/PersonalProfile/PersonalProfile";

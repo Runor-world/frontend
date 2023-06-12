@@ -1,14 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import UserList from "../../components/UserList/UserList";
-import { useDispatch, useSelector } from "react-redux";
-import { userSearchByName } from "../../features/user/userSlice";
+import { useSelector } from "react-redux";
 import Loading from "../../components/Loading/Loading";
 import UserStatusUpdateModal from "../../components/UserStatusUpdateModal/UserStatusUpdateModal";
 import UserSearchBar from "../../components/UserSearchBar/UserSearchBar";
 import { useGetAllUsersQuery } from "../../features/api/userApi";
 
 const Users = () => {
-  const dispatch = useDispatch();
   const { isOpened, selectedUser } = useSelector((store) => store.users);
   const { data, isLoading, isFetching } = useGetAllUsersQuery();
 

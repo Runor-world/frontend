@@ -8,13 +8,13 @@ import CardButton from "../../components/CardButton/CardButton";
 import ScrollableItemsWrapper from "../../components/ScrollableItemsWrapper/ScrollableItemsWrapper";
 import { Link } from "react-router-dom";
 import Badge from "../../components/Badge/Badge";
-import { useGetAllHiringByUserQuery } from "../../features/api/hiringApi";
+import { useGetAllServiceManJobsQuery } from "../../features/api/hiringApi";
 
 const status = ["pending", "in progress", "completed", "cancelled"];
 
-const UserHirings = (props) => {
+const Jobs = (props) => {
   const { data, isLoading, isFetching, error, isError } =
-    useGetAllHiringByUserQuery();
+    useGetAllServiceManJobsQuery();
 
   if (isLoading && isFetching) {
     return <Loading />;
@@ -30,7 +30,7 @@ const UserHirings = (props) => {
       <Header />
       <MainContentWrapper>
         <section className="grid grid-col lg:grid-cols-4 w-full gap-5 items-start mb-10">
-          {data?.hirings.length > 0 ? (
+          {data?.jobs.length > 0 ? (
             <>
               <div className="flex col-span-full lg:col-span-1 flex-col gap-5">
                 <h2 className="">Filter by status</h2>
@@ -47,12 +47,9 @@ const UserHirings = (props) => {
                 </ScrollableItemsWrapper>
               </div>
               <div className="col-span-full lg:col-span-3 w-full justify-center">
-                <Badge
-                  text="People/businesses you are hiring"
-                  number={data?.hirings?.length}
-                />
-                <div className="flex flex-col gap-4 mt-5 pr-3">
-                  {data?.hirings?.map((hiring) => (
+                <Badge text="Jobs for you" number={data?.jobs?.length} />
+                <div className="flex flex-col gap-4 mt-5 pr-6">
+                  {data?.jobs?.map((hiring) => (
                     <HiringItem key={hiring._id} hiring={hiring} />
                   ))}
                 </div>
@@ -60,9 +57,9 @@ const UserHirings = (props) => {
             </>
           ) : (
             <div className="col-span-full flex flex-col place-content-center items-center">
-              <h3>You not hired anyone yet</h3>
-              <Link className="btn-dark text-white" to={"/"}>
-                hire now
+              <h3>You have not been hired yet</h3>
+              <Link className="btn-dark text-white" to={"/home"}>
+                Go home
               </Link>
             </div>
           )}
@@ -72,6 +69,6 @@ const UserHirings = (props) => {
   );
 };
 
-UserHirings.propTypes = {};
+Jobs.propTypes = {};
 
-export default UserHirings;
+export default Jobs;

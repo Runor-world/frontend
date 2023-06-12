@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Error from "./pages/Error/Error";
@@ -19,11 +19,11 @@ import Loading from "./components/Loading/Loading";
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Signup = React.lazy(() => import("./pages/Signup/Signup"));
 const Profile = React.lazy(() => import("./pages/Profile/Profile"));
+const Jobs = React.lazy(() => import("./pages/Jobs/Jobs"));
 
 function App() {
   const { user } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.sidebar);
-  // const {serviceProvider} = useSelector( store => store.serviceman)
 
   return (
     <div className="relative">
@@ -88,11 +88,39 @@ function App() {
         />
         <Route
           path="/hiring/user"
-          element={!user ? <Navigate to={"/login"} /> : <UserHirings />}
+          element={
+            !user ? (
+              <Navigate to={"/login"} />
+            ) : (
+              <React.Suspense>
+                <UserHirings />
+              </React.Suspense>
+            )
+          }
+        />
+        <Route
+          path="/hiring/user/jobs"
+          element={
+            !user ? (
+              <Navigate to={"/login"} />
+            ) : (
+              <React.Suspense>
+                <Jobs />
+              </React.Suspense>
+            )
+          }
         />
         <Route
           path="/hiring/confirm/:serviceManUserId"
-          element={!user ? <Navigate to={"/login"} /> : <HiringConfirm />}
+          element={
+            !user ? (
+              <Navigate to={"/login"} />
+            ) : (
+              <React.Suspense>
+                <HiringConfirm />
+              </React.Suspense>
+            )
+          }
         />
       </Routes>
       {isOpen && <Sidebar />}

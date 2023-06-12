@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
 import Header from "../../components/Header/Header";
 import MainContentWrapper from "../../components/MainContentWrapper/MainContentWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/Loading/Loading";
-import { getServiceMan } from "../../features/serviceMan/serviceManSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import HiringWrapper from "../../components/HiringWrapper/HiringWrapper";
 import HiringHeader from "../../components/HiringHeader/HiringHeader";
-import { createHiring } from "../../features/hiring/hiringSlice";
 import ModalWrapper from "../../components/ModalWrapper/ModalWrapper";
 import HiringSuccess from "../../components/HiringSuccess/HiringSuccess";
 import { openModal } from "../../features/modal/modalSlice";
@@ -26,7 +23,6 @@ const HiringConfirm = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [selectedService, setSlectedService] = useState({});
 
   const handleBackClick = () => {
     if (data?.serviceMan.services.length > 1) {

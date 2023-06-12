@@ -1,25 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CardButton from "../CardButton/CardButton";
-import { useDispatch, useSelector } from "react-redux";
-import { getServices } from "../../features/service/serviceSlice";
 import { FaSpinner } from "react-icons/fa";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
 
-const categories = [
-  "Shoe making",
-  "Catering",
-  "Phone repair",
-  "Motor mechanic",
-  "Electrical",
-  "Dry cleaning",
-  "Web development",
-  "Mobile development",
-  "Tailoring",
-  "Decoration",
-];
-
 const WorkerCategories = () => {
-  const dispatch = useDispatch();
   const {
     data: services,
     isLoading,

@@ -1,18 +1,13 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { useFormik } from "formik";
-import FormInputError from "../FormInputError/FormInputError";
-import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import "./ServiceSearchBar.css";
-import { getServices } from "../../features/service/serviceSlice";
-import { FaMapMarker, FaMapMarkerAlt, FaSearch } from "react-icons/fa";
+import { FaMapMarkerAlt, FaSearch } from "react-icons/fa";
 
 const ServiceSearchBar = (props) => {
   const getServicesNamesList = (items) => {
     return items.map((item) => item.name);
   };
-  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {

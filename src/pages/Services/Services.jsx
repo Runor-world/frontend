@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ServiceList from "../../components/ServiceList/ServiceList";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../components/Loading/Loading";
-import { getServices, openForm } from "../../features/service/serviceSlice";
+import { openForm } from "../../features/service/serviceSlice";
 import ServiceForm from "../../components/ServiceForm/ServiceForm";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
 
@@ -10,7 +10,7 @@ const Services = () => {
   const dispatch = useDispatch();
   const { formIsOpened } = useSelector((store) => store.service);
 
-  const { data, isLoading, isFetching, isError, error } = useGetServicesQuery();
+  const { data, isLoading, isFetching } = useGetServicesQuery();
 
   const clickHandler = () => {
     dispatch(openForm());

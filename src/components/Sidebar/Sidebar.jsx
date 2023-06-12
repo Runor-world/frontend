@@ -1,5 +1,4 @@
 import React from "react";
-import Brand from "../Brand/Brand";
 import NavItems from "../NavItems/NavItems";
 import { useSelector, useDispatch } from "react-redux/";
 import { FaTimes } from "react-icons/fa";

@@ -9,7 +9,7 @@ export const userDropDown = [
   },
   {
     text: "My jobs",
-    url: "/jobs",
+    url: "/hiring/user/jobs",
   },
   {
     text: "My hiring",

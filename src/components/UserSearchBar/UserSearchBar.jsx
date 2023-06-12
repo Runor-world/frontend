@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearchKey } from "../../features/search/searchSlice";
 
 const UserSearchBar = () => {
   const [key, setKey] = useState("");
-  const dispatch = useDispatch();
-  const { search } = useSelector((store) => store.search);
 
   const handleChange = (e) => {
     setKey(e.target.value);
-    // dispatch(userSearchByName(key));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault(true);
-    // dispatch(userSearchByName(key))
   };
 
   useEffect(() => {}, []);

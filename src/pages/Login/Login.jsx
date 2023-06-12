@@ -3,13 +3,8 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import loginImage from "../../images/login-bg.jpg";
 import logo from "../../images/logo.png";
 import { Link } from "react-router-dom";
-import Loading from "../../components/Loading/Loading";
-import { useSelector } from "react-redux";
 
 const Login = () => {
-  //   const { isLoading } = useSelector((store) => store.profile);
-  const isLoading = false;
-  if (isLoading) return <Loading />;
   return (
     <div className="grid grid-col-1 lg:grid-cols-2 h-screen w-screen overflow-clip">
       <article className="relative items-center text-center invisible lg:visible">
@@ -30,11 +25,15 @@ const Login = () => {
         </div>
       </article>
 
-      <article className="flex flex-col items-center justify-center shadow-xl">
+      <article className="flex flex-col items-center justify-start shadow-xl pt-10">
         <Link
           to="/home"
           className="cursor-pointer flex gap-2 font-bold items-center text-3xl visible lg:invisible px-5 text-primary">
-          <img src={logo} alt="logo" />
+          <img
+            src={logo}
+            alt="logo"
+            className="w-10 h-10 rounded-full ring-primary ring-2"
+          />
           <h2>Runor</h2>
         </Link>
         <LoginForm />

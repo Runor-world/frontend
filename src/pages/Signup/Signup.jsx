@@ -3,13 +3,8 @@ import { Link } from "react-router-dom";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import loginImage from "../../images/login-bg.jpg";
 import logo from "../../images/logo.png";
-import Loading from "../../components/Loading/Loading";
-import { useSelector } from "react-redux";
 
 const Signup = () => {
-  // const { isLoading } = useSelector((store) => store.profile);
-
-  // if (isLoading) return <Loading />;
   return (
     <div className="grid grid-col-1 lg:grid-cols-2 h-screen w-screen overflow-x-clip py-5 lg:py-0">
       <article className="relative items-center text-center invisible lg:visible">

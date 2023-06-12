@@ -1,6 +1,5 @@
 import { emptyApi } from "./emptyApi";
 import { setMessage } from "../auth/authSlice";
-import { authHeader } from "../../utils/headers";
 
 export const authApi = emptyApi.injectEndpoints({
   endpoints: (build) => ({

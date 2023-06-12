@@ -1,6 +1,4 @@
-import { onQueryStarted } from "../../utils/api";
 import { authHeader } from "../../utils/headers";
-import { setMessage } from "../user/userSlice";
 import { emptyApi } from "./emptyApi";
 
 const userApi = emptyApi.injectEndpoints({

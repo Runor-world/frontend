@@ -1,6 +1,6 @@
 import React from "react";
-import { FaEdit, FaPen } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { FaPen } from "react-icons/fa";
+import { useDispatch } from "react-redux";
 import { openForm } from "../../features/service/serviceSlice";
 
 const Service = ({ _id, name, description, active }) => {
