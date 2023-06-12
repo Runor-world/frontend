@@ -11,7 +11,9 @@ export const serviceApi = emptyApi.injectEndpoints({
     createService: build.mutation({
       query: (value) => ({
         url: "service",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         method: "POST",
         body: value,
       }),
@@ -28,7 +30,9 @@ export const serviceApi = emptyApi.injectEndpoints({
     updateService: build.mutation({
       query: (value) => ({
         url: "service",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         method: "PATCH",
         body: value,
       }),

@@ -41,7 +41,7 @@ const ServiceMan = ({ serviceMan }) => {
             .filter((item) => item.active === true)
             .map((service, index) => (
               <small
-                key={service.userID}
+                key={service._id}
                 className="font-semibold text-primary ring-white border-slate-300 rounded-xl ring-2 p-2">
                 {service.name}
                 {services.length - 1 > index ? ", " : ""}

@@ -24,15 +24,25 @@ const Profile = () => {
   const { user } = useSelector((store) => store.auth);
   const { isOpened } = useSelector((store) => store.modal);
 
-  const { data, isLoading, isFetching } = useGetAllProfilesQuery();
+  const { data, isLoading, isFetching, isError } = useGetAllProfilesQuery();
 
   const [open, setOpen] = useState(false);
   const [showImageUploader, setShowImageUploader] = useState(false);
   const [showUserImageUploader, setShowUserImageUploader] = useState(false);
 
-  if (isLoading && isFetching && !data) {
+  if (isLoading && isFetching) {
     return <Loading />;
   }
+
+  if (isError)
+    return (
+      <div className="flex  flex-col justify-center h-screen items-center text-center">
+        <p>Something went wrong</p>
+        <Link className="btn-dark" to={"/"}>
+          Go Home
+        </Link>
+      </div>
+    );
   return (
     <div className="profile bg-white text-black relative">
       <Header />

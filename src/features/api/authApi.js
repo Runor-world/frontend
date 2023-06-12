@@ -1,5 +1,6 @@
 import { emptyApi } from "./emptyApi";
-import { setMessage } from "../auth/authSlice";
+import { setMessage, setUser } from "../auth/authSlice";
+import { authHeader } from "../../utils/headers";
 
 export const authApi = emptyApi.injectEndpoints({
   endpoints: (build) => ({
@@ -9,6 +10,18 @@ export const authApi = emptyApi.injectEndpoints({
         method: "POST",
         body: user,
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          // update user state in user slice
+          dispatch(setUser(data.user));
+          // localStorage.setItem("user", JSON.stringify(data.user));#
+          localStorage.setItem("token", JSON.stringify(data.token));
+          dispatch(setMessage({ text: data.msg, type: true }));
+        } catch (error) {
+          dispatch(setMessage({ text: error.error.data.msg, type: false }));
+        }
+      },
     }),
     registerUser: build.mutation({
       query: (values) => ({

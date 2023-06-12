@@ -6,7 +6,9 @@ const userApi = emptyApi.injectEndpoints({
     getAllUsers: build.query({
       query: () => ({
         url: "users",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       }),
       providesTags: ["user", "Serviceman"],
     }),
@@ -14,7 +16,9 @@ const userApi = emptyApi.injectEndpoints({
       query: (value) => ({
         url: "users/status",
         method: "PATCH",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         body: value,
       }),
       async onQueryStarted(setMessage, { dispatch, queryFulfilled }) {
