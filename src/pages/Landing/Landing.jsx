@@ -18,7 +18,7 @@ function Landing() {
   const { data: servicesData } = useGetServicesQuery();
 
   const activeServiceMen = data?.serviceMen.filter(
-    ({ user }) => user.active && user.phoneNumber !== ""
+    ({ user }) => user.active && user.phoneNumber
   );
 
   if (isLoading && isFetching) {
@@ -54,7 +54,7 @@ function Landing() {
           <div className="col-span-full lg:col-span-3 w-full justify-center">
             <Badge text="Service Men" number={activeServiceMen.length} />
             <div className="flex flex-col gap-4 mt-5 pr-6">
-              {activeServiceMen.length > 0 ? (
+              {activeServiceMen?.length > 0 ? (
                 serviceMenList
               ) : (
                 <div className="flex justify-center items-center">
