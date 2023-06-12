@@ -39,7 +39,7 @@ const Profile = () => {
       <div className="relative mt-16">
         <header className="profile-header">
           <FaUserEdit
-            className="text-xl text-primary absolute top-5 lg:top-8 right-5 z-10 bg-slate-500 rounded-full p-1 w-[40px] h-[40px]"
+            className="text-xl text-primary absolute top-5 lg:top-8 right-5 z-20 bg-slate-500 rounded-full p-1 w-[40px] h-[40px]"
             onClick={() => setShowImageUploader(true)}
           />
           <div className="absolute text-white z-10 w-full h-full top-0 left-0 text-center flex flex-col gap-4 justify-center items-center">
@@ -54,7 +54,7 @@ const Profile = () => {
             className="profile-photo ring-2 ring-primary"
           />
           <FaPen
-            className="text-white absolute -bottom-8 z-10 right-1/2 bg-slate-500 rounded-full p-1 w-[30px] h-[30px]"
+            className="text-white absolute bottom-16 z-20 right-1/2 bg-slate-500 rounded-full p-1 w-[30px] h-[30px]"
             onClick={() => setShowUserImageUploader(true)}
           />
 
