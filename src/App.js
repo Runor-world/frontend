@@ -15,10 +15,10 @@ import UserHirings from "./pages/UserHirings.jsx/UserHirings";
 import HiringConfirm from "./pages/HiringConfirm/HiringConfirm";
 import { useSelector } from "react-redux";
 import Loading from "./components/Loading/Loading";
+import Profile from "./pages/Profile/Profile";
 
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Signup = React.lazy(() => import("./pages/Signup/Signup"));
-const Profile = React.lazy(() => import("./pages/Profile/Profile"));
 const Jobs = React.lazy(() => import("./pages/Jobs/Jobs"));
 
 function App() {
@@ -66,15 +66,7 @@ function App() {
         />
         <Route
           path="/profile"
-          element={
-            !user ? (
-              <Navigate to="/" />
-            ) : (
-              <React.Suspense>
-                <Profile />
-              </React.Suspense>
-            )
-          }
+          element={!user ? <Navigate to="/" /> : <Profile />}
         />
         <Route
           path="/service-profile"
