@@ -11,15 +11,15 @@ import Services from "./pages/Services/Services";
 import Users from "./pages/Users/Users";
 import Landing from "./pages/Landing/Landing";
 import Hiring from "./pages/Hiring/Hiring";
-import UserHirings from "./pages/UserHirings.jsx/UserHirings";
+import UserHirings from "./pages/UserHirings/UserHirings";
 import HiringConfirm from "./pages/HiringConfirm/HiringConfirm";
 import { useSelector } from "react-redux";
 import Loading from "./components/Loading/Loading";
 import Profile from "./pages/Profile/Profile";
+import Jobs from "./pages/Jobs/Jobs";
 
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Signup = React.lazy(() => import("./pages/Signup/Signup"));
-const Jobs = React.lazy(() => import("./pages/Jobs/Jobs"));
 
 function App() {
   const { user } = useSelector((store) => store.auth);
@@ -92,15 +92,7 @@ function App() {
         />
         <Route
           path="/hiring/user/jobs"
-          element={
-            !user ? (
-              <Navigate to={"/login"} />
-            ) : (
-              <React.Suspense>
-                <Jobs />
-              </React.Suspense>
-            )
-          }
+          element={!user ? <Navigate to={"/login"} /> : <Jobs />}
         />
         <Route
           path="/hiring/confirm/:serviceManUserId"

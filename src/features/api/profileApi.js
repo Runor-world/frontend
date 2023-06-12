@@ -1,6 +1,5 @@
 import { emptyApi } from "./emptyApi";
 import { setMessage } from "../profile/profileSlice";
-import { authHeader } from "../../utils/headers";
 import { setUser } from "../auth/authSlice";
 
 export const profileApi = emptyApi.injectEndpoints({
@@ -8,14 +7,18 @@ export const profileApi = emptyApi.injectEndpoints({
     getAllProfiles: build.query({
       query: () => ({
         url: "profile",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       }),
       providesTags: ["profile", "user"],
     }),
     updateUserProfile: build.mutation({
       query: (value) => ({
         url: "profile/personal",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         method: "PATCH",
         body: value,
       }),
@@ -36,7 +39,9 @@ export const profileApi = emptyApi.injectEndpoints({
       query: (value) => ({
         url: "profile/service",
         method: "POST",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         body: value,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -53,7 +58,9 @@ export const profileApi = emptyApi.injectEndpoints({
       query: (value) => ({
         url: "profile/photo",
         method: "PATCH",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         body: value,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -71,7 +78,9 @@ export const profileApi = emptyApi.injectEndpoints({
       query: (value) => ({
         url: "profile/backgroundphoto",
         method: "PATCH",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         body: value,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -89,7 +98,9 @@ export const profileApi = emptyApi.injectEndpoints({
       query: (value) => ({
         url: "profile/phonenumber",
         method: "PATCH",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         body: value,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {

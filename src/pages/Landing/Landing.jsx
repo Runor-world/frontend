@@ -17,18 +17,23 @@ function Landing() {
 
   const { data: servicesData } = useGetServicesQuery();
 
-  if (isLoading && isFetching && !data) {
+  const activeServiceMen = data?.serviceMen.filter(
+    ({ user }) => user.active && user.phoneNumber !== ""
+  );
+
+  if (isLoading && isFetching) {
     return <Loading />;
   }
 
-  if (isError) {
-    return <h1>{error}</h1>;
-  }
+  if (isError)
+    return (
+      <div className="flex justify-center items-center text-center">
+        <p>{error}</p>
+      </div>
+    );
 
-  const activeServiceMen = data?.serviceMen.filter(({ user }) => user.active);
-
-  const serviceMenList = activeServiceMen.map((serviceMan) => (
-    <ServiceMan key={serviceMan._id} serviceMan={serviceMan} />
+  const serviceMenList = activeServiceMen.map((serviceMan, index) => (
+    <ServiceMan key={serviceMan?.user._id} serviceMan={serviceMan} />
   ));
 
   const activeServices = servicesData?.services.filter(

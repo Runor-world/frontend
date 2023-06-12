@@ -11,7 +11,6 @@ import Badge from "../../components/Badge/Badge";
 import { useGetAllHiringByUserQuery } from "../../features/api/hiringApi";
 
 const status = ["pending", "in progress", "completed", "cancelled"];
-
 const UserHirings = (props) => {
   const { data, isLoading, isFetching, error, isError } =
     useGetAllHiringByUserQuery();
@@ -21,8 +20,11 @@ const UserHirings = (props) => {
   }
   if (isError)
     return (
-      <div className="flex justify-center items-center text-center">
-        <p>{error}</p>
+      <div className="flex  flex-col justify-center h-screen items-center text-center">
+        <p>Something went wrong</p>
+        <Link className="btn-dark" to={"/"}>
+          Go Home
+        </Link>
       </div>
     );
   return (
@@ -35,12 +37,12 @@ const UserHirings = (props) => {
               <div className="flex col-span-full lg:col-span-1 flex-col gap-5">
                 <h2 className="">Filter by status</h2>
                 <ScrollableItemsWrapper>
-                  {status.map((item) => {
+                  {status.map((item, index) => {
                     return (
                       <CardButton
                         extraStyle="bg-slate-100 text-slate-600 border-2 border-primary my-0 underline"
                         text={item}
-                        key={item}
+                        key={index}
                       />
                     );
                   })}

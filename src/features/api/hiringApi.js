@@ -1,4 +1,3 @@
-import { authHeader } from "../../utils/headers";
 import { emptyApi } from "./emptyApi";
 import { setMessage } from "../hiring/hiringSlice";
 
@@ -8,7 +7,9 @@ const hiringApi = emptyApi.injectEndpoints({
       query: (values) => ({
         url: "hiring",
         method: "POST",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
         body: values,
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
@@ -24,14 +25,18 @@ const hiringApi = emptyApi.injectEndpoints({
     getAllHiringByUser: build.query({
       query: () => ({
         url: "hiring/user",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       }),
       providesTags: ["Hiring"],
     }),
     getAllServiceManJobs: build.query({
       query: () => ({
         url: "hiring/user/jobs",
-        headers: authHeader,
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
       }),
       providesTags: ["Hiring"],
     }),
