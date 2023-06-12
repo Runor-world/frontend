@@ -10,10 +10,14 @@
     @apply flex flex-col gap-1 w-full text-left;
   }
   .service-form .form-group input,
-  .service-form .form-group textarea,
-  .service-form .form-group select {
+  .service-form .form-group textarea {
     @apply p-2 px-4 rounded-md outline-none border-2 w-full text-black;
   }
+
+  .service-form .form-group select {
+    @apply p-2 px-4 outline-none border-2 text-black min-w-fit;
+  }
+
   .service-form form {
     @apply flex flex-col gap-3;
   }

@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FaMapMarkerAlt, FaPhone } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getServiceMan } from "../../features/serviceMan/serviceManSlice";
 import { setService } from "../../features/hiring/hiringSlice";
-import CopyText from "../CopyText/CopyText";
 
 const ServiceMan = ({ serviceMan }) => {
   const {
-    _id,
-    user: { firstName, lastName, otherName, active, phoneNumber },
+    user: { _id: userID, firstName, lastName, otherName, active },
     profile,
     services,
   } = serviceMan;
@@ -20,19 +18,18 @@ const ServiceMan = ({ serviceMan }) => {
   const handleHireClick = () => {
     if (services.length === 1) {
       dispatch(setService(services[0]));
-      navigate(`/hiring/confirm/${_id}`);
+      navigate(`/hiring/confirm/${userID}`);
     } else {
-      dispatch(getServiceMan(_id));
-      navigate(`/hiring/${_id}`);
+      navigate(`/hiring/${userID}`);
     }
   };
   return (
     <article className="flex gap-4 lg:gap-5 flex-wrap lg:flex-nowrap justify-start w-full items-center group hover:scale-[101%] bg-slate-100 duration-200 transitions-all border-b-2 p-2 rounded-lg">
-      <div className="self-start">
+      <div className="self-start lg:self-center">
         <img
           src={profile.photo}
           alt={firstName}
-          className="h-12 w-12 lg:w-20 lg:h-20 ring-2 rounded-full ring-slate-400"
+          className="h-20 w-20 lg:w-40 lg:h-40 ring-2 rounded-full ring-slate-400"
         />
       </div>
       <div className="flex flex-col gap-0 shrink-0 flex-1">
@@ -44,7 +41,7 @@ const ServiceMan = ({ serviceMan }) => {
             .filter((item) => item.active === true)
             .map((service, index) => (
               <small
-                key={service._id}
+                key={service.userID}
                 className="font-semibold text-primary ring-white border-slate-300 rounded-xl ring-2 p-2">
                 {service.name}
                 {services.length - 1 > index ? ", " : ""}

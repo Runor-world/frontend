@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { clearMessage } from "../../features/hiring/hiringSlice";
 import CopyText from "../CopyText/CopyText";
 
-const HiringSuccess = ({ serviceProvider }) => {
-  const { lastName, firstName, otherName, phone } = serviceProvider.user;
+const HiringSuccess = ({ serviceMan }) => {
+  const { lastName, firstName, otherName, phone } = serviceMan.user;
   const dispatch = useDispatch();
 
   const handleClick = () => {

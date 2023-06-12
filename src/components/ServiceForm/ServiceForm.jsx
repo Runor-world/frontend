@@ -5,21 +5,23 @@ import FormInputError from "../FormInputError/FormInputError";
 import FormError from "../FormError/FormError";
 import { useDispatch, useSelector } from "react-redux";
 import "./ServiceForm.css";
-import {
-  createService,
-  closeForm,
-  updateService,
-  setMessage,
-} from "../../features/service/serviceSlice";
-
+import { closeForm, setMessage } from "../../features/service/serviceSlice";
 import { FaTimes } from "react-icons/fa";
+import {
+  useCreateServiceMutation,
+  useUpdateServiceMutation,
+} from "../../features/api/serviceApi";
+import { autoCloseForm } from "../../utils/timer";
 
 const ServiceForm = () => {
+  let timer = null;
+
   const dispatch = useDispatch();
   const { message, selectedService, isLoading } = useSelector(
     (store) => store.service
   );
-
+  const [updateService] = useUpdateServiceMutation();
+  const [createService] = useCreateServiceMutation();
   const formik = useFormik({
     initialValues: selectedService
       ? { ...selectedService }
@@ -36,22 +38,27 @@ const ServiceForm = () => {
       ),
     }),
     onSubmit: async (values) => {
-      // save personal profile
+      // update if service is selected, otherwise create new one
       try {
         if (selectedService) {
-          const res = await dispatch(updateService(values)).unwrap();
+          await updateService(values);
+          timer = autoCloseForm(800, dispatch, closeForm);
           return;
         }
-        const res = await dispatch(createService(values)).unwrap();
-        // setOpen(false)
+        await createService(values);
+        autoCloseForm(800, timer, dispatch, closeForm);
       } catch (error) {
         console.log(error);
       }
     },
   });
 
+  useEffect(() => {
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="p-profile-edit-form">
+    <div className="service-form">
       <FaTimes
         className="text-4xl text-white p-2 rounded-full bg-slate-500 absolute -right-3 -top-3"
         onClick={() => dispatch(closeForm())}
@@ -96,7 +103,7 @@ const ServiceForm = () => {
 
         <div className="flex justify-between gap-4">
           <input
-            className="flex-1 p-2 rounded-md bg-primary bg-black"
+            className="flex-1 p-2 rounded-md bg-black"
             type="submit"
             value="Save"
             disabled={isLoading}

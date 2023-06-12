@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./UserStatusUpdateModal.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  closeUserModal,
-  updateUserStatus,
-} from "../../features/user/userSlice";
+import { closeUserModal } from "../../features/user/userSlice";
 import FormError from "../FormError/FormError";
+import { useUpdateUserStatusMutation } from "../../features/api/userApi";
 
 const UserStatusUpdateModal = () => {
+  let timer = null;
+
+  // clear timer on dismount
+  useEffect(() => {
+    return () => clearTimeout(timer);
+  }, []);
+
+  const [updateUserStatus] = useUpdateUserStatusMutation();
   const { selectedUser, message, isLoading } = useSelector(
     (store) => store.users
   );
   const { active, role, lastName, firstName, profile, _id } = selectedUser;
   const dispatch = useDispatch();
 
-  const handleYesClick = () => {
-    dispatch(updateUserStatus({ status: !active, userID: _id }));
+  const handleYesClick = async () => {
+    try {
+      await updateUserStatus({ status: !active, userID: _id });
+      timer = setTimeout(() => {
+        dispatch(closeUserModal());
+      }, [2000]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleClose = () => {

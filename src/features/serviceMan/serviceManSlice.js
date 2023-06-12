@@ -1,89 +1,26 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { baseUrl } from "../../utils/base_url";
-
-export const getAllServiceMen = createAsyncThunk(
-    'serviceMan/getAll',
-    async(values, thunkAPI) => {
-        let res = null
-        try {
-            res = await axios.get(`${baseUrl}/api/serviceman`)
-            return res.data
-        } catch (error) {
-            thunkAPI.rejectWithValue("Something went wrong")
-        }
-    }
-)
-
-export const getServiceMan = createAsyncThunk(
-    'serviceMan/getOne',
-    async(serviceProviderId, thunkAPI) => {
-        let res = null
-        try {
-            res = await axios.get(`${baseUrl}/api/serviceman/${serviceProviderId}` )
-            return res.data
-        } catch (error) {
-            thunkAPI.rejectWithValue("Something went wrong")
-        }
-    }
-)
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const serviceManSlice = createSlice({
-    name: 'serviceman',
-    initialState: {
-        serviceMen: [],
-        serviceProvider: {},
-        isLoading: true,
-        message: ''
+  name: "serviceman",
+  initialState: {
+    serviceMen: [],
+    serviceMan: {},
+    isLoading: true,
+    message: "",
+  },
+  reducers: {
+    setServiceMan: (state, { payload }) => {
+      state.serviceMan = payload;
     },
-    reducers: {
-        setMessage: (state, {payload}) =>{
-            state.message = payload
-        },
-        clearMessage: (state, {payload}) =>{
-            state.message = ''
-        }
+    setMessage: (state, { payload }) => {
+      state.message = payload;
     },
-    extraReducers: (builder) =>{
-        builder
-            .addCase(getAllServiceMen.pending, (state) =>{
-                state.isLoading = true
-            })
-            .addCase(getAllServiceMen.fulfilled, ( state, {payload})=>{
-                state.isLoading = false
-                if(payload){
-                    state.message = payload.msg
-                    state.serviceMen = payload.serviceMen
-                }else{
-                    state.message = 'Failed to fetch'
-                }
-            })
-            .addCase(getAllServiceMen.rejected, ( state, payload) =>{
-                state.isLoading = false
-                state.message = payload.msg
-            })
-            
-            //single service man 
-            .addCase(getServiceMan.pending, (state) =>{
-                state.isLoading = true
-            })
-            .addCase(getServiceMan.fulfilled, ( state, {payload})=>{
-                state.isLoading = false
-                if(payload){
-                    console.log('serviceProvider: ', payload.serviceProvider)
-                    state.message = payload.msg
-                    state.serviceProvider = payload.serviceProvider
-                }else{
-                    state.message = 'Failed to fetch service provider'
-                }
-            })
-            .addCase(getServiceMan.rejected, ( state, payload) =>{
-                state.isLoading = false
-                state.message = payload.msg
-            })
-    }
-})
+    clearMessage: (state, { payload }) => {
+      state.message = "";
+    },
+  },
+});
 
-export const {setMessage, clearMessage} = serviceManSlice.actions
-export default serviceManSlice.reducer
+export const { setMessage, clearMessage, setServiceMan } =
+  serviceManSlice.actions;
+export default serviceManSlice.reducer;

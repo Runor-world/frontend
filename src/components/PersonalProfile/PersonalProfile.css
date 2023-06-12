@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .profile-body section.wrapper{
-        @apply shadow-md p-4 bg-slate-100
-    }
-    .profile-body .profile-link-round{
-        @apply bg-primary rounded-full p-2 text-white hover:bg-black hover:text-primary text-4xl
-    }
+  .profile-body section.wrapper {
+    @apply shadow-md p-4 bg-slate-100;
+  }
+  .profile-body .profile-link-round {
+    @apply bg-primary rounded-full p-2 text-white hover:bg-black hover:text-primary text-4xl;
+  }
 }
