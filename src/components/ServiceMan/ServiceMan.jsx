@@ -24,7 +24,7 @@ const ServiceMan = ({ serviceMan }) => {
     }
   };
   return (
-    <article className="flex gap-4 lg:gap-5 flex-wrap lg:flex-nowrap justify-start w-full items-center group hover:scale-[101%] bg-slate-100 duration-200 transitions-all border-b-2 p-2 rounded-lg">
+    <article className="flex gap-4 lg:gap-5 flex-wrap lg:flex-nowrap justify-start w-full lg:w-2/3 items-center group hover:scale-[101%] border-slate-400 border-2 duration-200 transitions-all border-b-2 p-2 lg:p-5 rounded-lg">
       <div className="self-start lg:self-center">
         <img
           src={profile.photo}
@@ -66,7 +66,7 @@ const ServiceMan = ({ serviceMan }) => {
               !active
                 ? "btn-dark px-4 line-through"
                 : "btn-dark group-hover:bg-slate-900"
-            } bg-primary text-sm w-full`}>
+            } bg-primary text-sm w-full lg:w-2/5`}>
             Hire now
           </button>
         </div>

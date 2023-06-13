@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <header
-      className={`flex justify-between items-center main-x-p py-2 lg:py-5 w-screen fixed top-0 left-0 bg-white z-50 shadow-md shadow-slate-300 bg-opacity-100 text-primary`}>
+      className={`flex justify-between items-center main-x-p py-2 w-screen fixed top-0 left-0 bg-white z-50 shadow-sm shadow-slate-300 bg-opacity-100 text-primary`}>
       <div className="flex gap-4 items-center">
         <FaBars
           className="text-xl text-primary lg:hidden visible"

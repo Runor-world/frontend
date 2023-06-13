@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import ServiceSearchBar from "../../components/ServiceSearchBar/ServiceSearchBar";
 import ServiceCategoryList from "../../components/ServiceCategoryList/ServiceCategoryList";
@@ -14,14 +14,32 @@ import { useGetServicesQuery } from "../../features/api/serviceApi";
 function Landing() {
   const { data, isLoading, isFetching, isError, error } =
     useGetServiceMenQuery();
-
   const { data: servicesData } = useGetServicesQuery();
 
-  const activeServiceMen = data?.serviceMen.filter(
+  const [selectedServiceName, setSelectedServiceName] =
+    useState("All Services");
+
+  const activeServiceMen = data?.serviceMen?.filter(
     ({ user }) => user.active && user.phoneNumber
   );
+  const [filteredServiceMen, setFilteredServiceMen] = useState([]);
 
-  if (isLoading && isFetching) {
+  const handleServiceClick = (serviceName) => {
+    setSelectedServiceName(serviceName);
+    let filteredbyServiceName = [];
+    // return all services men if "All Services" is clicked on
+    if (serviceName !== "All Services") {
+      filteredbyServiceName = activeServiceMen?.filter(
+        (serviceMan) =>
+          serviceMan.services.map((service) => service.name)[0] === serviceName
+      );
+    } else {
+      filteredbyServiceName = activeServiceMen;
+    }
+    setFilteredServiceMen((prev) => [...filteredbyServiceName]);
+  };
+
+  if (isLoading && isFetching && data === undefined) {
     return <Loading />;
   }
 
@@ -32,7 +50,7 @@ function Landing() {
       </div>
     );
 
-  const serviceMenList = activeServiceMen.map((serviceMan, index) => (
+  const serviceMenList = filteredServiceMen?.map((serviceMan, index) => (
     <ServiceMan key={serviceMan?.user._id} serviceMan={serviceMan} />
   ));
 
@@ -48,13 +66,21 @@ function Landing() {
         <section className="grid grid-col lg:grid-cols-4 w-full gap-5 items-start mb-10">
           <div className="flex col-span-full lg:col-span-1 flex-col gap-2">
             <Badge text="Services" number={activeServices?.length} />
-            <ServiceCategoryList services={activeServices} />
+            <ServiceCategoryList
+              services={activeServices}
+              serviceClickHandler={handleServiceClick}
+              selectedServiceName={selectedServiceName}
+              setSelectedServiceName={setSelectedServiceName}
+            />
           </div>
 
           <div className="col-span-full lg:col-span-3 w-full justify-center">
-            <Badge text="Service Men" number={activeServiceMen.length} />
+            <Badge
+              text={`${selectedServiceName} Service Men`}
+              number={filteredServiceMen?.length}
+            />
             <div className="flex flex-col gap-4 mt-5 pr-6">
-              {activeServiceMen?.length > 0 ? (
+              {filteredServiceMen?.length > 0 ? (
                 serviceMenList
               ) : (
                 <div className="flex justify-center items-center">
