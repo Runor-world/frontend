@@ -54,6 +54,25 @@ export const profileApi = emptyApi.injectEndpoints({
       },
       invalidatesTags: ["profile"],
     }),
+    updateServiceProfile: build.mutation({
+      query: (value) => ({
+        url: "profile/service",
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+        body: value,
+      }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setMessage({ text: data.msg, type: true }));
+        } catch (error) {
+          dispatch(setMessage({ text: error.error.data.msg, type: false }));
+        }
+      },
+      invalidatesTags: ["profile"],
+    }),
     updateUserProfilePhoto: build.mutation({
       query: (value) => ({
         url: "profile/photo",
@@ -128,4 +147,5 @@ export const {
   useUpdateUserProfilePhotoMutation,
   useUpdateUserProfileBackgroundPhotoMutation,
   useAddUserPhoneNumberMutation,
+  useUpdateServiceProfileMutation,
 } = profileApi;

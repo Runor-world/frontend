@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./UserServiceProfile.css";
 import FormInputError from "../FormInputError/FormInputError";
 import FormError from "../FormError/FormError";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useCreateServiceProfileMutation } from "../../features/api/profileApi";
+import {
+  useCreateServiceProfileMutation,
+  useGetAllProfilesQuery,
+  useUpdateServiceProfileMutation,
+} from "../../features/api/profileApi";
 
 const UserServiceProfileForm = ({ services }) => {
   const navigate = useNavigate();
   const [createUserServiceProfile] = useCreateServiceProfileMutation();
+  const [updateServiceProfile] = useUpdateServiceProfileMutation();
+  const { data } = useGetAllProfilesQuery();
   const { message } = useSelector((store) => store.profile);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -27,7 +38,13 @@ const UserServiceProfileForm = ({ services }) => {
     onSubmit: async (values) => {
       // do something on submit
       try {
-        await createUserServiceProfile(values);
+        if (data?.serviceProfile) {
+          // save if service profile exists
+          console.log("service pro");
+          await updateServiceProfile(values);
+        } else {
+          await createUserServiceProfile(values);
+        }
         setTimeout(() => {
           navigate("/profile");
         }, 1000);
@@ -47,11 +64,23 @@ const UserServiceProfileForm = ({ services }) => {
             <option defaultValue={""} className="text-slate-300">
               ---Select account type---
             </option>
-            <option value={"service consumer"}>
+            <option
+              value={"service consumer"}
+              selected={
+                data?.serviceProfile?.accountType === "service consumer"
+              }>
               Service consumer (hire only)
             </option>
-            <option value={"service man"}>Service man (hire and serve)</option>
-            <option value={"business"}>Business (many services)</option>
+            <option
+              value={"service man"}
+              selected={data?.serviceProfile?.accountType === "service man"}>
+              Service man (hire and serve)
+            </option>
+            <option
+              value={"business"}
+              selected={data?.serviceProfile?.accountType === "business"}>
+              Business (many services)
+            </option>
           </select>
           <FormInputError
             isTouched={formik.touched.accountType}
@@ -68,7 +97,12 @@ const UserServiceProfileForm = ({ services }) => {
               ---Select a service---
             </option>
             {services.map((service) => (
-              <option value={service._id} key={service._id}>
+              <option
+                value={service._id}
+                key={service._id}
+                selected={
+                  data?.serviceProfile?.services[0].name === service.name
+                }>
                 {service.name}
               </option>
             ))}
@@ -84,12 +118,12 @@ const UserServiceProfileForm = ({ services }) => {
           <Link
             className="btn-dark bg-slate-800 text-white p-2 rounded-md flex-1"
             to={"/profile"}>
-            Not now
+            Discard
           </Link>
 
           <input
             type="submit"
-            value={"Submit"}
+            value={"Save"}
             className="btn-primary border-primary bg-primary p-2 rounded-md flex-1 border-2"
           />
         </div>

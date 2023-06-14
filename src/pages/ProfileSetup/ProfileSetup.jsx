@@ -6,9 +6,11 @@ import consumerImage from "../../images/cleaner.jpg";
 import Header from "../../components/Header/Header";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
 import Loading from "../../components/Loading/Loading";
+import { useGetAllProfilesQuery } from "../../features/api/profileApi";
 
 const ProfileSetup = () => {
   const { data, isLoading, isFetching, isError, error } = useGetServicesQuery();
+  const { data: profileData } = useGetAllProfilesQuery();
 
   if (isLoading && isFetching) return <Loading />;
 
@@ -29,7 +31,9 @@ const ProfileSetup = () => {
         </div>
         <div className="overlay main-x-p mt-10 text-center text-black">
           <p className="text-xl text-black font-semibold mb-0 text-left lg:text-center">
-            Set your account accordingly
+            {profileData?.serviceProfile.services.length > 0
+              ? "Update service profile"
+              : "Set service profile"}
           </p>
           <hr className="border-2 rounded-full border-slate-400 w-full lg:w-1/2 mb-4" />
           <UserServiceProfileForm services={data?.services} />
