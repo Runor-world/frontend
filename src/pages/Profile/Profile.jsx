@@ -16,7 +16,6 @@ import {
   useUpdateUserProfilePhotoMutation,
   useUpdateUserProfileBackgroundPhotoMutation,
 } from "../../features/api/profileApi";
-import UserServiceProfileForm from "../../components/UserServiceProfileForm/UserServiceProfileForm";
 
 const Profile = () => {
   const [updateUserProfilePhoto] = useUpdateUserProfilePhotoMutation();
@@ -24,9 +23,8 @@ const Profile = () => {
     useUpdateUserProfileBackgroundPhotoMutation();
   const { user } = useSelector((store) => store.auth);
   const { isOpened } = useSelector((store) => store.modal);
-
   const { data, isLoading, isFetching, isError } = useGetAllProfilesQuery();
-  const [openServiceProfileForm, setOpenServiceProfileForm] = useState(true);
+
   const [open, setOpen] = useState(false);
   const [showImageUploader, setShowImageUploader] = useState(false);
   const [showUserImageUploader, setShowUserImageUploader] = useState(false);
@@ -95,10 +93,7 @@ const Profile = () => {
               <h2 className="font-bold text-center">Service profile</h2>
               {data?.serviceProfile ? (
                 <Link to="/service-profile">
-                  <FaEdit
-                    className="text-lg text-primary"
-                    onClick={setOpenServiceProfileForm}
-                  />
+                  <FaEdit className="text-lg text-primary" />
                 </Link>
               ) : null}
             </div>
