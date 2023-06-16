@@ -31,7 +31,7 @@ const ProfileSetup = () => {
         </div>
         <div className="overlay main-x-p mt-10 text-center text-black">
           <p className="text-xl text-black font-semibold mb-0 text-left lg:text-center">
-            {profileData?.serviceProfile.services.length > 0
+            {profileData?.serviceProfile?.services?.length > 0
               ? "Update service profile"
               : "Set service profile"}
           </p>
