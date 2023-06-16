@@ -8,6 +8,7 @@ const serviceSlice = createSlice({
     message: { text: "", type: true },
     formIsOpened: false,
     selectedService: null,
+    
   },
   reducers: {
     setMessage: (state, { payload }) => {
