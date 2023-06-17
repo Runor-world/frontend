@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import Loading from "./components/Loading/Loading";
 import Profile from "./pages/Profile/Profile";
 import Jobs from "./pages/Jobs/Jobs";
+import Hirings from "./pages/admin/Hirings/Hirings";
 
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Signup = React.lazy(() => import("./pages/Signup/Signup"));
@@ -37,6 +38,7 @@ function App() {
           }>
           <Route index element={<Services />} />
           <Route path="users" element={<Users />} />
+          <Route path="hirings" element={<Hirings />} />
           <Route path="complains" element={<h1>Complains</h1>} />
         </Route>
         <Route path="/home" element={<Home />} />

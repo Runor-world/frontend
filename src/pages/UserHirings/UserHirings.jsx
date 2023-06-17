@@ -9,8 +9,9 @@ import ScrollableItemsWrapper from "../../components/ScrollableItemsWrapper/Scro
 import { Link } from "react-router-dom";
 import Badge from "../../components/Badge/Badge";
 import { useGetAllHiringByUserQuery } from "../../features/api/hiringApi";
+import Error from "../../components/Error/Error";
+import { hiringStatus } from "../../data";
 
-const status = ["pending", "in progress", "completed", "cancelled"];
 const UserHirings = (props) => {
   const { data, isLoading, isFetching, error, isError } =
     useGetAllHiringByUserQuery();
@@ -18,15 +19,9 @@ const UserHirings = (props) => {
   if (isLoading && isFetching) {
     return <Loading />;
   }
-  if (isError)
-    return (
-      <div className="flex  flex-col justify-center h-screen items-center text-center">
-        <p>Something went wrong</p>
-        <Link className="btn-dark" to={"/"}>
-          Go Home
-        </Link>
-      </div>
-    );
+
+  if (isError) return <Error error={error} />;
+
   return (
     <PageWrapper>
       <Header />
@@ -37,7 +32,7 @@ const UserHirings = (props) => {
               <div className="flex col-span-full lg:col-span-1 flex-col gap-5">
                 <h2 className="">Filter by status</h2>
                 <ScrollableItemsWrapper>
-                  {status.map((item, index) => {
+                  {hiringStatus.map((item, index) => {
                     return (
                       <CardButton
                         extraStyle="bg-slate-100 text-slate-600 border-2 border-primary my-0 underline"

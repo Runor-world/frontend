@@ -36,3 +36,10 @@ export const userDropDown = [
     url: "/logout",
   },
 ];
+
+export const hiringStatus = [
+  "pending",
+  "in progress",
+  "completed",
+  "cancelled",
+];
