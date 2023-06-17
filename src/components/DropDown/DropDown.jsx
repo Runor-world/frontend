@@ -70,6 +70,12 @@ const DropDown = ({ items, setIsOpen }) => {
                       Users
                     </Link>
                     <Link
+                      to="/dashboard/hirings"
+                      className="sub-item"
+                      onClick={() => setIsOpen(false)}>
+                      Hirings
+                    </Link>
+                    <Link
                       to="/dashboard/complains"
                       className="sub-item"
                       onClick={() => setIsOpen(false)}>

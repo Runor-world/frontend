@@ -3,25 +3,13 @@ import PropTypes from "prop-types";
 import { FaCalendar, FaClock, FaPhone } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import CopyText from "../CopyText/CopyText";
+import { getStatusColor } from "../../utils/general";
 
 const HiringItem = ({ hiring }) => {
   const { service, serviceProvider, createdAt, status, servicemanProfile } =
     hiring;
   const { lastname, firstName, otherName, _id, phoneNumber } = serviceProvider;
   const dateTime = new Date(createdAt);
-
-  const getStatusColor = () => {
-    switch (status) {
-      case "completed":
-        return "bg-green-300";
-      case "in progress":
-        return "bg-blue-300";
-      case "cancelled":
-        return "bg-red-300";
-      default:
-        return "bg-orange-300";
-    }
-  };
 
   return (
     <article className="flex flex-col gap-3 rounded-md shadow-md relative w-full md:w-2/3 bg-slate-50 group hover:scale-[101%] duration-200 transitions-all">
@@ -30,7 +18,9 @@ const HiringItem = ({ hiring }) => {
         <div className="flex gap-2">
           <h3 className="text-primary">{service.name}</h3>
           <div
-            className={`${getStatusColor()} px-2 flex-1 rounded-full text-center animate-pulse`}>
+            className={`${getStatusColor(
+              status
+            )} px-2 flex-1 rounded-full text-center animate-pulse`}>
             <small className="text-center">{status}</small>
           </div>
         </div>

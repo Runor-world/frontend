@@ -42,6 +42,10 @@ const hiringApi = emptyApi.injectEndpoints({
       }),
       providesTags: ["Hiring"],
     }),
+    getAllHirings: build.query({
+      query: () => "hiring",
+      providesTags: ["Hiring"],
+    }),
   }),
 });
 
@@ -49,4 +53,5 @@ export const {
   useGetAllHiringByUserQuery,
   useHireServiceManMutation,
   useGetAllServiceManJobsQuery,
+  useGetAllHiringsQuery,
 } = hiringApi;
