@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./UserServiceProfile.css";
@@ -19,6 +19,7 @@ const UserServiceProfileForm = ({ services }) => {
   const [updateServiceProfile] = useUpdateServiceProfileMutation();
   const { data } = useGetAllProfilesQuery();
   const { message } = useSelector((store) => store.profile);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,20 +38,22 @@ const UserServiceProfileForm = ({ services }) => {
         .required("Select account type"),
     }),
     onSubmit: async (values) => {
-      // do something on submit
+      // do something on
+      setIsLoading(true);
       try {
         if (data?.serviceProfile) {
           // save if service profile exists
-          console.log("service pro");
           await updateServiceProfile(values);
         } else {
           await createUserServiceProfile(values);
+          setIsLoading(false);
         }
         setTimeout(() => {
           navigate("/profile");
         }, 1000);
       } catch (error) {
         console.log(error);
+        setIsLoading(false);
       }
     },
   });
@@ -125,7 +128,12 @@ const UserServiceProfileForm = ({ services }) => {
           <input
             type="submit"
             value={"Save"}
-            className="btn-primary border-primary bg-primary p-2 rounded-md flex-1 border-2"
+            disabled={isLoading}
+            className={`${
+              isLoading
+                ? "bg-slate-600 border-slate-700"
+                : "bg-primary border-primary "
+            } btn-primary  p-2 rounded-md flex-1 border-2`}
           />
         </div>
       </form>
