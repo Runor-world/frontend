@@ -34,7 +34,7 @@ const Hero = () => {
               Whenever you are ready
             </h2>
             <p className="my-5 lg:my-10 lg:w-[80%]">
-              Hire helpers, get assistance, save time and pay as go on the
+              Hire helpers, get assistance, save time and pay as you go on the
               journey of hiring the world
             </p>
             <Link
