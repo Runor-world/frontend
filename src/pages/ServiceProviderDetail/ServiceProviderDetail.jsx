@@ -10,6 +10,7 @@ import Footer from "../../components/Footer/Footer";
 import Stars from "../../components/Stars/Stars";
 import { HiPhone } from "react-icons/hi";
 import { BiMap } from "react-icons/bi";
+import { MdDangerous } from "react-icons/md";
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
@@ -37,7 +38,7 @@ const ServiceProviderDetail = () => {
               alt={user.firstName}
               height={300}
               width={400}
-              className="object-contain aspect-auto rounded-t-md md:rounded-l-md h-auto "
+              className="object-contain aspect-auto rounded-t-md md:rounded-tr-none md:rounded-l-md h-auto "
             />
           </div>
           {/* personal details */}
@@ -58,7 +59,11 @@ const ServiceProviderDetail = () => {
             <h3 className="text-xl font-semibold text-slate-600">
               {user?.firstName} {user?.otherName}
             </h3>
-            {/* <p>{data?.serviceMan?.user?.email}</p> */}
+            <div className="flex justify-start items-center gap-1">
+              <small className="font-semibold">0 ratings</small>
+              <Stars stars={0} />{" "}
+              <small className="text-primary">(0) customers</small>
+            </div>
           </div>
           {/* business details */}
           <div className="flex flex-col gap-2 justify-start">
@@ -71,36 +76,31 @@ const ServiceProviderDetail = () => {
         </header>
 
         {/* body of the details */}
-        <div className="flex flex-col gap-10 px-2 md:px-5 mb-5">
+        <div className="flex flex-col gap-8 md:gap-10 px-2 md:px-5 mb-5">
           {/* top buttons  */}
           <div className="flex justify-between items-center gap-3">
-            {/* Ratings */}
-            <div>
-              <Stars stars={3} /> <small>(12) Customers</small>
-            </div>
             <button
               disabled={!data?.serviceMan?.user?.active}
               className={` ${
                 !data?.serviceMan?.user?.active
                   ? "btn-dark px-4 line-through"
                   : "btn-dark group-hover:bg-slate-900"
-              } bg-primary text-sm w-full md:w-1/5`}>
+              } bg-primary shadow-xl text-sm w-1/2 md:w-1/5`}>
               Hire now
             </button>
           </div>
-          <div></div>
 
           {/* description */}
           <div className="flex flex-col justify-start items-start gap-3">
-            <h3 className="text-xl md:text-2xl font-bold">
+            <h3 className="text-xl md:text-2xl font-semibold">
               Our Service Description
             </h3>
             <p>{services[0].description}</p>
           </div>
           {/* Customer's Reviews */}
           <div className="flex flex-col justify-start items-start gap-8">
-            <h3 className="text-xl md:text-2xl font-bold">
-              Customer's Reviews (4)
+            <h3 className="text-xl md:text-2xl font-semibold">
+              Customer's Reviews (0)
             </h3>
 
             <div>{/* reviews from database */}</div>

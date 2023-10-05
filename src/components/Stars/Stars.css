@@ -1,12 +1,12 @@
-.text-gold{
-    color: gold;
+.text-gold {
+  color: gold;
 }
 
-.text-gray{
-    color: gray;
+.text-gray {
+  color: gray;
 }
 
 .star {
-    font-weight: bolder;
-    font-size: 1.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
