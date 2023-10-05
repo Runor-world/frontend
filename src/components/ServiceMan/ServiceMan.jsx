@@ -35,9 +35,11 @@ const ServiceMan = ({ serviceMan }) => {
           />
         </div>
         <div className="flex flex-col gap-0 shrink-0 flex-1">
-          <span className="font-semibold">
-            {firstName} {lastName ?? otherName}
-          </span>
+          <Link to={`serviceman/${userID}`} className="underline">
+            <span className="font-semibold">
+              {firstName} {lastName ?? otherName}
+            </span>
+          </Link>
           <div className="flex gap-2 items-center flex-wrap my-1">
             {services
               .filter((item) => item.active === true)
