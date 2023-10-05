@@ -37,7 +37,7 @@ const ServiceProviderDetail = () => {
               alt={user.firstName}
               height={300}
               width={400}
-              className="object-contain aspect-auto rounded-t-md md:rounded-l-md h-auto "
+              className="object-contain aspect-auto rounded-t-md md:rounded-tr-none md:rounded-l-md h-auto "
             />
           </div>
           {/* personal details */}
@@ -58,7 +58,6 @@ const ServiceProviderDetail = () => {
             <h3 className="text-xl font-semibold text-slate-600">
               {user?.firstName} {user?.otherName}
             </h3>
-            {/* <p>{data?.serviceMan?.user?.email}</p> */}
           </div>
           {/* business details */}
           <div className="flex flex-col gap-2 justify-start">
@@ -75,8 +74,9 @@ const ServiceProviderDetail = () => {
           {/* top buttons  */}
           <div className="flex justify-between items-center gap-3">
             {/* Ratings */}
-            <div>
-              <Stars stars={3} /> <small>(12) Customers</small>
+            <div className="flex justify-center items-center gap-1">
+              <small className="font-semibold">0</small>
+              <Stars stars={0} /> <small className="text-primary">(1000)</small>
             </div>
             <button
               disabled={!data?.serviceMan?.user?.active}
@@ -100,7 +100,7 @@ const ServiceProviderDetail = () => {
           {/* Customer's Reviews */}
           <div className="flex flex-col justify-start items-start gap-8">
             <h3 className="text-xl md:text-2xl font-bold">
-              Customer's Reviews (4)
+              Customer's Reviews (0)
             </h3>
 
             <div>{/* reviews from database */}</div>
