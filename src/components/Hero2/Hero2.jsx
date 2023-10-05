@@ -1,25 +1,9 @@
-import React from "react";
-import { useRef, useEffect } from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import center from "../../images/hero-large-center.png";
 import heroImage from "../../images/hero-photo.jpg";
-import heroImage2 from "../../images/hero-photo2.jpg";
 
 const Hero = () => {
   const [zIndex, setZindex] = useState([10, 20]);
-  //   useEffect(() => {
-  //     const timeInterval = setInterval(() => {
-  //       if (zIndex[0] === 20) {
-  //         setZindex([10, 20]);
-  //       } else {
-  //         setZindex([20, 10]);
-  //       }
-  //     }, 5000);
-  //     return () => {
-  //       clearTimeout(timeInterval);
-  //     };
-  //   }, [zIndex]);
 
   return (
     <div className="relative w-full h-screen">
@@ -49,11 +33,6 @@ const Hero = () => {
               alt="hero-show"
               className={`h-[200px] lg:h-full w-full mx-auto object-cover aspect-auto ring-1 ring-primary scale-110 absolute transition-all duration-200 z-${zIndex[0]}`}
             />
-            {/* <img
-              src={heroImage2}
-              alt="hero-show"
-              className={`h-[200px] lg:h-full w-full mx-auto object-cover aspect-auto rounded-full scale-110 lanimate-pulse transition-all duration-200 absolute z-${zIndex[1]}`}
-            /> */}
           </div>
         </section>
       </div>
