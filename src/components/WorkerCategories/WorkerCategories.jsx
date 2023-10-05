@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import CardButton from "../CardButton/CardButton";
 import { FaSpinner } from "react-icons/fa";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
@@ -46,4 +46,4 @@ const WorkerCategories = () => {
   );
 };
 
-export default WorkerCategories;
+export default memo(WorkerCategories);

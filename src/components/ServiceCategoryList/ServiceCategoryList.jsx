@@ -1,6 +1,5 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
-import ServiceCategory from "../ServiceCategory/ServiceCategory";
 import CategoryFilterItem from "../CategoryFilterItem/CategoryFilterItem";
 
 const ServiceCategoryList = ({
@@ -42,4 +41,4 @@ ServiceCategoryList.defaultProps = {
   services: [],
 };
 
-export default ServiceCategoryList;
+export default memo(ServiceCategoryList);

@@ -18,6 +18,7 @@ import Loading from "./components/Loading/Loading";
 import Profile from "./pages/Profile/Profile";
 import Jobs from "./pages/Jobs/Jobs";
 import Hirings from "./pages/admin/Hirings/Hirings";
+import ServiceProviderDetail from "./pages/ServiceProviderDetail/ServiceProviderDetail";
 
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Signup = React.lazy(() => import("./pages/Signup/Signup"));
@@ -27,7 +28,7 @@ function App() {
   const { isOpen } = useSelector((store) => store.sidebar);
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <Routes>
         <Route
           path="/dashboard"
@@ -76,6 +77,7 @@ function App() {
         />
         <Route path="*" element={<Error />} />
         <Route path="/" element={<Landing />} />
+        <Route path="/serviceman/:id" element={<ServiceProviderDetail />} />
         <Route
           path="/hiring/:serviceProviderId"
           element={!user ? <Navigate to={"/login"} /> : <Hiring />}

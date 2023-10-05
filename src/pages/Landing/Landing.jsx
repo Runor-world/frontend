@@ -63,7 +63,7 @@ function Landing() {
       <Header />
       <MainContentWrapper>
         <ServiceSearchBar />
-        <section className="grid grid-col lg:grid-cols-4 w-full gap-5 items-start mb-10">
+        <section className="grid grid-col lg:grid-cols-4 w-full gap-5 items-start mb-10 ">
           <div className="flex col-span-full lg:col-span-1 flex-col gap-2">
             <Badge text="Services" number={activeServices?.length} />
             <ServiceCategoryList
