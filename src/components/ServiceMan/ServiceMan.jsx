@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setService } from "../../features/hiring/hiringSlice";
 import userAvatar from "../../images/user.png";
 import { Link } from "react-router-dom";
+import { Review } from "../Review/Review";
 
 const ServiceMan = ({ serviceMan }) => {
   const {
@@ -44,12 +45,20 @@ const ServiceMan = ({ serviceMan }) => {
             {services
               .filter((item) => item.active === true)
               .map((service, index) => (
-                <small
-                  key={service._id}
-                  className="font-semibold text-primary ring-white border-slate-300 rounded-xl ring-2 p-2">
-                  {service.name}
-                  {services.length - 1 > index ? ", " : ""}
-                </small>
+                <div
+                  className="flex flex-col gap-2 justify-start items-start"
+                  key={index}>
+                  <small
+                    key={service._id}
+                    className="font-semibold text-primary ring-white border-slate-300 rounded-xl ring-2 p-2">
+                    {service.name}
+                    {services.length - 1 > index ? ", " : ""}
+                  </small>
+                  <Review
+                    ratings={service.averageRating}
+                    customers={service.numOfReviews}
+                  />
+                </div>
               ))}
           </div>
 

@@ -1,19 +1,20 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Loading from "../../components/Loading/Loading";
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGetServiceManQuery } from "../../features/api/servicemanApi";
 import Header from "../../components/Header/Header";
 import avatarImage from "../../images/user.png";
 import MainContentWrapper from "../../components/MainContentWrapper/MainContentWrapper";
 import Footer from "../../components/Footer/Footer";
 import Stars from "../../components/Stars/Stars";
-import { HiPhone } from "react-icons/hi";
 import { BiMap } from "react-icons/bi";
-import { MdDangerous } from "react-icons/md";
+import { setService } from "../../features/hiring/hiringSlice";
 
 const ServiceProviderDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const { data, isLoading, isFetching, isError } = useGetServiceManQuery(id);
 
@@ -27,6 +28,15 @@ const ServiceProviderDetail = () => {
     return <Loading />;
   }
   const { services, profile, user } = data?.serviceMan;
+
+  const handleHireClick = () => {
+    if (services.length === 1) {
+      dispatch(setService(services[0]));
+      navigate(`/hiring/confirm/${user?._id}`);
+    } else {
+      navigate(`/hiring/${user?._id}`);
+    }
+  };
   return (
     <section className="flex flex-col">
       <Header />
@@ -51,10 +61,6 @@ const ServiceProviderDetail = () => {
                 <BiMap className="" />
                 <small>{user.location}</small>
               </div>
-              {/* <div className="flex gap-2 justify-start items-center">
-                <HiPhone className="" />
-                <h3>{data?.serviceMan?.user?.phoneNumber}</h3>
-              </div> */}
             </div>
             <h3 className="text-xl font-semibold text-slate-600">
               {user?.firstName} {user?.otherName}
@@ -67,7 +73,6 @@ const ServiceProviderDetail = () => {
           </div>
           {/* business details */}
           <div className="flex flex-col gap-2 justify-start">
-            <h3></h3>
             <p>{data?.serviceMan?.profile?.address}</p>
             <div className="">
               <p>{data?.serviceMan?.profile.description}</p>
@@ -81,6 +86,7 @@ const ServiceProviderDetail = () => {
           <div className="flex justify-between items-center gap-3">
             <button
               disabled={!data?.serviceMan?.user?.active}
+              onClick={handleHireClick}
               className={` ${
                 !data?.serviceMan?.user?.active
                   ? "btn-dark px-4 line-through"
