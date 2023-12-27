@@ -31,7 +31,7 @@ const Hero = () => {
             <img
               src={heroImage}
               alt="hero-show"
-              className={`h-[200px] lg:h-full w-full mx-auto object-cover aspect-auto ring-1 ring-primary scale-110 absolute transition-all duration-200 z-${zIndex[0]}`}
+              className={`h-[200px] lg:h-full w-full mx-auto object-cover aspect-auto ring-1 opacity-30  scale-110 absolute transition-all duration-200 z-${zIndex[0]}`}
             />
           </div>
         </section>

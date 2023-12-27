@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header/Header";
 import ServiceSearchBar from "../../components/ServiceSearchBar/ServiceSearchBar";
 import ServiceCategoryList from "../../components/ServiceCategoryList/ServiceCategoryList";
@@ -12,21 +12,19 @@ import { useGetServiceMenQuery } from "../../features/api/servicemanApi";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
 
 function Landing() {
-  const { data, isLoading, isFetching, isError, error } =
-    useGetServiceMenQuery();
+  const { data, isLoading, isError, error } = useGetServiceMenQuery();
   const { data: servicesData } = useGetServicesQuery();
 
   const [selectedServiceName, setSelectedServiceName] =
     useState("All Services");
-
-  const activeServiceMen = data?.serviceMen?.filter(
-    ({ user }) => user.active && user.phoneNumber
-  );
   const [filteredServiceMen, setFilteredServiceMen] = useState([]);
 
   const handleServiceClick = (serviceName) => {
     setSelectedServiceName(serviceName);
     let filteredbyServiceName = [];
+    const activeServiceMen = data?.serviceMen?.filter(
+      ({ user }) => user.active && user.phoneNumber
+    );
     // return all services men if "All Services" is clicked on
     if (serviceName !== "All Services") {
       filteredbyServiceName = activeServiceMen?.filter(
@@ -39,7 +37,7 @@ function Landing() {
     setFilteredServiceMen((prev) => [...filteredbyServiceName]);
   };
 
-  if (isLoading && isFetching && data === undefined) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -50,10 +48,11 @@ function Landing() {
       </div>
     );
 
-  const serviceMenList = filteredServiceMen?.map((serviceMan, index) => (
+  const serviceMenList = filteredServiceMen?.map((serviceMan) => (
     <ServiceMan key={serviceMan?.user._id} serviceMan={serviceMan} />
   ));
 
+  // list of services that are active
   const activeServices = servicesData?.services.filter(
     (service) => service.active
   );
