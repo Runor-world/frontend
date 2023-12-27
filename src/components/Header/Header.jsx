@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import NavBar from "../NavBar/NavBar";
 import Brand from "../Brand/Brand";
-import { FaBars, FaSearch } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { openSidebar } from "../../features/sidebar/sidebarSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { showSearchBar } from "../../features/search/searchSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const dispatch = useDispatch();
