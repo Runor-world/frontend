@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import loginImage from "../../images/login-bg.jpg";
 import logo from "../../images/logo.png";

@@ -56,7 +56,7 @@ const DropDown = ({ items, setIsOpen }) => {
                   {item.text} {hovered ? <FaCaretDown /> : <FaCaretRight />}
                 </p>
                 {hovered ? (
-                  <ul className="flex flex-col  pt-3 list-none pl-4 gap-2">
+                  <ul className="flex flex-col  pt-3 list-none pl-4 gap-2 transition-transform">
                     <Link
                       to="/dashboard"
                       className="sub-item"

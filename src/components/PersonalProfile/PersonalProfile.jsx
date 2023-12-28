@@ -1,22 +1,11 @@
 import React from "react";
 import "./PersonalProfile.css";
-import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { openModal } from "../../features/modal/modalSlice";
 import { getTodayFormatedDate, toISODate } from "../../utils/date";
 
 const PersonalProfile = ({ personalProfile, user, setOpen }) => {
-  // if user is new use this default profile
-  // const personalProfile = {
-  //   ...pProfile,
-  //   birthday: toISODate(pProfile?.birthday),
-  // } ?? {
-  //   bio: "my beatiful bio",
-  //   birthday: getTodayFormatedDate(),
-  //   city: "my city",
-  //   country: "my country",
-  // };
   const dispatch = useDispatch();
 
   return (

@@ -18,8 +18,8 @@ const Sidebar = () => {
     <aside
       className={`${
         isOpen
-          ? "translate-x-0 flex flex-col bg-slate-200 p-5 fixed w-[95%] z-50 bg-opacity-100 top-2 left-2 h-screen"
-          : "absolute top-0 -translate-x-[120%]"
+          ? "translate-x-0 rotate-0 flex flex-col bg-slate-200 p-5 fixed w-[95%] z-50 bg-opacity-100 top-2 left-2 h-screen"
+          : "absolute top-0 -translate-x-[120%] rotate-90"
       } lg:hidden transition-slow`}>
       <FaTimes
         className="text-3xl p-1 font-bold absolute top-2 right-2"
