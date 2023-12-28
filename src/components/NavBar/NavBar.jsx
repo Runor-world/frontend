@@ -12,7 +12,7 @@ const NavBar = () => {
   const { data } = useGetAllProfilesQuery();
   const personalProfile = data;
   const [isOpen, setIsOpen] = useState(false);
-  //   const { personalProfile } = useSelector((store) => store.profile);
+
   return (
     <nav className="flex gap-2 px-4">
       <Link
