@@ -10,3 +10,7 @@ export const getStatusColor = (status) => {
       return "bg-orange-300";
   }
 };
+
+export const capitalizeString = (text) => {
+  return text.slice(0, 1).toUpperCase() + text.slice(1);
+};

@@ -2,17 +2,15 @@
 @tailwind utilities;
 @tailwind base;
 
-
 @layer components {
-    .drop-down{
-        @apply  border-2 w-screen lg:w-[200px] h-screen lg:h-auto fixed right-0 lg:right-2 top-0 lg:top-24 flex flex-col justify-start text-black bg-slate-100 list-none z-40;
-    }
+  .drop-down {
+    @apply transition-transform border-2 w-screen lg:w-[200px] h-screen lg:h-auto fixed right-0 lg:right-2 top-0 lg:top-20 flex flex-col justify-start text-black bg-slate-100 list-none z-40;
+  }
 
-    .drop-down .item{
-        @apply py-3 p-4 hover:bg-slate-50 capitalize w-full text-left
-    }
-    .drop-down .item .sub-item {
-        @apply bg-slate-200 p-1 rounded-full px-4 hover:scale-105 duration-200 transition-all;
-    }
+  .drop-down .item {
+    @apply py-3 p-4 hover:bg-slate-50 capitalize w-full text-left;
+  }
+  .drop-down .item .sub-item {
+    @apply bg-slate-200 p-1 rounded-full px-4 hover:scale-105 duration-200 transition-all;
+  }
 }
-

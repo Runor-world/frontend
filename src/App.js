@@ -1,6 +1,6 @@
 import "./App.css";
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Error from "./pages/Error/Error";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -19,6 +19,7 @@ import Profile from "./pages/Profile/Profile";
 import Jobs from "./pages/Jobs/Jobs";
 import Hirings from "./pages/admin/Hirings/Hirings";
 import ServiceProviderDetail from "./pages/ServiceProviderDetail/ServiceProviderDetail";
+import { capitalizeString } from "./utils/general";
 
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Signup = React.lazy(() => import("./pages/Signup/Signup"));
@@ -26,6 +27,13 @@ const Signup = React.lazy(() => import("./pages/Signup/Signup"));
 function App() {
   const { user } = useSelector((store) => store.auth);
   const { isOpen } = useSelector((store) => store.sidebar);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname !== "/") {
+      document.title = capitalizeString(pathname.split("/")[1]);
+    }
+  }, [pathname]);
 
   return (
     <div className="relative ">
