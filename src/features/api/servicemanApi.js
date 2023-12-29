@@ -3,8 +3,13 @@ import { emptyApi } from "./emptyApi";
 export const serviceManApi = emptyApi.injectEndpoints({
   endpoints: (build) => ({
     getServiceMen: build.query({
-      query: () => "serviceman",
+      query: (queryValue) => ({
+        url: "serviceman",
+        method: "GET",
+        params: queryValue,
+      }),
       providesTags: ["Serviceman"],
+      invalidatesTags: ["Serviceman"],
     }),
     getServiceMan: build.query({
       query: (serviceManId) => `serviceman/${serviceManId}`,

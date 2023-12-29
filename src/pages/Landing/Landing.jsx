@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import ServiceSearchBar from "../../components/ServiceSearchBar/ServiceSearchBar";
 import ServiceCategoryList from "../../components/ServiceCategoryList/ServiceCategoryList";
@@ -10,9 +10,24 @@ import Loading from "../../components/Loading/Loading";
 import Badge from "../../components/Badge/Badge";
 import { useGetServiceMenQuery } from "../../features/api/servicemanApi";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
+import { useSelector } from "react-redux";
+import { ITEM_PER__PAGE } from "../../utils/general";
 
 function Landing() {
-  const { data, isLoading, isError, error } = useGetServiceMenQuery();
+  const { search } = useSelector((store) => store.search);
+
+  const { data, isLoading, isError, error, refetch, isFetching } =
+    useGetServiceMenQuery({
+      key: search?.key,
+      items_per_page: ITEM_PER__PAGE,
+      page: 1,
+    });
+
+  useEffect(() => {
+    refetch();
+    console.log("refetching...");
+  }, [search.key]);
+
   const { data: servicesData } = useGetServicesQuery();
 
   const [selectedServiceName, setSelectedServiceName] =
@@ -37,7 +52,7 @@ function Landing() {
     setFilteredServiceMen((prev) => [...filteredbyServiceName]);
   };
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return <Loading />;
   }
 
@@ -48,8 +63,8 @@ function Landing() {
       </div>
     );
 
-  const serviceMenList = filteredServiceMen?.map((serviceMan) => (
-    <ServiceMan key={serviceMan?.user._id} serviceMan={serviceMan} />
+  const serviceMenList = filteredServiceMen?.map((serviceMan, index) => (
+    <ServiceMan key={serviceMan?._id + index} serviceMan={serviceMan} />
   ));
 
   // list of services that are active
@@ -81,6 +96,12 @@ function Landing() {
             <div className="flex flex-col gap-4 mt-5 pr-6">
               {filteredServiceMen?.length > 0 ? (
                 serviceMenList
+              ) : search.key ? (
+                <div className="flex justify-center items-center">
+                  <p className="text-black">
+                    No result matching <q>{search.key}</q>
+                  </p>
+                </div>
               ) : (
                 <div className="flex justify-center items-center">
                   <p className="text-black">No service man yet</p>

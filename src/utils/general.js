@@ -14,3 +14,5 @@ export const getStatusColor = (status) => {
 export const capitalizeString = (text) => {
   return text.slice(0, 1).toUpperCase() + text.slice(1);
 };
+
+export const ITEM_PER__PAGE = 20; //Maximu number of services items to be fetched from API at a go
