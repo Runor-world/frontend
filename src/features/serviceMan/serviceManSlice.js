@@ -7,6 +7,7 @@ const serviceManSlice = createSlice({
     serviceMan: {},
     isLoading: true,
     message: "",
+    searchey: "",
   },
   reducers: {
     setServiceMan: (state, { payload }) => {
@@ -18,9 +19,12 @@ const serviceManSlice = createSlice({
     clearMessage: (state, { payload }) => {
       state.message = "";
     },
+    setSearchkey: (state, { payload }) => {
+      state.searchey = payload;
+    },
   },
 });
 
-export const { setMessage, clearMessage, setServiceMan } =
+export const { setMessage, clearMessage, setServiceMan, setSearchkey } =
   serviceManSlice.actions;
 export default serviceManSlice.reducer;
