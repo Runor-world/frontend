@@ -19,7 +19,7 @@ const Header = () => {
         />
         <Brand />
       </div>
-      <div className="lg:flex flex-1 ml-7 absolute top-20 left-1 md:relative md:top-0 md:left-3">
+      <div className="lg:flex flex-1 ml-7 absolute top-20 left-5 md:relative md:top-0 md:left-3">
         <SearchForm />
       </div>
 

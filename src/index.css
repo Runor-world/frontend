@@ -4,6 +4,7 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;500;800&display=swap");
 
 ::-webkit-scrollbar {
   height: 5px;
@@ -88,7 +89,7 @@ h3,
 h4,
 h5 {
   text-transform: capitalize;
-  font-family: "Righteous", "Nanum Myeongjo";
+  font-family: "Poppins", sans-serif;
 }
 
 /* // form  */
