@@ -1,0 +1,22 @@
+@tailwind utilities;
+@tailwind components;
+@tailwind base;
+
+@layer components {
+  .animation-bubble {
+    animation-name: scroll;
+    animation-duration: 10000ms;
+    animation-timing-function: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+  }
+  @keyframes scroll {
+    from {
+      transform: scale(0.88);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+}

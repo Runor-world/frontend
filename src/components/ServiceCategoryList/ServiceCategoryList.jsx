@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
 import CategoryFilterItem from "../CategoryFilterItem/CategoryFilterItem";
+import "./ServiceCategoryList.css";
 
 const ServiceCategoryList = ({
   services,
@@ -9,7 +10,7 @@ const ServiceCategoryList = ({
   setSelectedServiceName,
 }) => {
   return (
-    <section className="flex flex-row lg:flex-col gap-2 justify-start lg:items-start items-center overflow-x-auto w-screen lg:w-full h-auto p-2 py-5">
+    <section className="flex flex-row lg:flex-col gap-2 justify-start lg:items-start items-center overflow-x-auto w-screen lg:w-full md:h-[50vh] p-2 py-5 bg-slate-100 rounded-md">
       <CategoryFilterItem
         text={"All Services"}
         key={"All services"}

@@ -1,0 +1,22 @@
+@tailwind utilities;
+@tailwind components;
+@tailwind base;
+
+@layer components {
+  .animation-scrollX {
+    animation-name: scroll;
+    animation-duration: 10000ms;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+  }
+  @keyframes scroll {
+    from {
+      transform: translate(0%);
+    }
+    to {
+      transform: translate(100%);
+    }
+  }
+}

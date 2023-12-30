@@ -27,15 +27,10 @@ export const Search = () => {
       navigate("/");
     }
     refetch();
-    console.log("refetching...", search.key);
   }, [search.key]);
 
   if (isLoading) {
     return <Loading />;
-  }
-
-  if (isFetching) {
-    return <Fetching message={"Fetching result..."} />;
   }
 
   if (isError)
@@ -45,27 +40,25 @@ export const Search = () => {
       </div>
     );
 
-  const activeServiceMen = data?.serviceMen?.filter(
-    ({ user }) => user.active && user.phoneNumber
-  );
-
   return (
     <PageWrapper>
       <Header />
       <MainContentWrapper>
         <div className="col-span-full lg:col-span-3 w-full justify-center">
-          <div className="flex flex-col gap-4 mt-5 pr-6 w-full">
-            {activeServiceMen?.length > 0 ? (
+          <div className="flex flex-col items-center gap-4 mt-5 pr-1 w-full">
+            {isFetching ? (
+              <Fetching />
+            ) : data.serviceMen.length > 0 ? (
               <>
                 <div className="flex gap-2 items-center">
-                  <Badge number={activeServiceMen.length} />{" "}
+                  <Badge number={data.serviceMen.length} />{" "}
                   <p>
-                    {activeServiceMen.length > 1 ? "Results" : "Result"}{" "}
-                    matching <q>{search.key}</q>
+                    {data.serviceMen.length > 1 ? "Results" : "Result"} matching{" "}
+                    <q>{search.key}</q>
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 w-full">
-                  {activeServiceMen.map((serviceMan, index) => (
+                  {data.serviceMen.map((serviceMan, index) => (
                     <ServiceMan
                       key={serviceMan?._id + index}
                       serviceMan={serviceMan}

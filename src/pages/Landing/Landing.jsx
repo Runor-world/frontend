@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import ServiceCategoryList from "../../components/ServiceCategoryList/ServiceCategoryList";
 import MainContentWrapper from "../../components/MainContentWrapper/MainContentWrapper";
@@ -15,45 +15,37 @@ import Fetching from "../../components/Fetching/Fetching";
 
 function Landing() {
   const { search } = useSelector((store) => store.search);
-  const { data, isLoading, isError, error, isFetching } = useGetServiceMenQuery(
-    {
-      key: "",
+  const [categoryText, setCategoryText] = useState("");
+  const { data, isLoading, isError, error, isFetching, refetch } =
+    useGetServiceMenQuery({
+      key: categoryText,
       items_per_page: ITEM_PER__PAGE,
       page: 1,
-    }
-  );
+    });
+  const { user } = useSelector((store) => store.auth);
 
   const { data: servicesData } = useGetServicesQuery();
 
   const [selectedServiceName, setSelectedServiceName] =
     useState("All Services");
-  const [filteredServiceMen, setFilteredServiceMen] = useState([]);
 
   const handleServiceClick = (serviceName) => {
+    // load services based on the clicked service category
     setSelectedServiceName(serviceName);
-    let filteredbyServiceName = [];
-    const activeServiceMen = data?.serviceMen?.filter(
-      ({ user }) => user.active && user.phoneNumber
-    );
-    console.log(data.serviceMen.length);
-    // return all services men if "All Services" is clicked on
-    if (serviceName !== "All Services") {
-      filteredbyServiceName = activeServiceMen?.filter(
-        (serviceMan) =>
-          serviceMan.services.map((service) => service.name)[0] === serviceName
-      );
+    if (serviceName === "All Services") {
+      // fetch all services
+      setCategoryText("");
     } else {
-      filteredbyServiceName = activeServiceMen;
+      setCategoryText(serviceName);
     }
-    setFilteredServiceMen((prev) => [...filteredbyServiceName]);
   };
+
+  useEffect(() => {
+    refetch();
+  }, [categoryText, selectedServiceName]);
 
   if (isLoading) {
     return <Loading />;
-  }
-
-  if (isFetching) {
-    return <Fetching message={"Fetching result..."} />;
   }
 
   if (isError)
@@ -65,7 +57,7 @@ function Landing() {
 
   const serviceMenList = (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5 w-full">
-      {filteredServiceMen?.map((serviceMan, index) => (
+      {data?.serviceMen.map((serviceMan, index) => (
         <ServiceMan key={serviceMan?._id + index} serviceMan={serviceMan} />
       ))}
     </div>
@@ -80,9 +72,13 @@ function Landing() {
     <PageWrapper>
       <Header />
       <MainContentWrapper>
-        {/* <ServiceSearchBar /> */}
-        <section className="grid grid-col lg:grid-cols-5 w-full gap-5 items-start mb-10 ">
-          <div className="flex col-span-full lg:col-span-1 flex-col gap-2">
+        <div className="bg-primary rounded-md p-4 w-fit mx-auto md:mx-0 shadow-lg bg-opacity-70">
+          <h3 className="capitalize text-white font-normal md:font-medium text-center md:text-left">
+            Hi {user.firstName}! Which service do you need today?
+          </h3>
+        </div>
+        <section className="grid grid-col lg:grid-cols-8 w-full gap-5 items-start mb-10 ">
+          <div className="flex col-span-full lg:col-span-2 flex-col gap-2">
             <Badge text="Services" number={activeServices?.length} />
             <ServiceCategoryList
               services={activeServices}
@@ -92,26 +88,30 @@ function Landing() {
             />
           </div>
 
-          <div className="col-span-full lg:col-span-4 w-full justify-center">
+          <div className="col-span-full lg:col-span-6 w-full justify-center">
             <Badge
               text={`${selectedServiceName} Service Men`}
-              number={filteredServiceMen?.length}
+              number={data?.serviceMen.length}
             />
-            <div className="flex flex-col gap-4 mt-5 pr-6">
-              {filteredServiceMen?.length > 0 ? (
-                serviceMenList
-              ) : search.key ? (
-                <div className="flex justify-center items-center">
-                  <p className="text-black">
-                    No result matching <q>{search.key}</q>
-                  </p>
-                </div>
-              ) : (
-                <div className="flex justify-center items-center">
-                  <p className="text-black">No service man yet</p>
-                </div>
-              )}
-            </div>
+            {isFetching ? (
+              <Fetching message={`Fetching ${selectedServiceName}`} />
+            ) : (
+              <div className="flex flex-col justify-center gap-4 mt-5 pr-4">
+                {data?.serviceMen.length > 0 ? (
+                  serviceMenList
+                ) : search.key ? (
+                  <div className="flex justify-center items-center">
+                    <p className="text-black">
+                      No result matching <q>{search.key}</q>
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex justify-center items-center">
+                    <p className="text-black">No service man yet</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </section>
       </MainContentWrapper>
