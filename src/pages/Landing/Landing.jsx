@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Header from "../../components/Header/Header";
-import ServiceSearchBar from "../../components/ServiceSearchBar/ServiceSearchBar";
 import ServiceCategoryList from "../../components/ServiceCategoryList/ServiceCategoryList";
 import MainContentWrapper from "../../components/MainContentWrapper/MainContentWrapper";
 import ServiceMan from "../../components/ServiceMan/ServiceMan";
@@ -12,21 +11,17 @@ import { useGetServiceMenQuery } from "../../features/api/servicemanApi";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
 import { useSelector } from "react-redux";
 import { ITEM_PER__PAGE } from "../../utils/general";
+import Fetching from "../../components/Fetching/Fetching";
 
 function Landing() {
   const { search } = useSelector((store) => store.search);
-
-  const { data, isLoading, isError, error, refetch, isFetching } =
-    useGetServiceMenQuery({
-      key: search?.key,
+  const { data, isLoading, isError, error, isFetching } = useGetServiceMenQuery(
+    {
+      key: "",
       items_per_page: ITEM_PER__PAGE,
       page: 1,
-    });
-
-  useEffect(() => {
-    refetch();
-    console.log("refetching...");
-  }, [search.key]);
+    }
+  );
 
   const { data: servicesData } = useGetServicesQuery();
 
@@ -40,6 +35,7 @@ function Landing() {
     const activeServiceMen = data?.serviceMen?.filter(
       ({ user }) => user.active && user.phoneNumber
     );
+    console.log(data.serviceMen.length);
     // return all services men if "All Services" is clicked on
     if (serviceName !== "All Services") {
       filteredbyServiceName = activeServiceMen?.filter(
@@ -52,20 +48,28 @@ function Landing() {
     setFilteredServiceMen((prev) => [...filteredbyServiceName]);
   };
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return <Loading />;
+  }
+
+  if (isFetching) {
+    return <Fetching message={"Fetching result..."} />;
   }
 
   if (isError)
     return (
       <div className="flex justify-center items-center text-center">
-        <p>{error}</p>
+        <p>{error.message}</p>
       </div>
     );
 
-  const serviceMenList = filteredServiceMen?.map((serviceMan, index) => (
-    <ServiceMan key={serviceMan?._id + index} serviceMan={serviceMan} />
-  ));
+  const serviceMenList = (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5 w-full">
+      {filteredServiceMen?.map((serviceMan, index) => (
+        <ServiceMan key={serviceMan?._id + index} serviceMan={serviceMan} />
+      ))}
+    </div>
+  );
 
   // list of services that are active
   const activeServices = servicesData?.services.filter(
@@ -77,7 +81,7 @@ function Landing() {
       <Header />
       <MainContentWrapper>
         {/* <ServiceSearchBar /> */}
-        <section className="grid grid-col lg:grid-cols-4 w-full gap-5 items-start mb-10 ">
+        <section className="grid grid-col lg:grid-cols-5 w-full gap-5 items-start mb-10 ">
           <div className="flex col-span-full lg:col-span-1 flex-col gap-2">
             <Badge text="Services" number={activeServices?.length} />
             <ServiceCategoryList
@@ -88,7 +92,7 @@ function Landing() {
             />
           </div>
 
-          <div className="col-span-full lg:col-span-3 w-full justify-center">
+          <div className="col-span-full lg:col-span-4 w-full justify-center">
             <Badge
               text={`${selectedServiceName} Service Men`}
               number={filteredServiceMen?.length}

@@ -21,12 +21,12 @@ const NavBar = () => {
         Services
       </Link>
       <Link
-        to="/categories"
+        to="#"
         className="transition-slow hidden lg:flex no-underline p-2 px-7 text-inherit font-bold rounded-full hover:bg-slate-500">
         Categories
       </Link>
       <Link
-        to="/aboutus"
+        to="#"
         className="transition-slow hidden lg:flex no-underline p-2 px-7 text-inherit font-bold rounded-full hover:bg-slate-500">
         About us
       </Link>

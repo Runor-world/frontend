@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  FaUser,
-  FaHome,
-  FaBell,
-  FaEnvelope,
-  FaBook,
-  FaBookOpen,
-  FaPhone,
-  FaInfo,
-  FaProductHunt,
-} from "react-icons/fa";
+import { FaHome, FaPhone, FaInfo, FaProductHunt } from "react-icons/fa";
 import { MdHomeRepairService } from "react-icons/md";
 import NavItem from "../NavItem/NavItem";
 

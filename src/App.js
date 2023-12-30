@@ -20,6 +20,7 @@ import Jobs from "./pages/Jobs/Jobs";
 import Hirings from "./pages/admin/Hirings/Hirings";
 import ServiceProviderDetail from "./pages/ServiceProviderDetail/ServiceProviderDetail";
 import { capitalizeString } from "./utils/general";
+import { Search } from "./pages/Search/Search";
 
 const Login = React.lazy(() => import("./pages/Login/Login"));
 const Signup = React.lazy(() => import("./pages/Signup/Signup"));
@@ -85,6 +86,7 @@ function App() {
         />
         <Route path="*" element={<Error />} />
         <Route path="/" element={<Landing />} />
+        <Route path="/search/:key" element={<Search />} />
         <Route path="/serviceman/:id" element={<ServiceProviderDetail />} />
         <Route
           path="/hiring/:serviceProviderId"
