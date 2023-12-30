@@ -15,7 +15,7 @@ const SearchForm = () => {
     e.preventDefault(true);
     dispatch(setSearchKey(searchText));
     if (searchText) {
-      navigate("/");
+      navigate(`/search/${searchText}`);
     }
   };
   return (

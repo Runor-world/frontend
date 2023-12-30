@@ -26,18 +26,18 @@ const ServiceMan = ({ serviceMan }) => {
     }
   };
   return (
-    <Link to={`serviceman/${userID}`}>
-      <article className="shadow-lg bg-gradient-to-tl from-slate-300 to-slate-50 flex gap-4 lg:gap-5 flex-wrap lg:flex-nowrap justify-start w-full lg:w-2/3 items-center group hover:scale-[101%] duration-200 transitions-all p-2 lg:p-5 rounded-lg">
+    <Link to={`/serviceman/${userID}`} className="w-full">
+      <article className="shadow-lg bg-gradient-to-tl from-slate-300 to-slate-50 flex gap-4 lg:gap-5 flex-wrap lg:flex-nowrap justify-start w-full items-center group hover:scale-[101%] duration-200 transitions-all p-2 lg:p-5 rounded-lg">
         <div className="self-start lg:self-center">
           <img
             src={profile?.photo || userAvatar}
             alt={firstName}
-            className="h-20 w-20 lg:w-40 lg:h-40 ring-2 rounded-full ring-slate-400"
+            className="h-20 w-20 lg:w-40 lg:h-40 ring-0 rounded-full ring-slate-400 shadow-sm"
           />
         </div>
         <div className="flex flex-col gap-0 shrink-0 flex-1">
-          <Link to={`serviceman/${userID}`} className="underline">
-            <span className="font-semibold">
+          <Link to={`/serviceman/${userID}`} className="my-0">
+            <span className="font-bold text-slate-600">
               {firstName} {lastName ?? otherName}
             </span>
           </Link>
@@ -50,7 +50,7 @@ const ServiceMan = ({ serviceMan }) => {
                   key={index}>
                   <small
                     key={service._id}
-                    className="font-semibold text-primary ring-white border-slate-300 rounded-xl ring-2 p-2">
+                    className="font-semibold text-primary border-primary shadow-sm rounded-xl p-2">
                     {service.name}
                     {services.length - 1 > index ? ", " : ""}
                   </small>
@@ -61,7 +61,6 @@ const ServiceMan = ({ serviceMan }) => {
                 </div>
               ))}
           </div>
-
           {(profile.location || profile.city || profile.country) && (
             <div className="flex flex-col my-2">
               <p className="flex gap-2 text-md">
@@ -79,7 +78,7 @@ const ServiceMan = ({ serviceMan }) => {
                 !active
                   ? "btn-dark px-4 line-through"
                   : "btn-dark group-hover:bg-slate-900"
-              } bg-primary text-sm w-full lg:w-2/5`}>
+              } bg-primary text-sm w-full`}>
               Hire now
             </button>
           </div>

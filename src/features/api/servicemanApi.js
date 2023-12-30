@@ -10,6 +10,7 @@ export const serviceManApi = emptyApi.injectEndpoints({
       }),
       providesTags: ["Serviceman"],
       invalidatesTags: ["Serviceman"],
+      keepUnusedDataFor: 0.01,
     }),
     getServiceMan: build.query({
       query: (serviceManId) => `serviceman/${serviceManId}`,
