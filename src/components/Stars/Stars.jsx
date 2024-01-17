@@ -6,12 +6,12 @@ const Stars = ({ stars }) => {
   const starsList = [1, 2, 3, 4, 5].map((star, index) => {
     if (index < stars) {
       return (
-        <FaStar className="text-base font-extrabold text-primary" key={index} />
+        <FaStar className="text-base font-semibold text-primary" key={index} />
       );
     } else {
       return (
         <FaStar
-          className="text-base font-extrabold text-slate-600"
+          className="text-base font-semibold text-slate-600"
           key={index}
         />
       );
