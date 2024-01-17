@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { Review } from "../Review/Review";
 
 const ServiceMan = ({ serviceMan }) => {
+  console.log(serviceMan);
   const {
     user: { _id: userID, firstName, lastName, otherName, active },
     profile,
