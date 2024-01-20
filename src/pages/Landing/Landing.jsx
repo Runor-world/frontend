@@ -12,6 +12,7 @@ import { useGetServicesQuery } from "../../features/api/serviceApi";
 import { useSelector } from "react-redux";
 import { ITEM_PER__PAGE } from "../../utils/general";
 import Fetching from "../../components/Fetching/Fetching";
+import SectionLoading from "../../components/SectionLoading/SectionLoading";
 
 function Landing() {
   const { search } = useSelector((store) => store.search);
@@ -82,7 +83,7 @@ function Landing() {
         </div>
 
         {isLoading ? (
-          <h1>Loading...</h1>
+          <SectionLoading message={"loading"} />
         ) : (
           <section className="grid grid-col lg:grid-cols-8 w-full gap-5 items-start mb-10 ">
             <div className="flex col-span-full lg:col-span-2 flex-col gap-2">
