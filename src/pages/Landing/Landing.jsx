@@ -5,7 +5,6 @@ import MainContentWrapper from "../../components/MainContentWrapper/MainContentW
 import ServiceMan from "../../components/ServiceMan/ServiceMan";
 import Footer from "../../components/Footer/Footer";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import Loading from "../../components/Loading/Loading";
 import Badge from "../../components/Badge/Badge";
 import { useGetServiceMenQuery } from "../../features/api/servicemanApi";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
@@ -47,10 +46,6 @@ function Landing() {
   useEffect(() => {
     refetch();
   }, [categoryText, selectedServiceName]);
-
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
 
   if (isError)
     return (
@@ -112,7 +107,9 @@ function Landing() {
                     </div>
                   ) : (
                     <div className="flex justify-center items-center">
-                      <p className="text-black">No service man yet</p>
+                      <p className="text-black">
+                        No {selectedServiceName} service yet
+                      </p>
                     </div>
                   )}
                 </div>
