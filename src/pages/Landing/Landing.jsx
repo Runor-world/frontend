@@ -89,10 +89,7 @@ function Landing() {
           </div>
 
           <div className="col-span-full lg:col-span-6 w-full justify-center">
-            <Badge
-              text={`${selectedServiceName} Service Men`}
-              number={data?.serviceMen.length}
-            />
+            <Badge text={`${selectedServiceName} Service Men`} />
             {isFetching ? (
               <Fetching message={`Fetching ${selectedServiceName}`} />
             ) : (
