@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import ServiceCategoryList from "../../components/ServiceCategoryList/ServiceCategoryList";
 import MainContentWrapper from "../../components/MainContentWrapper/MainContentWrapper";
@@ -29,16 +29,19 @@ function Landing() {
   const [selectedServiceName, setSelectedServiceName] =
     useState("All Services");
 
-  const handleServiceClick = (serviceName) => {
-    // load services based on the clicked service category
-    setSelectedServiceName(serviceName);
-    if (serviceName === "All Services") {
-      // fetch all services
-      setCategoryText("");
-    } else {
-      setCategoryText(serviceName);
-    }
-  };
+  const handleServiceClick = useCallback(
+    (serviceName) => {
+      // load services based on the clicked service category
+      setSelectedServiceName(serviceName);
+      if (serviceName === "All Services") {
+        // fetch all services
+        setCategoryText("");
+      } else {
+        setCategoryText(serviceName);
+      }
+    },
+    [categoryText]
+  );
 
   useEffect(() => {
     refetch();

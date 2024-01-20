@@ -20,7 +20,7 @@ Badge.propTypes = {
 };
 Badge.defaultProps = {
   text: "",
-  number: 0,
+  number: null,
 };
 
 export default Badge;
