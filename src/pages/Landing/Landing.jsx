@@ -74,7 +74,7 @@ function Landing() {
       <MainContentWrapper>
         <div className="bg-primary rounded-md p-4 w-fit mx-auto md:mx-0 shadow-lg bg-opacity-70">
           <h3 className="capitalize text-white font-normal md:font-medium text-center md:text-left">
-            Hi {user.firstName}! Which service do you need today?
+            Hi {user?.firstName}! Which service do you need today?
           </h3>
         </div>
         <section className="grid grid-col lg:grid-cols-8 w-full gap-5 items-start mb-10 ">
