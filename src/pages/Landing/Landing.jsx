@@ -47,9 +47,9 @@ function Landing() {
     refetch();
   }, [categoryText, selectedServiceName]);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
 
   if (isError)
     return (
@@ -80,40 +80,45 @@ function Landing() {
             Hi {user?.firstName}! Which service do you need today?
           </h3>
         </div>
-        <section className="grid grid-col lg:grid-cols-8 w-full gap-5 items-start mb-10 ">
-          <div className="flex col-span-full lg:col-span-2 flex-col gap-2">
-            <Badge text="Services" number={activeServices?.length} />
-            <ServiceCategoryList
-              services={activeServices}
-              serviceClickHandler={handleServiceClick}
-              selectedServiceName={selectedServiceName}
-              setSelectedServiceName={setSelectedServiceName}
-            />
-          </div>
 
-          <div className="col-span-full lg:col-span-6 w-full justify-center">
-            <Badge text={`${selectedServiceName} Service Men`} />
-            {isFetching ? (
-              <Fetching message={`Fetching ${selectedServiceName}`} />
-            ) : (
-              <div className="flex flex-col justify-center gap-4 mt-5 pr-4">
-                {data?.serviceMen.length > 0 ? (
-                  serviceMenList
-                ) : search.key ? (
-                  <div className="flex justify-center items-center">
-                    <p className="text-black">
-                      No result matching <q>{search.key}</q>
-                    </p>
-                  </div>
-                ) : (
-                  <div className="flex justify-center items-center">
-                    <p className="text-black">No service man yet</p>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </section>
+        {isLoading ? (
+          <h1>Loading...</h1>
+        ) : (
+          <section className="grid grid-col lg:grid-cols-8 w-full gap-5 items-start mb-10 ">
+            <div className="flex col-span-full lg:col-span-2 flex-col gap-2">
+              <Badge text="Services" number={activeServices?.length} />
+              <ServiceCategoryList
+                services={activeServices}
+                serviceClickHandler={handleServiceClick}
+                selectedServiceName={selectedServiceName}
+                setSelectedServiceName={setSelectedServiceName}
+              />
+            </div>
+
+            <div className="col-span-full lg:col-span-6 w-full justify-center">
+              <Badge text={`${selectedServiceName} Service Men`} />
+              {isFetching ? (
+                <Fetching message={`Fetching ${selectedServiceName}`} />
+              ) : (
+                <div className="flex flex-col justify-center gap-4 mt-5 pr-4">
+                  {data?.serviceMen.length > 0 ? (
+                    serviceMenList
+                  ) : search.key ? (
+                    <div className="flex justify-center items-center">
+                      <p className="text-black">
+                        No result matching <q>{search.key}</q>
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="flex justify-center items-center">
+                      <p className="text-black">No service man yet</p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </section>
+        )}
       </MainContentWrapper>
       <Footer />
     </PageWrapper>
