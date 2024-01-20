@@ -5,13 +5,13 @@ import MainContentWrapper from "../../components/MainContentWrapper/MainContentW
 import ServiceMan from "../../components/ServiceMan/ServiceMan";
 import Footer from "../../components/Footer/Footer";
 import PageWrapper from "../../components/PageWrapper/PageWrapper";
-import Loading from "../../components/Loading/Loading";
 import Badge from "../../components/Badge/Badge";
 import { useGetServiceMenQuery } from "../../features/api/servicemanApi";
 import { useGetServicesQuery } from "../../features/api/serviceApi";
 import { useSelector } from "react-redux";
 import { ITEM_PER__PAGE } from "../../utils/general";
 import Fetching from "../../components/Fetching/Fetching";
+import SectionLoading from "../../components/SectionLoading/SectionLoading";
 
 function Landing() {
   const { search } = useSelector((store) => store.search);
@@ -47,10 +47,6 @@ function Landing() {
     refetch();
   }, [categoryText, selectedServiceName]);
 
-  // if (isLoading) {
-  //   return <Loading />;
-  // }
-
   if (isError)
     return (
       <div className="flex justify-center items-center text-center">
@@ -82,7 +78,7 @@ function Landing() {
         </div>
 
         {isLoading ? (
-          <h1>Loading...</h1>
+          <SectionLoading message={"loading"} />
         ) : (
           <section className="grid grid-col lg:grid-cols-8 w-full gap-5 items-start mb-10 ">
             <div className="flex col-span-full lg:col-span-2 flex-col gap-2">
@@ -111,7 +107,9 @@ function Landing() {
                     </div>
                   ) : (
                     <div className="flex justify-center items-center">
-                      <p className="text-black">No service man yet</p>
+                      <p className="text-black">
+                        No {selectedServiceName} service yet
+                      </p>
                     </div>
                   )}
                 </div>
