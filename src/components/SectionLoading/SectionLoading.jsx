@@ -12,3 +12,5 @@ const SectionLoading = ({ message }) => {
 };
 
 export default SectionLoading;
+
+
